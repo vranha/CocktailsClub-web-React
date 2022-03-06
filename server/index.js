@@ -14,7 +14,7 @@ server.use(bodyParser.urlencoded({ extended: true }));
 
 connect();
 
-server.options("*", cors()); // include before other routes
+server.options("*", cors());
 server.use(cors());
 
 server.listen(PORT, () => {

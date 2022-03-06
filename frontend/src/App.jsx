@@ -1,35 +1,46 @@
-import './App.scss';
-import { Home, Carta, LaCocteleria, Contacto, Login, Pedidos, Pedir, Register, Reservar, Reservas } from './pages';
-import { Header, Footer } from './components';
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import "./App.scss";
+import {
+  Home,
+  Menu,
+  Order,
+  Book,
+  About,
+  Login,
+  Register,
+  OrderList,
+} from "./pages";
+import { Header, Footer } from "./components";
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
+import Bookings from "./pages/Bookings/Bookings";
 
 //fasdfsa
 
 function App() {
-    return (
-        <div className="app">
-            <Header></Header>
-            <h1>Hola</h1>
-            <Router>
-                <Routes>
-                    <Route path="*" element={<Navigate replace to="/" />} />
-                    <Route path="/">
-                        <Route index element={<Home />} />
-                        <Route path="carta" element={<Carta />} />
-                        <Route path="laCocteleria" element={<LaCocteleria />} />
-                        <Route path="contacto" element={<Contacto />} />
-                        <Route path="pedir" element={<Pedir />} />
-                        <Route path="pedidos" element={<Pedidos />} />
-                        <Route path="reservar" element={<Reservar />} />
-                        <Route path="reservas" element={<Reservas />} />
-                        <Route path="register" element={<Register />} />
-                        <Route path="login" element={<Login />} />
-                    </Route>
-                </Routes>
-            </Router>
-            <Footer></Footer>
-        </div>
-    );
+  return (
+    <div className="app">
+      <Router>
+        <Header></Header>
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/menu" element={<Menu />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/order" element={<Order />} />
+          <Route path="/orderList" element={<OrderList />} />
+          <Route path="/book" element={<Book />} />
+          <Route path="/bookings" element={<Bookings />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </Router>
+      <Footer></Footer>
+    </div>
+  );
 }
 
 export default App;
