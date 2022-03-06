@@ -1,11 +1,13 @@
-import "./App.scss";
-import { Home, Carta } from "./pages";
-import { Header, Footer } from "./components";
-import { BrowserRouter as Router, Navigate, Route, Routes } from "react-router-dom";
+import './App.scss';
+import { Home, Carta, LaCocteleria, Contacto, Login, Pedidos, Pedir, Register, Reservar, Reservas } from './pages';
+import { Header, Footer } from './components';
+import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+
+//fasdfsa
 
 function App() {
     return (
-        <div className="App">
+        <div className="app">
             <Header></Header>
             <h1>Hola</h1>
             <Router>
@@ -14,6 +16,14 @@ function App() {
                     <Route path="/">
                         <Route index element={<Home />} />
                         <Route path="carta" element={<Carta />} />
+                        <Route path="laCocteleria" element={<LaCocteleria />} />
+                        <Route path="contacto" element={<Contacto />} />
+                        <Route path="pedir" element={<Pedir />} />
+                        <Route path="pedidos" element={<Pedidos />} />
+                        <Route path="reservar" element={<Reservar />} />
+                        <Route path="reservas" element={<Reservas />} />
+                        <Route path="register" element={<Register />} />
+                        <Route path="login" element={<Login />} />
                     </Route>
                 </Routes>
             </Router>

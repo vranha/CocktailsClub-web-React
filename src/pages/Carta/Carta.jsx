@@ -1,8 +1,7 @@
 export default function Carta() {
-
-    return(
+    return (
         <>
-        <h2>Carta</h2>
+            <h2>Carta</h2>
         </>
-    )
+    );
 }
