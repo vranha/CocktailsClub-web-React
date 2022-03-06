@@ -3,6 +3,9 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const connect = require("./database/connection");
 
+// Routes
+const productRoute = require("./routes/product.routes");
+
 require("dotenv").config();
 
 const PORT = process.env.PORT;
@@ -16,6 +19,15 @@ connect();
 
 server.options("*", cors());
 server.use(cors());
+
+server.use((err, req, res, next) => {
+  const status = err.status || 500;
+  const message = err.message || "Unexpected error";
+
+  return res.status(status).json(message);
+});
+
+server.use("/product", productRoute);
 
 server.listen(PORT, () => {
   console.log(`Server running in http://127.0.0.1:${PORT}`);
