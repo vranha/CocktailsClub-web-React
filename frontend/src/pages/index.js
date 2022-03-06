@@ -1,12 +1,11 @@
-import Home from './Home/Home';
-import Carta from './Carta/Carta';
-import LaCocteleria from './LaCocteleria/LaCocteleria';
-import Contacto from './Contacto/Contacto';
-import Login from './Login/Login';
-import Pedidos from './Pedidos/Pedidos';
-import Pedir from './Pedir/Pedir';
-import Register from './Register/Register';
-import Reservar from './Reservar/Reservar';
-import Reservas from './Reservas/Reservas';
+import Home from "./Home/Home";
+import Menu from "./Menu/Menu";
+import About from "./About/About";
+import Login from "./Login/Login";
+import OrderList from "./OrderList/OrderList";
+import Order from "./Order/Order";
+import Register from "./Register/Register";
+import Book from "./Book/Book";
+import Booking from "./Bookings/Bookings";
 
-export { Home, Carta, LaCocteleria, Contacto, Login, Pedidos, Pedir, Register, Reservar, Reservas };
+export { Home, Menu, About, Login, OrderList, Order, Register, Book, Booking };
