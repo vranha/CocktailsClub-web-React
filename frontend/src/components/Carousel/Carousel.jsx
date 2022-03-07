@@ -7,7 +7,13 @@ import styles from "./Carousel.module.scss";
 
 export default function Carousel() {
   return (
-    <Swiper className={styles.swiper} pagination={true} modules={[Pagination]}>
+    <Swiper
+      className={styles.swiper}
+      pagination={{
+        clickable: true,
+      }}
+      modules={[Pagination]}
+    >
       <SwiperSlide className={styles.swiperSlide}>Slide 1</SwiperSlide>
       <SwiperSlide className={styles.swiperSlide}>Slide 2</SwiperSlide>
       <SwiperSlide className={styles.swiperSlide}>Slide 3</SwiperSlide>
