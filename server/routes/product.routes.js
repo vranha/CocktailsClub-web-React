@@ -8,4 +8,30 @@ router.get("/", async (req, res, next) => {
   });
 });
 
+router.post("/new", async (req, res, next) => {
+  const { name, type, price, image, description, others } = req.body;
+  let id = 1;
+  const productCounter = await Product.countDocuments();
+  const productExist = await Product.findOne({ name });
+
+  productCounter ? (id = productCounter + 1) : id;
+
+  if (productExist) {
+    res.status(400);
+    res.json("Product already in db");
+  } else {
+    Product.create({
+      id,
+      name,
+      type,
+      price,
+      image,
+      description,
+      others,
+    });
+    res.status(200);
+    res.json("Product created in db");
+  }
+});
+
 module.exports = router;
