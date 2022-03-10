@@ -1,24 +1,19 @@
 const express = require("express");
 const router = express.Router();
 const Order = require("../models/order");
+const { getDate, getTime } = require("../utils/functions/getDateTime");
 
-router.get("/", async (req, res, next) => {});
+router.get("/", async (req, res, next) => {
+  //By default this route get just the current day orders
+  const date = getDate();
+  const orders = await Order.find({ date: date });
+  res.json(orders);
+});
 
 router.post("/new", async (req, res, next) => {
   const { table, products } = req.body;
-
-  const currentDate = new Date();
-  const year = currentDate.getFullYear();
-  const month = currentDate.getMonth();
-  const day = currentDate.getDate();
-  const date = `${year}-${month + 1}-${day}`;
-  console.log(year, month, day);
-
-  const seconds = currentDate.getSeconds();
-  const minutes = currentDate.getMinutes();
-  const hour = currentDate.getHours();
-  const time = `${hour}:${minutes}:${seconds}`;
-  console.log(products);
+  const date = getDate();
+  const time = getTime();
 
   try {
     Order.create({
