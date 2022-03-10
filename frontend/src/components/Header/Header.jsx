@@ -1,7 +1,6 @@
 import { Navbar, Container, Nav, NavDropdown } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import logoCoctel from "../../assets/logoCoctel.png";
-import Carousel from "../Carousel/Carousel";
 import styles from "./Header.module.scss";
 
 export default function Header() {
@@ -11,7 +10,7 @@ export default function Header() {
     <>
       <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
         <Container>
-          <Navbar.Brand onClick={() => navigate("home")}>
+          <Navbar.Brand className={styles.titleNav} onClick={() => navigate("home")}>
             <img className={styles.logoNav} src={logoCoctel} alt="imagen" />{" "}
             Cocktails Club
           </Navbar.Brand>
@@ -25,9 +24,9 @@ export default function Header() {
                 Carta
               </Nav.Link>
               <NavDropdown title="Sobre nosotros" id="collasible-nav-dropdown">
-                <NavDropdown.Item>Conócenos</NavDropdown.Item>
-                <NavDropdown.Item>Encuéntranos</NavDropdown.Item>
-                <NavDropdown.Item>Contáctanos</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate("about")}>Conócenos</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate("locate")}>Encuéntranos</NavDropdown.Item>
+                <NavDropdown.Item onClick={() => navigate("contact")}>Contáctanos</NavDropdown.Item>
                 {/* <NavDropdown.Divider /> */}
               </NavDropdown>
             </Nav>
@@ -39,7 +38,6 @@ export default function Header() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Carousel />
     </>
   );
 }

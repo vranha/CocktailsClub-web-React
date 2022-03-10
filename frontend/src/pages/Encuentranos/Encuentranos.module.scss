@@ -1,0 +1,14 @@
+.mapContainer{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    
+    iframe {
+        height: 300px;
+        width: 500px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.315);
+    }
+}
