@@ -1,4 +1,4 @@
-export default function About() {
+export default function Conocenos() {
   return (
     <>
       <h2>LaCocteleria</h2>
