@@ -23,7 +23,7 @@ export default function Header() {
               <Nav.Link as={Link} to="/menu">
                 Carta
               </Nav.Link>
-              <NavDropdown title="Sobre nosotros" id="collasible-nav-dropdown">
+              <NavDropdown menuVariant="dark"  title="Sobre nosotros" id="collasible-nav-dropdown">
                 <NavDropdown.Item onClick={() => navigate("about")}>Conócenos</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => navigate("locate")}>Encuéntranos</NavDropdown.Item>
                 <NavDropdown.Item onClick={() => navigate("contact")}>Contáctanos</NavDropdown.Item>
