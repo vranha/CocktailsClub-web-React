@@ -19,6 +19,9 @@ router.post("/new", async (req, res, next) => {
   if (productExist) {
     res.status(400);
     res.json("Product already in db");
+  } else if (type != "cocktail" && type != "appetizer") {
+    res.status(400);
+    res.json("Product type has to be cocktail or appetizer");
   } else {
     Product.create({
       id,

@@ -1,0 +1,46 @@
+.productCard {
+  width: 220px;
+  height: 350px;
+  border-radius: 20px;
+  box-shadow: 2px 1px 5px magenta;
+  background-color: white;
+  position: relative;
+}
+
+.imageDiv {
+  width: 100%;
+  height: 60%;
+  border-radius: 20px 0px 0px 0px;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: auto;
+  border-radius: 20px 20px 0px 0px;
+}
+
+.nameDiv {
+  text-transform: capitalize;
+}
+
+.description {
+  font-size: 12px;
+}
+
+.buttonPrice {
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+
+  padding: 2px;
+}
+
+.buttonIcon {
+  width: 30px;
+  height: 45px;
+  position: absolute;
+  right: 50px;
+  bottom: 10px;
+}
