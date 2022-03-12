@@ -4,9 +4,8 @@ const Order = require("../models/order");
 const { getDate, getTime } = require("../utils/functions/getDateTime");
 
 router.get("/", async (req, res, next) => {
-  //By default this route get just the current day orders
-  const date = getDate();
-  const orders = await Order.find({ date: date });
+  const currentDate = getDate();
+  const orders = await Order.find({ date: currentDate });
   res.json(orders);
 });
 
