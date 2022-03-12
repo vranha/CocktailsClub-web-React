@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import ProductCard from "../../components/ProducCard/ProductCard";
+import ProductCard from "../../components/ProductCard/ProductCard";
+import styles from "./Menu.module.scss";
 
 export default function Menu() {
   const [products, setProducts] = useState([]);
@@ -12,10 +13,10 @@ export default function Menu() {
   }, []);
 
   return (
-    <div>
-      {products.map((product) => {
-        return <ProductCard key={product.name} props={product} />;
-      })}
+    <div className={styles.menu}>
+      {products.map((product) => (
+        <ProductCard key={product.name} props={product} />
+      ))}
     </div>
   );
 }
