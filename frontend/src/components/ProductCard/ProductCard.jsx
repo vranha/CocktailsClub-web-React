@@ -1,21 +1,20 @@
 import styles from "./ProductCard.module.scss";
 import waiterIcon from "../../assets/waiterIcon.png";
-
 import Button from "react-bootstrap/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-export default function ProductCard({ props }) {
-  const { name, description, image, price } = props;
-  const [productSelection, setProductSelection] = useState([]);
+export default function ProductCard({ props, onClick }) {
+  const { id, name, description, image, price } = props;
 
-  const handdleProductSelection = (e, name) => {
-    //e.preventDefault();
-    setProductSelection([name]);
-    console.log(productSelection);
+  const selectedStyle = (id) => {
+    const cardProduct = document.querySelector(`.product-${id}`);
+    console.log(cardProduct);
+    cardProduct.style.backgroundColor = "grey";
+    cardProduct.style.opacity = "0.7";
   };
 
   return (
-    <div className={styles.productCard}>
+    <div className={`product-${id} ${styles.productCard}`}>
       <div className={styles.imageDiv}>
         <img className={styles.image} src={image} alt="" />
       </div>
@@ -23,11 +22,11 @@ export default function ProductCard({ props }) {
       <div className={styles.description}>{description}</div>
       <div>
         <Button
-          className={styles.buttonPrice}
+          className={`${styles.buttonPrice}`}
           variant="outline-dark"
           onClick={(e) => {
-            handdleProductSelection(e, name);
-            console.log(name);
+            onClick(e, name);
+            selectedStyle(id);
           }}
         >
           {`${price}€`}

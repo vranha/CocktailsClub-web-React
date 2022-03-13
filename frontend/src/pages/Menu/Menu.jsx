@@ -7,6 +7,8 @@ import styles from "./Menu.module.scss";
 
 export default function Menu() {
   const [products, setProducts] = useState([]);
+  const [productSelection, setProductSelection] = useState([]);
+
   useEffect(() => {
     fetch("http://127.0.0.1:4000/product")
       .then((product) => product.json())
@@ -14,6 +16,25 @@ export default function Menu() {
         setProducts(product);
       });
   }, []);
+
+  useEffect(() => {
+    console.log(productSelection);
+  }, [productSelection]);
+
+  const addProduct = (e, name) => {
+    const productAdded = productSelection.includes(name);
+
+    if (productAdded) {
+      setProductSelection(
+        [...productSelection].filter((value) => value != name)
+      );
+    }
+
+    if (!productAdded) {
+      e.preventDefault();
+      setProductSelection([...productSelection, name]);
+    }
+  };
 
   return (
     <>
@@ -23,13 +44,20 @@ export default function Menu() {
         <Dropdown.Toggle split variant="dark" id="dropdown-split-basic" />
 
         <Dropdown.Menu>
+          <Dropdown.Item href="#/action-1">Todos</Dropdown.Item>
           <Dropdown.Item href="#/action-1">Cócteles</Dropdown.Item>
           <Dropdown.Item href="#/action-2">Tapas</Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
+
+      <div>{productSelection}</div>
       <div className={styles.menu}>
         {products.map((product) => (
-          <ProductCard key={product.name} props={product} />
+          <ProductCard
+            key={product.name}
+            props={product}
+            onClick={addProduct}
+          />
         ))}
       </div>
     </>
