@@ -50,7 +50,7 @@ export default function Menu() {
         </Dropdown.Menu>
       </Dropdown>
 
-      <div>{productSelection}</div>
+      <div className={styles.productSelection}>{productSelection}</div>
       <div className={styles.menu}>
         {products.map((product) => (
           <ProductCard

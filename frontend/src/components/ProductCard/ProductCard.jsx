@@ -8,9 +8,16 @@ export default function ProductCard({ props, onClick }) {
 
   const selectedStyle = (id) => {
     const cardProduct = document.querySelector(`.product-${id}`);
-    console.log(cardProduct);
-    cardProduct.style.backgroundColor = "grey";
-    cardProduct.style.opacity = "0.7";
+    const buttonproduct = document.querySelector(`.button-${id}`);
+    if (cardProduct.style.backgroundColor == "grey") {
+      cardProduct.style.backgroundColor = "white";
+      cardProduct.style.opacity = "1";
+      buttonproduct.innerHTML = `${price}`;
+    } else {
+      cardProduct.style.backgroundColor = "grey";
+      cardProduct.style.opacity = "0.5";
+      buttonproduct.innerHTML = "X";
+    }
   };
 
   return (
@@ -22,11 +29,11 @@ export default function ProductCard({ props, onClick }) {
       <div className={styles.description}>{description}</div>
       <div>
         <Button
-          className={`${styles.buttonPrice}`}
+          className={`button-${id} ${styles.buttonPrice}`}
           variant="outline-dark"
           onClick={(e) => {
             onClick(e, name);
-            selectedStyle(id);
+            selectedStyle(id, price);
           }}
         >
           {`${price}€`}
