@@ -26,7 +26,7 @@ export default function Menu() {
 
     if (productAdded) {
       setProductSelection(
-        [...productSelection].filter((value) => value != name)
+        [...productSelection].filter((product) => product != name)
       );
     }
 
