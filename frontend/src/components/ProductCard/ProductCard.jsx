@@ -9,6 +9,7 @@ export default function ProductCard({ props, onClick }) {
   const selectedStyle = (id) => {
     const cardProduct = document.querySelector(`.product-${id}`);
     const buttonproduct = document.querySelector(`.button-${id}`);
+
     if (cardProduct.style.backgroundColor == "grey") {
       cardProduct.style.backgroundColor = "white";
       cardProduct.style.opacity = "1";

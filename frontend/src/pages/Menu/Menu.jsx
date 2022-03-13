@@ -8,18 +8,16 @@ import styles from "./Menu.module.scss";
 export default function Menu() {
   const [products, setProducts] = useState([]);
   const [productSelection, setProductSelection] = useState([]);
+  const [initialState, setInitialState] = useState([]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:4000/product")
       .then((product) => product.json())
       .then((product) => {
         setProducts(product);
+        setInitialState(product);
       });
   }, []);
-
-  useEffect(() => {
-    console.log(productSelection);
-  }, [productSelection]);
 
   const addProduct = (e, name) => {
     const productAdded = productSelection.includes(name);
@@ -28,11 +26,20 @@ export default function Menu() {
       setProductSelection(
         [...productSelection].filter((product) => product != name)
       );
-    }
-
-    if (!productAdded) {
-      e.preventDefault();
+    } else {
       setProductSelection([...productSelection, name]);
+    }
+  };
+
+  const filterProduct = (e, filter) => {
+    e.preventDefault();
+    if (filter == "cocktail" || filter == "appetizer") {
+      const filterState = initialState.filter(
+        (product) => product.type == filter
+      );
+      setProducts(filterState);
+    } else {
+      setProducts(initialState);
     }
   };
 
@@ -44,9 +51,27 @@ export default function Menu() {
         <Dropdown.Toggle split variant="dark" id="dropdown-split-basic" />
 
         <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">Todos</Dropdown.Item>
-          <Dropdown.Item href="#/action-1">Cócteles</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Tapas</Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => {
+              filterProduct(e, "all");
+            }}
+          >
+            Todos
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => {
+              filterProduct(e, "cocktail");
+            }}
+          >
+            Cócteles
+          </Dropdown.Item>
+          <Dropdown.Item
+            onClick={(e) => {
+              filterProduct(e, "appetizer");
+            }}
+          >
+            Tapas
+          </Dropdown.Item>
         </Dropdown.Menu>
       </Dropdown>
 
