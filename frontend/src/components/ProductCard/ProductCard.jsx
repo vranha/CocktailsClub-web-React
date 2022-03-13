@@ -29,6 +29,13 @@ export default function ProductCard({ props, onClick }) {
       <div className={styles.nameDiv}>{name}</div>
       <div className={styles.description}>{description}</div>
       <div>
+        <input
+          defaultValue={0}
+          className={styles.quantityInput}
+          type="number"
+          name=""
+          id=""
+        />
         <Button
           className={`button-${id} ${styles.buttonPrice}`}
           variant="outline-dark"

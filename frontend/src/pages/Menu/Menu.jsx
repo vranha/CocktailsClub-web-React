@@ -46,7 +46,7 @@ export default function Menu() {
   return (
     <>
       <Dropdown as={ButtonGroup}>
-        <Button variant="dark">Buscar</Button>
+        <Button variant="dark">Filtro</Button>
 
         <Dropdown.Toggle split variant="dark" id="dropdown-split-basic" />
 
