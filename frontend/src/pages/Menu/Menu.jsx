@@ -20,6 +20,7 @@ export default function Menu() {
   }, []);
 
   const addProduct = (e, name) => {
+    e.preventDefault();
     const productAdded = productSelection.includes(name);
 
     if (productAdded) {
@@ -45,35 +46,38 @@ export default function Menu() {
 
   return (
     <>
-      <Dropdown as={ButtonGroup}>
-        <Button variant="dark">Filtro</Button>
+      <div className={styles.menuHeader}>
+        <Dropdown as={ButtonGroup}>
+          <Button variant="dark">Filtro</Button>
 
-        <Dropdown.Toggle split variant="dark" id="dropdown-split-basic" />
+          <Dropdown.Toggle split variant="dark" id="dropdown-split-basic" />
 
-        <Dropdown.Menu>
-          <Dropdown.Item
-            onClick={(e) => {
-              filterProduct(e, "all");
-            }}
-          >
-            Todos
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={(e) => {
-              filterProduct(e, "cocktail");
-            }}
-          >
-            Cócteles
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={(e) => {
-              filterProduct(e, "appetizer");
-            }}
-          >
-            Tapas
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+          <Dropdown.Menu>
+            <Dropdown.Item
+              onClick={(e) => {
+                filterProduct(e, "all");
+              }}
+            >
+              Todos
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={(e) => {
+                filterProduct(e, "cocktail");
+              }}
+            >
+              Cócteles
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={(e) => {
+                filterProduct(e, "appetizer");
+              }}
+            >
+              Tapas
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Button className={styles.orderButton}>Realizar pedido</Button>
+      </div>
 
       <div className={styles.productSelection}>{productSelection}</div>
       <div className={styles.menu}>

@@ -1,23 +1,27 @@
 import styles from "./ProductCard.module.scss";
 import waiterIcon from "../../assets/waiterIcon.png";
 import Button from "react-bootstrap/Button";
-import { useEffect, useState } from "react";
+import { Form } from "react-bootstrap";
 
 export default function ProductCard({ props, onClick }) {
   const { id, name, description, image, price } = props;
 
-  const selectedStyle = (id) => {
+  const selectedStyle = (e, id) => {
+    e.preventDefault();
     const cardProduct = document.querySelector(`.product-${id}`);
     const buttonproduct = document.querySelector(`.button-${id}`);
+    const quantityInput = document.querySelector(`.quantityInput-${id}`);
 
     if (cardProduct.style.backgroundColor == "grey") {
       cardProduct.style.backgroundColor = "white";
       cardProduct.style.opacity = "1";
       buttonproduct.innerHTML = `${price}`;
+      quantityInput.disabled = false;
     } else {
       cardProduct.style.backgroundColor = "grey";
       cardProduct.style.opacity = "0.5";
       buttonproduct.innerHTML = "X";
+      quantityInput.disabled = true;
     }
   };
 
@@ -28,27 +32,31 @@ export default function ProductCard({ props, onClick }) {
       </div>
       <div className={styles.nameDiv}>{name}</div>
       <div className={styles.description}>{description}</div>
-      <div>
+
+      <Form
+        onSubmit={(e) => {
+          onClick(e, name);
+          selectedStyle(e, id, price);
+        }}
+      >
         <input
-          defaultValue={0}
-          className={styles.quantityInput}
+          min="1"
+          required
+          className={`quantityInput-${id} ${styles.quantityInput}`}
           type="number"
           name=""
           id=""
         />
         <Button
+          type="submit"
           className={`button-${id} ${styles.buttonPrice}`}
           variant="outline-dark"
-          onClick={(e) => {
-            onClick(e, name);
-            selectedStyle(id, price);
-          }}
         >
           {`${price}€`}
         </Button>
 
         <img className={styles.buttonIcon} src={waiterIcon} alt="" />
-      </div>
+      </Form>
     </div>
   );
 }
