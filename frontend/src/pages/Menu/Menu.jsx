@@ -20,12 +20,9 @@ export default function Menu() {
   const addProduct = (e, name, id) => {
     e.preventDefault();
     const productAdded = productSelection.includes(name);
-    console.log(name);
     const quantity = document.querySelector(`.quantityInput-${id}`).value;
-    console.log(quantity);
 
     if (productAdded) {
-      console.log(1);
       setProductSelection(
         [...productSelection].filter((product) => product != name)
       );
@@ -39,7 +36,6 @@ export default function Menu() {
     const allProducts = document.querySelectorAll(".product-card");
 
     allProducts.forEach((product) => {
-      console.log(product);
       product.style.display = "block";
     });
 
