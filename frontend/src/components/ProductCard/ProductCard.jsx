@@ -26,7 +26,9 @@ export default function ProductCard({ props, onClick }) {
   };
 
   return (
-    <div className={`product-${id} ${styles.productCard}`}>
+    <div
+      className={`product-card product-${id} product-${name} ${styles.productCard}`}
+    >
       <div className={styles.imageDiv}>
         <img className={styles.image} src={image} alt="" />
       </div>
@@ -35,16 +37,16 @@ export default function ProductCard({ props, onClick }) {
 
       <Form
         onSubmit={(e) => {
-          onClick(e, name);
+          onClick(e, name, id);
           selectedStyle(e, id, price);
         }}
       >
         <input
           min="1"
           required
-          className={`quantityInput-${id} ${styles.quantityInput}`}
+          className={`quantityInput-${name} quantityInput-${id} ${styles.quantityInput}`}
           type="number"
-          name=""
+          name="quantity"
           id=""
         />
         <Button

@@ -8,39 +8,50 @@ import styles from "./Menu.module.scss";
 export default function Menu() {
   const [products, setProducts] = useState([]);
   const [productSelection, setProductSelection] = useState([]);
-  const [initialState, setInitialState] = useState([]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:4000/product")
       .then((product) => product.json())
       .then((product) => {
         setProducts(product);
-        setInitialState(product);
       });
   }, []);
 
-  const addProduct = (e, name) => {
+  const addProduct = (e, name, id) => {
     e.preventDefault();
     const productAdded = productSelection.includes(name);
+    console.log(name);
+    const quantity = document.querySelector(`.quantityInput-${id}`).value;
+    console.log(quantity);
 
     if (productAdded) {
+      console.log(1);
       setProductSelection(
         [...productSelection].filter((product) => product != name)
       );
     } else {
-      setProductSelection([...productSelection, name]);
+      setProductSelection([...productSelection, [name, quantity]]);
     }
   };
 
   const filterProduct = (e, filter) => {
     e.preventDefault();
+    const allProducts = document.querySelectorAll(".product-card");
+
+    allProducts.forEach((product) => {
+      console.log(product);
+      product.style.display = "block";
+    });
+
     if (filter == "cocktail" || filter == "appetizer") {
-      const filterState = initialState.filter(
-        (product) => product.type == filter
+      const filterProducts = products.filter(
+        (product) => product.type !== filter
       );
-      setProducts(filterState);
-    } else {
-      setProducts(initialState);
+
+      filterProducts.forEach(({ id }) => {
+        const filterProduct = document.querySelector(`.product-${id}`);
+        filterProduct.style.display = "none";
+      });
     }
   };
 
