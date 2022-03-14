@@ -79,7 +79,7 @@ export default function App() {
               </li>
               <li>
                 <a href='#!' className='text-light'>
-                <MDBIcon fas icon="mobile-alt" /> 555-555-555
+                <MDBIcon fas icon="mobile-alt" /> 555-777-555
                 </a>
               </li>
 
