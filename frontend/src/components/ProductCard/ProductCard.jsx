@@ -19,7 +19,7 @@ export default function ProductCard({ props, onClick }) {
       quantityInput.disabled = false;
     } else {
       cardProduct.style.backgroundColor = "grey";
-      cardProduct.style.opacity = "0.5";
+      cardProduct.style.opacity = "0.7";
       buttonproduct.innerHTML = "X";
       quantityInput.disabled = true;
     }

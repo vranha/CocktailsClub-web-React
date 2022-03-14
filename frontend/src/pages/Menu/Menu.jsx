@@ -19,7 +19,10 @@ export default function Menu() {
 
   const addProduct = (e, name, id) => {
     e.preventDefault();
+    console.log(name);
+    console.log(productSelection);
     const productAdded = productSelection.includes(name);
+    console.log(productAdded);
     const quantity = document.querySelector(`.quantityInput-${id}`).value;
 
     if (productAdded) {
@@ -27,7 +30,7 @@ export default function Menu() {
         [...productSelection].filter((product) => product != name)
       );
     } else {
-      setProductSelection([...productSelection, [name, quantity]]);
+      setProductSelection([...productSelection, name]);
     }
   };
 
