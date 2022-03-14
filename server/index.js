@@ -5,6 +5,7 @@ const connect = require("./database/connection");
 
 // Routes
 const productRoute = require("./routes/product.routes");
+const orderRoute = require("./routes/order.routes");
 
 require("dotenv").config();
 
@@ -28,6 +29,7 @@ server.use((err, req, res, next) => {
 });
 
 server.use("/product", productRoute);
+server.use("/order", orderRoute);
 
 server.listen(PORT, () => {
   console.log(`Server running in http://127.0.0.1:${PORT}`);
