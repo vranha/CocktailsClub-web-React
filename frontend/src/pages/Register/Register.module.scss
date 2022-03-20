@@ -1,3 +1,19 @@
 .container {
-    min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin: 2%;
+  // min-height: 100vh ;
   }
+
+.formContainer{
+  width: 70vh;
+  height: auto;
+  border-radius: 5px;
+  background-color: rgb(33, 37, 41);
+  color: white;
+  padding: 2%;
+}
+
+.formlabe{
+  color: red;
+}
