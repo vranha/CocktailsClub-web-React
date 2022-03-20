@@ -7,6 +7,7 @@ import { toast } from 'react-toastify';
 // BOOTSTRAP IMPORTS
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
+import styles from './Login.module.scss';
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -50,7 +51,7 @@ export default function Login() {
     };
 
     return (
-        <>
+        <div className={styles.container}>
             <Form className="container d-flex flex-column align-items-center" onSubmit={onSubmit}>
                 <h1>Vamos a tomar algo</h1>
                 <Form.Group className="mb-3 text-white" controlId="formBasicEmail">
@@ -87,6 +88,6 @@ export default function Login() {
                     Submit
                 </Button>
             </Form>
-        </>
+        </div>
     );
 }

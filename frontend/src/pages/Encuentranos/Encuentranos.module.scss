@@ -1,8 +1,37 @@
+.container {
+    min-height: 100vh;
+  }
+
+
+.directions{
+        
+    .logos_metro, .logos_fgc {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100px;
+
+        img{
+            height: 30px;
+        }
+
+    }
+
+        p{
+            margin-top:-20px;
+            font-weight: 600;
+            font-size: 20px;
+            letter-spacing: 2px;
+        }
+}
+
+
+
 .mapContainer{
     position: absolute;
-    top: 50%;
+    
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, 0%);
     
     iframe {
         height: 300px;
