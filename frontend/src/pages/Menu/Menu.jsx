@@ -7,6 +7,8 @@ import styles from "./Menu.module.scss";
 
 export default function Menu() {
   const [products, setProducts] = useState([]);
+  const [productSelection, setProductSelection] = useState([]);
+
   useEffect(() => {
     fetch("http://127.0.0.1:4000/product")
       .then((product) => product.json())
@@ -15,23 +17,88 @@ export default function Menu() {
       });
   }, []);
 
+  const addProduct = (e, name, id) => {
+    e.preventDefault();
+    console.log(name);
+    console.log(productSelection);
+    const productAdded = productSelection.includes(name);
+    console.log(productAdded);
+    const quantity = document.querySelector(`.quantityInput-${id}`).value;
+
+    if (productAdded) {
+      setProductSelection(
+        [...productSelection].filter((product) => product != name)
+      );
+    } else {
+      setProductSelection([...productSelection, name]);
+    }
+  };
+
+  const filterProduct = (e, filter) => {
+    e.preventDefault();
+    const allProducts = document.querySelectorAll(".product-card");
+
+    allProducts.forEach((product) => {
+      product.style.display = "block";
+    });
+
+    if (filter == "cocktail" || filter == "appetizer") {
+      const filterProducts = products.filter(
+        (product) => product.type !== filter
+      );
+
+      filterProducts.forEach(({ id }) => {
+        const filterProduct = document.querySelector(`.product-${id}`);
+        filterProduct.style.display = "none";
+      });
+    }
+  };
+
   return (
-    <>
-      <Dropdown as={ButtonGroup}>
-        <Button variant="dark">Buscar</Button>
+    <div className={styles.container}>
+      <div className={styles.menuHeader}>
+        <Dropdown as={ButtonGroup}>
+          <Button variant="dark">Filtro</Button>
 
-        <Dropdown.Toggle split variant="dark" id="dropdown-split-basic" />
+          <Dropdown.Toggle split variant="dark" id="dropdown-split-basic" />
 
-        <Dropdown.Menu>
-          <Dropdown.Item href="#/action-1">Cócteles</Dropdown.Item>
-          <Dropdown.Item href="#/action-2">Tapas</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
+          <Dropdown.Menu>
+            <Dropdown.Item
+              onClick={(e) => {
+                filterProduct(e, "all");
+              }}
+            >
+              Todos
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={(e) => {
+                filterProduct(e, "cocktail");
+              }}
+            >
+              Cócteles
+            </Dropdown.Item>
+            <Dropdown.Item
+              onClick={(e) => {
+                filterProduct(e, "appetizer");
+              }}
+            >
+              Tapas
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+        <Button className={styles.orderButton}>Realizar pedido</Button>
+      </div>
+
+      <div className={styles.productSelection}>{productSelection}</div>
       <div className={styles.menu}>
         {products.map((product) => (
-          <ProductCard key={product.name} props={product} />
+          <ProductCard
+            key={product.name}
+            props={product}
+            onClick={addProduct}
+          />
         ))}
       </div>
-    </>
+    </div>
   );
 }

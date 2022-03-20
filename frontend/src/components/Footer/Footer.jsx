@@ -79,7 +79,7 @@ export default function App() {
               </li>
               <li>
                 <a href='#!' className='text-light'>
-                <MDBIcon fas icon="mobile-alt" /> 555-555-555
+                <MDBIcon fas icon="mobile-alt" /> 555-777-555
                 </a>
               </li>
 
@@ -104,9 +104,9 @@ export default function App() {
 
             <ul className='list-unstyled mb-0'>
               <li>
-                <p>
-                    <MDBIcon fas icon="map-marked-alt" /> Calle ejemplo, ejemplo 77
-                </p>
+                <div className="iframe">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1779.3778813648992!2d2.1494861804753262!3d41.40568740920311!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x12a4a398912e4cad%3A0x693c9efc2aa1ba63!2sBurger%20King!5e0!3m2!1ses!2ses!4v1647800303000!5m2!1ses!2ses" title="location"  loading="lazy"></iframe>
+                </div>
               </li>
 
             </ul>
