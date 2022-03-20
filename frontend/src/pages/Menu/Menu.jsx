@@ -55,7 +55,7 @@ export default function Menu() {
   };
 
   return (
-    <>
+    <div className={styles.container}>
       <div className={styles.menuHeader}>
         <Dropdown as={ButtonGroup}>
           <Button variant="dark">Filtro</Button>
@@ -99,6 +99,6 @@ export default function Menu() {
           />
         ))}
       </div>
-    </>
+    </div>
   );
 }
