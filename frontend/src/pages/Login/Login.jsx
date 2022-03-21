@@ -2,7 +2,8 @@ import { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { login, reset } from '../../features/authSlice';
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
+import toast from 'react-hot-toast';
 
 // BOOTSTRAP IMPORTS
 import Form from 'react-bootstrap/Form';
@@ -25,7 +26,18 @@ export default function Login() {
 
     useEffect(() => {
         if (isError) {
-            toast.error(message);
+            toast(`error`, {
+                icon: '❌',
+                style: {
+                  border: '4px solid var(--dark)',
+                  padding: '16px',
+                  color: 'var(--main)',
+                },
+                iconTheme: {
+                  primary: 'red',
+                  secondary: '#FFFAEE',
+                },
+              });
         }
         if (isSuccess || user) {
             navigate('/');

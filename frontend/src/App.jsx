@@ -14,11 +14,15 @@ import {
 } from './pages';
 import { Header, Footer, PrivateRoute } from './components';
 import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
+
+
 // import Bookings from './pages/Bookings/Bookings';
 
 function App() {
     return (
         <div className="app">
+            <Toaster />
             <Router>
                 <Header></Header>
                 <Routes>
