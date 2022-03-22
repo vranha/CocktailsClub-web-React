@@ -26,19 +26,19 @@ export default function Menu() {
   }, []);
 
 
-  const addProduct = (e, name, id) => {
-    e.preventDefault();
+  const addProduct = (name, id) => {
+  
     console.log(name);
     // console.log(productSelection);
     // const productAdded = productSelection.includes(name);
-    const productAdded = productObject.product.includes(name);
-    const quantity = document.querySelector(`.quantityInput-${id}`).value;
+    const productAdded = productSelection.some((i) => i.product.includes(name));
+    const quantity = document.querySelector(`.quantityInput-${id}`).value ? document.querySelector(`.quantityInput-${id}`).value: "1";
     
     
     
     if (productAdded) {
       setProductSelection(
-        [...productSelection].filter((product) => product !== name)
+        [...productSelection].filter((product) => product.product !== name)
       );
       toast(`${name} eliminado`, {
         icon: '🥵',
@@ -55,8 +55,9 @@ export default function Menu() {
     } else {
       
       // setProductSelection([...productSelection, name]);
-      setProductObject({product: name, quantity: quantity});
-      setProductSelection([...productSelection, productObject]);
+      const newProduct = {product: name, quantity: quantity}
+      setProductObject(newProduct);
+      setProductSelection([...productSelection, newProduct]);
       
 
       toast(`${name} añadido al carrito`, {
@@ -74,6 +75,7 @@ export default function Menu() {
 
 
     }
+    
   };
   
   
@@ -149,8 +151,8 @@ export default function Menu() {
         {products.map((product) => (
           <ProductCard
           key={product.name}
-          props={product}
-          onClick={addProduct}
+          product={product}
+          onClickProduct={ addProduct }
           />
           ))}
       </div>

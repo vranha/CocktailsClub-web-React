@@ -6,8 +6,9 @@ import { useState } from "react";
 import ReactTooltip from 'react-tooltip';
 
 
-export default function ProductCard({ props, onClick }) {
-  const { id, name, description, image, price } = props;
+export default function ProductCard({ onClickProduct, product }) {
+  console.log(product)
+  const { id, name, description, image, price } = product;
 
   const [tooltip, setTooltip] = useState('Añadir al carrito');
 
@@ -46,17 +47,17 @@ export default function ProductCard({ props, onClick }) {
 
       <Form
         onSubmit={(e) => {
-          onClick(e, name, id);
+          e.preventDefault();
+          onClickProduct(name, id);
           selectedStyle(e, id, price);
         }}
       >
         <input
           min="1"
-          required
           className={`quantityInput-${name} quantityInput-${id} ${styles.quantityInput}`}
           type="number"
           name="quantity"
-          value="1"
+          placeholder="1"
           id=""
           style={{textAlign: 'center'}}
         />
