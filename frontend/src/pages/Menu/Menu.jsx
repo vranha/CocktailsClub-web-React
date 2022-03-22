@@ -8,8 +8,14 @@ import toast from 'react-hot-toast';
 import styles from "./Menu.module.scss";
 
 export default function Menu() {
+  const INITIAL_STATE = {
+    product: '',
+    quantity: ''
+  }
   const [products, setProducts] = useState([]);
   const [productSelection, setProductSelection] = useState([]);
+  const [productObject, setProductObject] = useState(INITIAL_STATE);
+  
 
   useEffect(() => {
     fetch("http://127.0.0.1:4000/product")
@@ -19,18 +25,20 @@ export default function Menu() {
       });
   }, []);
 
+
   const addProduct = (e, name, id) => {
     e.preventDefault();
     console.log(name);
-    console.log(productSelection);
-    const productAdded = productSelection.includes(name);
-    console.log(productAdded);
+    // console.log(productSelection);
+    // const productAdded = productSelection.includes(name);
+    const productAdded = productObject.product.includes(name);
     const quantity = document.querySelector(`.quantityInput-${id}`).value;
     
-   
+    
+    
     if (productAdded) {
       setProductSelection(
-        [...productSelection].filter((product) => product != name)
+        [...productSelection].filter((product) => product !== name)
       );
       toast(`${name} eliminado`, {
         icon: '🥵',
@@ -45,7 +53,12 @@ export default function Menu() {
         },
       });
     } else {
-      setProductSelection([...productSelection, name]); 
+      
+      // setProductSelection([...productSelection, name]);
+      setProductObject({product: name, quantity: quantity});
+      setProductSelection([...productSelection, productObject]);
+      
+
       toast(`${name} añadido al carrito`, {
         icon: '😍',
         style: {
@@ -58,8 +71,20 @@ export default function Menu() {
           secondary: '#FFFAEE',
         },
       });
+
+
     }
   };
+  
+  
+  // useEffect(() => {
+  //   // setTimeout
+    
+  // }, []);
+        
+
+  console.log(productSelection);
+  console.log("productSelection ->", productSelection); //
 
   const filterProduct = (e, filter) => {
     e.preventDefault();
@@ -69,7 +94,7 @@ export default function Menu() {
       product.style.display = "block";
     });
 
-    if (filter == "cocktail" || filter == "appetizer") {
+    if (filter === "cocktail" || filter === "appetizer") {
       const filterProducts = products.filter(
         (product) => product.type !== filter
         );
@@ -80,7 +105,6 @@ export default function Menu() {
         });
       }
   };
-  
   return (
     <div className={styles.container}>
       <div className={styles.menuHeader}>
@@ -116,7 +140,11 @@ export default function Menu() {
         <Button className={styles.orderButton} variant="dark" style={{backgroundColor: 'var(--medium)'}}>Realizar Pedido</Button>
       </div>
 
-      <div className={styles.productSelection}>{productSelection}</div>
+      <div className={styles.productSelection}>
+        {productSelection.map((pedido) => (
+          <p>{pedido.product} <span> {pedido.quantity} </span> </p>
+        ))}
+      </div>
       <div className={styles.menu}>
         {products.map((product) => (
           <ProductCard

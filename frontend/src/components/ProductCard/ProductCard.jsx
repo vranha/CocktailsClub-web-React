@@ -17,7 +17,7 @@ export default function ProductCard({ props, onClick }) {
     const buttonProduct = document.querySelector(`.button-${id}`);
     const quantityInput = document.querySelector(`.quantityInput-${id}`);
 
-    if (cardProduct.style.backgroundColor == "grey") {
+    if (cardProduct.style.backgroundColor === "grey") {
       cardProduct.style.backgroundColor = "white";
       cardProduct.style.opacity = "1";
       buttonProduct.innerHTML = `${price}`;
