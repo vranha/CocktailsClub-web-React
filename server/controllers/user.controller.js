@@ -82,7 +82,7 @@ const registerPost = async(req, res, next) => {
 
     passport.authenticate('register', (error, user) => {
         if (error) {
-            return res.status(403).json({message: error.message});
+            return res.status(403).json({message: error.message}); //Error 403 forbidden, en el navegador, pero en postMan: usuario ya existente
         }
 
         req.logIn(user, (error) => {

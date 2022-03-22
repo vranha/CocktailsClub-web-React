@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     // apellido: '',
     email: '',
     password: '',
+    // role: 'USER_ROLE', //modificado en el método passport
     // movil: ''    
 }
 
@@ -35,7 +36,7 @@ export default function Register() {
             await registerUser(dispatch, user);
             // console.log(response);
             // if (!response.user) return; //error de propiedades indefinidas
-            navigate('/home');
+            // navigate('/login');
         } catch (error) {
             console.log('Catch', error);
         }

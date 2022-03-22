@@ -100,6 +100,7 @@ export default function Login() {
                     Submit
                 </Button>
             </Form>
+                <a className={styles.linkRegister} href="/register"> <p>¿No estás registrado?</p> </a>
         </div>
     );
 }

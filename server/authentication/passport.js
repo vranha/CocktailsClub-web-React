@@ -61,6 +61,7 @@ passport.use(
                     email: email.toLowerCase(),
                     username: req.body.username,
                     password: hash,
+                    role: 'USER_ROLE'
                     
                 });
 
