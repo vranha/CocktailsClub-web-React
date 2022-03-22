@@ -46,6 +46,7 @@ export default function Menu() {
           border: '4px solid var(--dark)',
           padding: '26px',
           color: 'var(--main)',
+          width: '100%',
         },
         iconTheme: {
           primary: 'red',
@@ -66,6 +67,7 @@ export default function Menu() {
           border: '4px solid green',
           padding: '26px',
           color: 'var(--main)',
+          width: '100%',
         },
         iconTheme: {
           primary: 'green',
