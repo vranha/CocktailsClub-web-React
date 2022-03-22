@@ -60,12 +60,12 @@ export default function Menu() {
       setProductSelection([...productSelection, newProduct]);
       
 
-      toast(`${name} añadido al carrito`, {
-        icon: '😍',
+      toast(`${name} añadido `, {
+        icon: '🤑',
         style: {
-          border: '4px solid var(--dark)',
+          border: '4px solid green',
           padding: '26px',
-          color: 'var(--main)'
+          color: 'var(--main)',
         },
         iconTheme: {
           primary: 'green',

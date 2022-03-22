@@ -28,7 +28,7 @@ export default function ProductCard({ onClickProduct, product }) {
     } else {
       cardProduct.style.backgroundColor = "grey";
       cardProduct.style.opacity = "0.7";
-      buttonProduct.innerHTML = "X";
+      buttonProduct.innerHTML = "❌";
       buttonProduct.style.backgroundColor = "#ff6262";
       quantityInput.disabled = true;
       setTooltip('Eliminar')
