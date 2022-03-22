@@ -36,7 +36,7 @@ export default function Menu() {
         icon: '🥵',
         style: {
           border: '4px solid var(--dark)',
-          padding: '16px',
+          padding: '26px',
           color: 'var(--main)',
         },
         iconTheme: {

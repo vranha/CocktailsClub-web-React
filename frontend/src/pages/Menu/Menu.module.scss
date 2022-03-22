@@ -17,8 +17,10 @@
   box-shadow: 0 0px 10px black;
 }
 .menu {
+  max-width: 70%;
   margin-top: 30px;
   display: flex;
+  margin: 50px auto;
   justify-content: center;
   flex-wrap: wrap;
   gap: 50px;

@@ -36,7 +36,7 @@ export default function Register() {
             await registerUser(dispatch, user);
             // console.log(response);
             // if (!response.user) return; //error de propiedades indefinidas
-            // navigate('/login');
+            navigate('/login');
         } catch (error) {
             console.log('Catch', error);
         }
