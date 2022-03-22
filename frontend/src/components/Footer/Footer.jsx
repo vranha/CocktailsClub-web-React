@@ -7,6 +7,7 @@ import {
 } from 'mdb-react-ui-kit';
 import './Footer.module.scss';
 export default function App() {
+
   return (
     <MDBFooter className='bg-dark text-center text-white'>
       <div className='container p-4 pb-0'>
@@ -126,13 +127,16 @@ export default function App() {
           </MDBCol>
 
           <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-            <h5 className='text-uppercase mb-3'>Registrate</h5>
+
+              <h5 className='text-uppercase mb-3'>Registrate</h5>
 
             <p className='d-flex justify-content-center align-items-center'>
             <span className='me-3'>Regístrate gratis</span>
-            <button type='button' className='btn btn-primary btn-rounded'>
-              Sign up!
-            </button>
+            <a href="/register">
+               <button type='button' className='btn btn-primary btn-rounded' >
+                Sign up!
+              </button>
+            </a>
           </p>
           </MDBCol>
         </MDBRow>

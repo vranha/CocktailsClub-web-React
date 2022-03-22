@@ -1,17 +1,44 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { registerUser, useAuthDispatch, useAuthSate } from '../../context';
 import styles from './Register.module.scss'
 
+const INITIAL_STATE = {
+    username: '',
+    // apellido: '',
+    email: '',
+    password: '',
+    // movil: ''    
+}
+
 export default function Register() {
+    const [user, setUser] = useState(INITIAL_STATE);
+    const dispatch = useAuthDispatch();
+    const navigate = useNavigate();
+    const state = useAuthSate();
 
-    const INITIAL_STATE = {
-        nombre: '',
-        apellido: '',
-        username: '',
-        password: '',
-        movil: ''    
-    }
+    const inputChange = (ev) => {
+        const { id, value } = ev.target;
 
-    const submitForm = (ev) => {
+        setUser({
+            ...user,
+            [id]: value,
+        });
+    };
+
+    const submitForm = async (ev) => {
         ev.preventDefault();
+
+        try {
+            // console.log(user);
+            // const response = await registerUser(dispatch, user);
+            await registerUser(dispatch, user);
+            // console.log(response);
+            // if (!response.user) return; //error de propiedades indefinidas
+            navigate('/home');
+        } catch (error) {
+            console.log('Catch', error);
+        }
     }
 
     return (
@@ -20,30 +47,31 @@ export default function Register() {
                 <h1>Regístrate</h1>
                 <form className="row g-3" onSubmit={submitForm}>
                     <div className="col-md-12">
-                        <label for="validationDefault01" className="form-label">First name</label>
-                        <input type="text" className="form-control" id="validationDefault01" placeholder='Nombre...' required/>
+                        <label htmlFor="username" className="form-label">First name</label>
+                        <input type="text" className="form-control" id="username" onChange={inputChange} placeholder='Nombre...' required/>
                     </div>
-                    <div className="col-md-12">
-                        <label for="validationDefault02" className="form-label">Last name</label>
+                    {/* <div className="col-md-12">
+                        <label htmlFor="validationDefault02" className="form-label">Last name</label>
                         <input type="text" className="form-control" id="validationDefault02" placeholder='Apellido...' required/>
+                    </div> */}
+                    <div className="col-md-12">
+                        <label htmlFor="email" className="form-label">Email</label>
+                        <input type="email" className="form-control" id="email" onChange={inputChange} />
                     </div>
                     <div className="col-md-12">
-                        <label for="inputEmail4" className="form-label">Email</label>
-                        <input type="email" className="form-control" id="inputEmail4"/>
-                    </div>
-                    <div className="col-md-12">
-                        <label for="inputPassword4" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="inputPassword4"/>
+                        <label htmlFor="password" className="form-label">Password</label>
+                        <input type="password" className="form-control" id="password" onChange={inputChange} />
                     </div>  
-                    <div className="col-md-12">
-                        <label for="inputCity" className="form-label">Móvil</label>
+                    {/* <div className="col-md-12">
+                        <label htmlFor="inputCity" className="form-label">Móvil</label>
                         <input type="text" className="form-control" id="inputMobile"/>
-                    </div>
+                    </div> */}
                     <div className="col-12">
-                        <button type="submit" className="btn btn-primary">Sign in</button>
+                        <button type="submit" className="btn btn-primary">Regístrate</button>
                     </div>
                 </form>
             </div>
+            {state.error && <p style={{color: 'red'}}> { state.error } </p> }
         </div>
     );
 }
