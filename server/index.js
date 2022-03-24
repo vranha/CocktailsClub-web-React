@@ -8,6 +8,7 @@ const passport = require('passport');
 const authRoute = require ("./routes/user.routes");
 const productRoute = require("./routes/product.routes");
 const orderRoute = require("./routes/order.routes");
+const nodemailer = require("nodemailer")
 
 connect();
 
@@ -28,6 +29,46 @@ require('./authentication/passport');
 
 server.options("*", cors());
 server.use(cors());
+
+// Enviamos email mediante MAILTRAP (mailtrap es mas para tests, para producción habria que cambiar por otra)
+
+server.post("/send_mail", cors(), async (req, res) => {
+  let {text, name, email, phone} = req.body 
+  const transport = nodemailer.createTransport({
+    host: process.env.MAIL_HOST,
+    port: process.env.MAIL_PORT,
+    auth: {
+      user: process.env.MAIL_USER,
+      pass: process.env.MAIL_PASS
+    },
+    tls: {
+      rejectUnauthorized: false
+    }
+  })
+  await transport.sendMail({
+    from:`${email}`,
+    to: "CocktailsClub@gmail.com",
+    subject: "CocktailsClub Contact Form",
+    html: `<div className={styles.email} style="
+    border: 1px solid black;
+    padding: 20px;
+    font-family: sans-serif;
+    line-height: 2;
+    font-size: 20px;
+    ">
+    <p>💌Mensaje de <strong>${name}</strong>, con email: <strong>${email}</strong> </p>
+    <p>📞Telefono de contacto: <strong>${phone || "No nos lo da, es una persona reservada"}</strong></p>
+
+    <h3>Mensaje:</h3>
+    <p>${text}</p>
+
+    <p>A sus pies, señores cockteleros.</p>
+    <p>${name}😘</p>
+    </div>
+    `
+  })
+  console.log('Mensaje enviado')
+})
 
 server.use((err, req, res, next) => {
   const status = err.status || 500;
