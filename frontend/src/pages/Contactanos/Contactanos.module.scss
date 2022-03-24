@@ -1,3 +1,27 @@
 .container {
     min-height: 100vh;
-  }
+    
+    .title{
+      margin: 60px;
+    }
+
+    .enviado {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        height: 438px;
+
+        .enviadoTitle {
+            font-family: "Poppins", sans-serif;
+            margin-bottom: 50px;
+        }
+    }
+
+    .phone{
+      text-decoration: none;
+      color: var(--medium);
+      margin-right: 5px;
+    }
+
+}
