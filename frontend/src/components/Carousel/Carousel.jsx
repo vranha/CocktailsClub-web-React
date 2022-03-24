@@ -1,5 +1,5 @@
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper';
 
@@ -11,6 +11,20 @@ import styles from './Carousel.module.scss';
 import { useState } from "react";
 
 export default function Carousel() {
+  const navigate = useNavigate();
+  const [titleSlide, setTitleSlide] = useState(0);
+  
+  const handleTitle = () => {
+    if (titleSlide === 0) {
+      navigate('/menu')
+    } else if (titleSlide === 1) {
+      navigate('/bookings')
+    } else if (titleSlide === 2) {
+      navigate('/about')
+    } else if (titleSlide === 3) {
+      navigate('/contact')
+    }
+  }
 
     return (
         <Swiper
@@ -23,6 +37,10 @@ export default function Carousel() {
                 delay: 2500,
                 disableOnInteraction: false,
             }}
+            onSlideChange={(swiper) => {
+              setTitleSlide(swiper.activeIndex)
+            }}
+            onClick={handleTitle}
         >
             <SwiperSlide className={styles.swiperSlide}>
                 <div className={styles.linkDiv}>
@@ -39,8 +57,8 @@ export default function Carousel() {
 
             <SwiperSlide className={styles.swiperSlide}>
                 <div className={styles.linkDiv}>
-                    <Link to="/contact" className={styles.link}>
-                        Contactanos
+                    <Link to="/bookings" className={styles.link}>
+                        Reserva tu mesa
                     </Link>
                 </div>
                 <img
@@ -52,7 +70,7 @@ export default function Carousel() {
             <SwiperSlide className={styles.swiperSlide}>
                 <div className={styles.linkDiv}>
                     <Link to="/about" className={styles.link}>
-                        Conocenos
+                        Conócenos
                     </Link>
                 </div>
                 <img
@@ -63,8 +81,8 @@ export default function Carousel() {
             </SwiperSlide>
             <SwiperSlide className={styles.swiperSlide}>
                 <div className={styles.linkDiv}>
-                    <Link to="/locate" className={styles.link}>
-                        Encuentranos
+                    <Link to="/contact" className={styles.link}>
+                      Contáctanos
                     </Link>
                 </div>
                 <img
