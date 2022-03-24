@@ -1,6 +1,8 @@
+
 .swiper {
-  width: 90vmin;
+  width: 70vmin;
   height: 20em;
+  cursor: pointer;
 }
 
 .swiperSlide {
@@ -13,4 +15,11 @@
 
 .slideImg {
   width: 100%;
+}
+
+.title {
+  margin: 30px;
+  font-size:60px;
+  cursor: pointer;
+
 }
