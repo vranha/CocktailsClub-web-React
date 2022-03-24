@@ -1,12 +1,14 @@
 import { Button } from "react-bootstrap";
 import styles from "./MenuSidebar.module.scss";
 
-export default function MenuSidebar({ sideNav, main, productSelection, totalPrice }) {
+export default function MenuSidebar({ sideNav, main, productSelection, totalPrice, buttonPedido }) {
     /* Set the width of the side navigation to 0 */
     function closeNav() {
         sideNav.current.style.width = "0px";
         main.current.style.transition = ".5s";
         main.current.style.marginLeft = "0px";
+        buttonPedido.current.style.backgroundColor = "var(--medium)";
+
     }
 
     return (

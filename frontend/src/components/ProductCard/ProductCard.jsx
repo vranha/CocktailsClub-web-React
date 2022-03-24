@@ -6,7 +6,7 @@ import { useState } from "react";
 import ReactTooltip from 'react-tooltip';
 
 
-export default function ProductCard({ onClickProduct, product }) {
+export default function ProductCard({ onClickProduct, product, buttonPedido }) {
 
   const { id, name, description, image, price } = product;
 
@@ -31,6 +31,15 @@ export default function ProductCard({ onClickProduct, product }) {
       buttonProduct.innerHTML = "❌";
       buttonProduct.style.backgroundColor = "#ff6262";
       quantityInput.disabled = true;
+
+      buttonPedido.current.style.backgroundColor = "#a12154";
+      buttonPedido.current.style.transition = ".4s";
+      buttonPedido.current.style.boxShadow = "0 0 10px #ffffff19";
+      setTimeout(() => {
+        buttonPedido.current.style.backgroundColor = "var(--medium)"  
+        buttonPedido.current.style.boxShadow = "0 0 0px #ffffff39";
+      }, 400);
+
       setTooltip('Eliminar')
     }
   };

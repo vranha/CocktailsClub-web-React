@@ -22,6 +22,7 @@ export default function Menu() {
 
   const sideNav = useRef();
   const main = useRef();
+  const buttonPedido = useRef();
   
 
   useEffect(() => {
@@ -37,6 +38,7 @@ export default function Menu() {
     sideNav.current.style.width = "300px";
     main.current.style.transition = ".5s";
     main.current.style.marginLeft = "250px";
+    buttonPedido.current.style.backgroundColor = "var(--dark)";
 
   }
 
@@ -123,7 +125,7 @@ export default function Menu() {
   return (
     <div ref={main} id="main" className={styles.container}>
       <div className={styles.menuHeader}>
-      <Button className={styles.orderButton} onClick={openNav} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Mi Pedido</Button>
+      <Button ref={buttonPedido} className={styles.orderButton} onClick={openNav} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Mi Pedido</Button>
         <Dropdown  as={ButtonGroup}>
           <Button variant="light" >Filtrar</Button>
 
@@ -155,7 +157,7 @@ export default function Menu() {
         </Dropdown>
       </div>
 
-      <MenuSidebar sideNav={sideNav} main={main} productSelection={productSelection} totalPrice={totalPrice}></MenuSidebar>
+      <MenuSidebar sideNav={sideNav} main={main} productSelection={productSelection} totalPrice={totalPrice} buttonPedido={buttonPedido}></MenuSidebar>
 
       <div className={styles.menu}>
         {products.map((product) => (
@@ -163,6 +165,7 @@ export default function Menu() {
           key={product.name}
           product={product}
           onClickProduct={ addProduct }
+          buttonPedido={buttonPedido}
           />
           ))}
       </div>
