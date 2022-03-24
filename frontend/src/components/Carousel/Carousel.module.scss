@@ -1,20 +1,49 @@
 
 .swiper {
-  width: 70vmin;
-  height: 20em;
-  cursor: pointer;
+
+    width: 100%;
+    height: 95vmin;
+min-height: 95vh;
 }
 
 .swiperSlide {
-  background-color: black;
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    background-color: black;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .slideImg {
-  width: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.linkDiv {
+    position: absolute;
+    color: red;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.link {
+    text-decoration: none;
+    font-size: 40px;
+    color: white;
+    font-weight: bold;
+}
+
+.link:hover {
+    text-decoration: none;
+    color: white;
 }
 
 .title {
