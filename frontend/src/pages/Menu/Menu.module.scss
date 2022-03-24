@@ -13,8 +13,8 @@
   position: fixed;
   right: 30px;
   top: 86px;
-  z-index: 9999;
-  box-shadow: 0 0px 10px black;
+  z-index: 999;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.39);
 }
 .menu {
   max-width: 70%;
@@ -24,8 +24,4 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 50px;
-}
-
-.productSelection {
-  color: white;
 }

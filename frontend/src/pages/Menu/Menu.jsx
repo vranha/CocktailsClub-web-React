@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
@@ -6,15 +6,22 @@ import ProductCard from "../../components/ProductCard/ProductCard";
 import toast from 'react-hot-toast';
 
 import styles from "./Menu.module.scss";
+import MenuSidebar from "../../components/MenuSidebar/MenuSidebar";
 
 export default function Menu() {
   const INITIAL_STATE = {
     product: '',
-    quantity: ''
+    quantity: '',
+    price: '',
+    totalPrice: ''
   }
   const [products, setProducts] = useState([]);
   const [productSelection, setProductSelection] = useState([]);
-  const [productObject, setProductObject] = useState(INITIAL_STATE);
+  const [/* productObject */, setProductObject] = useState(INITIAL_STATE);
+  const [totalPrice, setTotalPrice] = useState(0);
+
+  const sideNav = useRef();
+  const main = useRef();
   
 
   useEffect(() => {
@@ -25,22 +32,32 @@ export default function Menu() {
       });
   }, []);
 
+    /* Set the width of the side navigation to 250px */
+    const openNav = () => {
+    sideNav.current.style.width = "300px";
+    main.current.style.transition = ".5s";
+    main.current.style.marginLeft = "250px";
 
-  const addProduct = (name, id) => {
+  }
+
+
+  const addProduct = (name, id, price) => {
   
     console.log(name);
-    // console.log(productSelection);
-    // const productAdded = productSelection.includes(name);
     const productAdded = productSelection.some((i) => i.product.includes(name));
     const quantity = document.querySelector(`.quantityInput-${id}`).value ? document.querySelector(`.quantityInput-${id}`).value: "1";
-    
-    
+   
     
     if (productAdded) {
       setProductSelection(
-        [...productSelection].filter((product) => product.product !== name)
-      );
+        [...productSelection].filter((product) =>  product.product !== name));
+
+      const thisProduct = productSelection.find((product) => product.product === name)
+      setTotalPrice(totalPrice - thisProduct.totalPrice)
+      
+
       toast(`${name} eliminado`, {
+        duration: 2000,
         icon: '🥵',
         style: {
           border: '4px solid var(--dark)',
@@ -56,12 +73,13 @@ export default function Menu() {
     } else {
       
       // setProductSelection([...productSelection, name]);
-      const newProduct = {product: name, quantity: quantity}
+      const newProduct = {product: name, quantity: quantity, price: price, totalPrice: quantity * price}
       setProductObject(newProduct);
       setProductSelection([...productSelection, newProduct]);
-      
+      setTotalPrice(totalPrice + (price * quantity))
 
       toast(`${name} añadido `, {
+        duration: 2000,
         icon: '🤑',
         style: {
           border: '4px solid green',
@@ -79,13 +97,6 @@ export default function Menu() {
     }
     
   };
-  
-  
-  // useEffect(() => {
-  //   // setTimeout
-    
-  // }, []);
-        
 
   console.log(productSelection);
   console.log("productSelection ->", productSelection); //
@@ -110,8 +121,9 @@ export default function Menu() {
       }
   };
   return (
-    <div className={styles.container}>
+    <div ref={main} id="main" className={styles.container}>
       <div className={styles.menuHeader}>
+      <Button className={styles.orderButton} onClick={openNav} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Mi Pedido</Button>
         <Dropdown  as={ButtonGroup}>
           <Button variant="light" >Filtrar</Button>
 
@@ -141,14 +153,10 @@ export default function Menu() {
             </Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
-        <Button className={styles.orderButton} variant="dark" style={{backgroundColor: 'var(--medium)'}}>Realizar Pedido</Button>
       </div>
 
-      <div className={styles.productSelection}>
-        {productSelection.map((pedido) => (
-          <p>{pedido.product} <span> {pedido.quantity} </span> </p>
-        ))}
-      </div>
+      <MenuSidebar sideNav={sideNav} main={main} productSelection={productSelection} totalPrice={totalPrice}></MenuSidebar>
+
       <div className={styles.menu}>
         {products.map((product) => (
           <ProductCard

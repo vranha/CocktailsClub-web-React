@@ -7,7 +7,7 @@ import ReactTooltip from 'react-tooltip';
 
 
 export default function ProductCard({ onClickProduct, product }) {
-  console.log(product)
+
   const { id, name, description, image, price } = product;
 
   const [tooltip, setTooltip] = useState('Añadir al carrito');
@@ -21,7 +21,7 @@ export default function ProductCard({ onClickProduct, product }) {
     if (cardProduct.style.backgroundColor === "grey") {
       cardProduct.style.backgroundColor = "white";
       cardProduct.style.opacity = "1";
-      buttonProduct.innerHTML = `${price}`;
+      buttonProduct.innerHTML = `${price}€`;
       buttonProduct.style.backgroundColor = "white";
       quantityInput.disabled = false;
       setTooltip('Añadir al carrito')
@@ -48,7 +48,7 @@ export default function ProductCard({ onClickProduct, product }) {
       <Form
         onSubmit={(e) => {
           e.preventDefault();
-          onClickProduct(name, id);
+          onClickProduct(name, id, price);
           selectedStyle(e, id, price);
         }}
       >

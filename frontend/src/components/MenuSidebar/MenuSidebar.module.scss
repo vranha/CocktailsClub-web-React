@@ -1,0 +1,87 @@
+/* The side navigation menu */
+.sidenav {
+    height: 100vh; /* 100% Full-height */
+    width: 0px; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 9999; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    background-color: #111; /* Black*/
+    overflow-x: hidden; /* Disable horizontal scroll */
+    padding-top: 100px; /* Place content 60px from the top */
+    transition: 0.5s; /* 0.5 second transition effect to slide in the sidenav */
+}
+
+/* The navigation menu links */
+.sidenav div {
+    padding: 4px 8px 4px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    color: #818181;
+    transition: 0.3s;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav a:hover {
+    color: #f1f1f1;
+}
+
+/* Position and style the close button (top right corner) */
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+.containerList {
+    display: flex;
+    flex-direction: row;
+    text-align: left;
+}
+
+.product {
+    margin-left: 20px;
+}
+
+.price {
+    margin-left: auto;
+    color: var(--medium);
+}
+
+.totalPriceContainer{
+    position: absolute;
+    bottom: 60px;
+    left: 50%;
+    transform: translate(-50%, 0%);
+
+    .line {
+     transform: scale(1.5);
+     margin-bottom: 20px;
+    }
+
+    .totalPrice {
+        font-family: "Poppins", sans-serif;
+        font-size: 25px;
+        margin-left: auto;
+        margin-top: -10px;
+        color: var(--medium);
+    }
+
+    .orderButton {
+        margin-top: 20px;
+        width: 150px;
+        box-shadow: 0 0px 10px rgba(0, 0, 0, 0.39);
+    }
+}
+
+
+/* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
+@media screen and (max-height: 450px) {
+    .sidenav {
+        padding-top: 15px;
+    }
+    .sidenav a {
+        font-size: 18px;
+    }
+}
