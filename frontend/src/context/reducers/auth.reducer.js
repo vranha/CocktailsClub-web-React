@@ -1,8 +1,7 @@
 import * as actions from '../actions/auth.actions';
 
 const INITIAL_STATE = {
-    user: '',
-    token: '',
+    user: null,
     loading: false,
     error: '',
 };
@@ -18,7 +17,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
             return {
                 ...state, 
                 user: payload.user,
-                token: payload.auth_token,
                 loading: false,
             }
         }
@@ -30,11 +28,35 @@ const authReducer = (state = INITIAL_STATE, action) => {
                 user: false
             }
         }
+        case actions.AUTH_LOGIN: {
+            return {
+                ...state, 
+                loading: true
+            }
+        }
+        case actions.AUTH_LOGIN_OK: {
+            return {
+                ...state,
+                user: payload.user,
+                loading: false,
+            }
+        }
+        case actions.AUTH_LOGIN_ERROR: {
+            return {
+                ...state,
+                loading: false,
+                error: payload,
+                user: false
+            }
+        }
+
         default:
             return state;
     
     };
 };
+
+
 
 export {
     INITIAL_STATE,

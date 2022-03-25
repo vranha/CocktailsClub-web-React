@@ -16,8 +16,10 @@ const user = mongoose.Schema(
             require: [true, 'Please add a username'],
         },
         role: {
+            enum: ["ADMIN_ROLE", "USER_ROLE"],
             type: String,
-            require: [true, 'Please add a role']
+            default: "USER_ROLE",
+            require: true
         }
     },
     { timestamps: true }

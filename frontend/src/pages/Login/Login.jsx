@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { login, reset } from '../../features/authSlice';
+import { loginUser, useAuthDispatch, useAuthState } from '../../context';
+// import { login, reset } from '../../features/authSlice';
 // import { toast } from 'react-toastify';
 import toast from 'react-hot-toast';
 
@@ -10,61 +11,83 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import styles from './Login.module.scss';
 
-export default function Login() {
-    const [formData, setFormData] = useState({
-        email: '',
-        password: '',
-    });
 
-    const { email, password } = formData;
+const INITIAL_STATE = {
+    email: '',
+    password: ''
+}
 
+export default function Login({error}) {
+    const [form, setForm] = useState(INITIAL_STATE);
+    const dispatch = useAuthDispatch();
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const state = useAuthState();
+    
+    // const { email, password } = formData;
 
-    const { user, isError, isSuccess, message } = useSelector((state) => state.auth);
+    // const navigate = useNavigate();
+    // const dispatch = useDispatch();
+
+    // const { user, isError, isSuccess, message } = useSelector((state) => state.auth);
     // const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
-    useEffect(() => {
-        if (isError) {
-            toast(`error`, {
-                icon: '❌',
-                style: {
-                  border: '4px solid var(--dark)',
-                  padding: '16px',
-                  color: 'var(--main)',
-                },
-                iconTheme: {
-                  primary: 'red',
-                  secondary: '#FFFAEE',
-                },
-              });
-        }
-        if (isSuccess || user) {
-            navigate('/');
-        }
-        dispatch(reset());
-    }, [user, isError, isSuccess, message, navigate, dispatch]);
+    // useEffect(() => {
+    //     if (isError) {
+    //         toast(`error`, {
+    //             icon: '❌',
+    //             style: {
+    //               border: '4px solid var(--dark)',
+    //               padding: '16px',
+    //               color: 'var(--main)',
+    //             },
+    //             iconTheme: {
+    //               primary: 'red',
+    //               secondary: '#FFFAEE',
+    //             },
+    //           });
+    //     }
+    //     if (isSuccess || user) {
+    //         navigate('/');
+    //     }
+    //     dispatch(reset());
+    // }, [user, isError, isSuccess, message, navigate, dispatch]);
 
-    const onChange = (e) => {
-        setFormData((prevState) => ({
-            ...prevState,
-            [e.target.name]: e.target.value,
-        }));
+    // const onChange = (e) => {
+    //     setFormData((prevState) => ({
+    //         ...prevState,
+    //         [e.target.name]: e.target.value,
+    //     }));
+    // };
+
+    const inputChange = (ev) => {
+        const {id, value} = ev.target;
+
+        setForm({
+            ...form,
+            [id]: value,
+        });
     };
-    const onSubmit = (e) => {
-        e.preventDefault();
-        const userData = {
-            email,
-            password,
-        };
-        dispatch(login(userData));
-        // console.log(userData);
-        // return userData;
+
+
+
+    const submitForm = async (ev) => {
+        ev.preventDefault();
+
+        try {
+    console.log(state);
+
+            const response = await loginUser(dispatch, form);
+            // if (!response.user) return;
+            // navigate('/home');
+        } catch (error) {
+            console.log("Error:", error);
+        }
+
     };
 
     return (
         <div className={styles.container}>
-            <Form className="container d-flex flex-column align-items-center" onSubmit={onSubmit}>
+            <Form className="container d-flex flex-column align-items-center" onSubmit={submitForm}>
                 <h1>Vamos a tomar algo</h1>
                 <Form.Group className="mb-3 text-white" controlId="formBasicEmail">
                     <Form.Label>
@@ -73,11 +96,11 @@ export default function Login() {
                     <Form.Control
                         type="email"
                         className="form-control"
-                        // id="email"
+                        id="email"
                         name="email"
-                        value={email}
+                        value={form.email}
                         placeholder="Introduce tu correo electrónico"
-                        onChange={onChange}
+                        onChange={inputChange}
                     />
                     <Form.Text className="text-muted">Sin el no podrás entrar.</Form.Text>
                 </Form.Group>
@@ -89,17 +112,18 @@ export default function Login() {
                     <Form.Control
                         type="password"
                         className="form-control"
-                        // id="password"
+                        id="password"
                         name="password"
-                        value={password}
+                        value={form.password}
                         placeholder="Introduce tu Password"
-                        onChange={onChange}
+                        onChange={inputChange}
                     />
                 </Form.Group>
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
             </Form>
+            {/* {state.error && <p>{state.error}</p> } */}
                 <a className={styles.linkRegister} href="/register"> <p>¿No estás registrado?</p> </a>
         </div>
     );

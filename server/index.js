@@ -28,7 +28,18 @@ require('./authentication/passport');
 
 
 server.options("*", cors());
-server.use(cors());
+server.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true,
+}));
+
+server.use((req, res, next) => {
+  res.header('Acces-Control-Allow-Methods', 'GET,PUT,`PST,DELETE');
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+})
+
 
 // Enviamos email mediante MAILTRAP (mailtrap es mas para tests, para producción habria que cambiar por otra)
 

@@ -5,7 +5,7 @@ const AuthStateContext = createContext();
 const AuthDispatchContext = createContext();
 
 
-const useAuthSate = () => {
+const useAuthState = () => {
     const authContext = useContext(AuthStateContext);
 
     if (authContext === undefined) {
@@ -38,7 +38,7 @@ const AuthProvider = (props) => {
 };
 
 export {
-    useAuthSate,
+    useAuthState,
     useAuthDispatch,
     AuthProvider,
 };

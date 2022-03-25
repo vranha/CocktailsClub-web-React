@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerUser, useAuthDispatch, useAuthSate } from '../../context';
+import { registerUser, useAuthDispatch, useAuthState } from '../../context';
 import styles from './Register.module.scss'
 
 const INITIAL_STATE = {
@@ -16,7 +16,7 @@ export default function Register() {
     const [user, setUser] = useState(INITIAL_STATE);
     const dispatch = useAuthDispatch();
     const navigate = useNavigate();
-    const state = useAuthSate();
+    const state = useAuthState();
 
     const inputChange = (ev) => {
         const { id, value } = ev.target;

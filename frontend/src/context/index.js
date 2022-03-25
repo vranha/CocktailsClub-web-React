@@ -1,9 +1,10 @@
-import { registerUser } from "./actions/auth.actions";
-import { useAuthSate, useAuthDispatch, AuthProvider } from "./context";
+import { registerUser, loginUser } from "./actions/auth.actions";
+import { useAuthState, useAuthDispatch, AuthProvider } from "./context";
 
 export {
-    registerUser,
-    useAuthSate,
+    useAuthState,
     useAuthDispatch,
     AuthProvider,
+    registerUser,
+    loginUser,
 };

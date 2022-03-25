@@ -60,9 +60,7 @@ passport.use(
                 const newUser = new User({
                     email: email.toLowerCase(),
                     username: req.body.username,
-                    password: hash,
-                    role: 'USER_ROLE'
-                    
+                    password: hash                    
                 });
 
 
@@ -75,5 +73,51 @@ passport.use(
                 return done(err);
             }
         }
+    )
+);
+
+passport.use(
+    "login",
+    new LocalStrategy(
+    {
+        usernameField: "email",
+        passwordField: "password",
+        passReqToCallback: true,
+    },
+    async (req, email, password, done) => {
+        try {
+
+            // const validEmail = validate(email);
+            // if (!validEmail) {
+            //     const error = new Error("Invalid Email");
+            //     return done(error);
+            // }
+
+            const currentUser = await User.findOne({
+                email: email.toLowerCase()
+            });
+
+            if (!currentUser) {
+                const error = new Error("The user does not exist!");
+                return done(error);
+            }
+
+            const isValidPassword = await bcrypt.compare(
+                password,
+                currentUser.password
+            );
+
+            if (!isValidPassword) {
+                const error = new Error("The email or password is invalid");
+                return done(error);
+            }
+
+            return done(null, currentUser);
+
+        } catch (err) {
+            console.log('error catch')
+            return done(err)
+        }
+    }
     )
 );

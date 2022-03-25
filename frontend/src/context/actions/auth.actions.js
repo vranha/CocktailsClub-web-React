@@ -2,6 +2,10 @@ export const AUTH_REGISTER = 'AUTH_REGISTER';
 export const AUTH_REGISTER_OK = 'AUTH_REGISTER_OK';
 export const AUTH_REGISTER_ERROR = 'AUTH_REGISTER_ERROR';
 
+export const AUTH_LOGIN = 'AUTH_LOGIN';
+export const AUTH_LOGIN_OK = 'AUTH_LOGIN_OK';
+export const AUTH_LOGIN_ERROR = 'AUTH_LOGIN_ERROR';
+
 
 export const registerUser = async (dispatch, user) => {
     try {
@@ -40,3 +44,41 @@ export const registerUser = async (dispatch, user) => {
     }
 };
 
+
+export const loginUser = async (dispatch, loginData) => {
+    try {
+        console.log('Función loginUser ->', loginData);
+
+        dispatch({ 
+            type: AUTH_LOGIN 
+        });
+
+        const request = await fetch("http://localhost:4000/auth/login", {
+            method: 'POST',
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*", // matizar?
+            },
+            // credentials: "include",
+            body: JSON.stringify(loginData)
+        });
+        console.log(request)
+
+        const data = await request.json();
+        console.log('data from server', data);
+
+        if (request.ok) {
+            dispatch({ type: AUTH_LOGIN_OK, payload: data });
+            localStorage.setItem('user', JSON.stringify(data));
+            return data;
+        } else {
+            dispatch({ type: AUTH_LOGIN_ERROR, error: true, payload: data.message }); //diferencias entre data.errors[0] y data.message
+            return;
+        }
+
+    } catch (error) {
+        dispatch({ type: AUTH_LOGIN_ERROR, payload: error });
+        return;
+    }
+};
