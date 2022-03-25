@@ -1,7 +1,21 @@
 import axios from "axios";
 import { useState } from "react";
+import { motion } from "framer-motion"
 
 import styles from "./Contactanos.module.scss";
+
+const containerVariants = {
+    hidden: {
+       
+        opacity:0,
+    },
+    show: {
+       
+        opacity:1,
+    },
+  
+  
+  }
 
 export default function Contactanos() {
     const [sent, setSent] = useState(false);
@@ -22,7 +36,7 @@ export default function Contactanos() {
     };
 
     return (
-        <div className={styles.container}>
+        <motion.div  variants={containerVariants} initial="hidden" animate="show" className={styles.container}>
             <h2 className={styles.title}>Contáctanos</h2>
             <h4>Envíanos un e-mail</h4>
             {!sent ? (
@@ -74,7 +88,7 @@ export default function Contactanos() {
                 </a>
                 ( +34 684 411 802 )
             </p>
-        </div>
+        </motion.div>
     );
 }
 

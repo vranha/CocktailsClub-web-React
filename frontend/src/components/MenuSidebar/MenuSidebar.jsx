@@ -1,5 +1,23 @@
 import { Button } from "react-bootstrap";
+import { motion } from "framer-motion"
 import styles from "./MenuSidebar.module.scss";
+
+
+const divVariants = {
+    hidden: {
+        opacity: 0.2,
+        
+    },
+    show: {
+        opacity: 1,
+        
+        transition: {
+            duration: 0.2,
+            ease: "easeInOut",
+        }
+    }
+
+}
 
 export default function MenuSidebar({ sideNav, main, productSelection, totalPrice, buttonPedido }) {
     /* Set the width of the side navigation to 0 */
@@ -19,11 +37,11 @@ export default function MenuSidebar({ sideNav, main, productSelection, totalPric
                 </div>
                 <div>
                     {productSelection.map((pedido) => (
-                        <div  key={pedido.quantity+Math.random()}  className={styles.containerList}>
+                        <motion.div variants={divVariants} initial="hidden" animate="show" key={pedido.quantity+Math.random()}  className={styles.containerList}>
                             <span> {pedido.quantity} </span>
                             <p  className={styles.product}> {pedido.product} </p>
                             <p className={styles.price}> {(pedido.price * pedido.quantity).toFixed(2)}€ </p>
-                        </div>                        
+                        </motion.div>                        
                     ))}
                 </div>
             <div className={styles.totalPriceContainer}>

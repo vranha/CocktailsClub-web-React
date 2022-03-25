@@ -2,9 +2,15 @@
     min-height: 100vh;
   }
 
+.title {
+    margin-top: 60px;
+    margin-bottom: 30px;
+    font-size: 40px;
+  }
+
 
 .directions{
-        
+       
     .logos_metro, .logos_fgc {
         display: flex;
         justify-content: center;
@@ -29,7 +35,7 @@
 
 .mapContainer{
     position: absolute;
-    
+    margin-top:40px;
     left: 50%;
     transform: translate(-50%, 0%);
     

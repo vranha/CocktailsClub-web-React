@@ -4,9 +4,21 @@ import Button from "react-bootstrap/Button";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import ProductCard from "../../components/ProductCard/ProductCard";
 import toast from 'react-hot-toast';
-
+import { motion } from "framer-motion"
 import styles from "./Menu.module.scss";
 import MenuSidebar from "../../components/MenuSidebar/MenuSidebar";
+
+const containerVariants = {
+  hidden: {
+     
+      opacity:0,
+      
+  },
+  show: {
+     
+      opacity:1,
+  },
+}
 
 export default function Menu() {
   const INITIAL_STATE = {
@@ -123,7 +135,9 @@ export default function Menu() {
       }
   };
   return (
-    <div ref={main} id="main" className={styles.container}>
+    <motion.div
+      variants={containerVariants} initial="hidden" animate="show"
+      ref={main} id="main" className={styles.container}>
       <div className={styles.menuHeader}>
       <Button ref={buttonPedido} className={styles.orderButton} onClick={openNav} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Mi Pedido</Button>
         <Dropdown  as={ButtonGroup}>
@@ -170,6 +184,6 @@ export default function Menu() {
           ))}
       </div>
 
-    </div>
+    </motion.div>
   );
 }
