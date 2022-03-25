@@ -74,16 +74,16 @@ export default function Login({error}) {
         ev.preventDefault();
 
         try {
-    console.log(state);
-
+            
             const response = await loginUser(dispatch, form);
             // if (!response.user) return;
             // navigate('/home');
         } catch (error) {
             console.log("Error:", error);
         }
-
+        
     };
+    // console.log(state.error); //Para pruebas sobre los estados
 
     return (
         <div className={styles.container}>

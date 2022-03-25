@@ -73,7 +73,7 @@ export const loginUser = async (dispatch, loginData) => {
             localStorage.setItem('user', JSON.stringify(data));
             return data;
         } else {
-            dispatch({ type: AUTH_LOGIN_ERROR, error: true, payload: data.message }); //diferencias entre data.errors[0] y data.message
+            dispatch({ type: AUTH_LOGIN_ERROR, payload: data.message }); //diferencias entre data.errors[0] y data.message
             return;
         }
 
