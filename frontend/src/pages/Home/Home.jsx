@@ -1,12 +1,12 @@
-import { Carousel } from "../../components";
-import styles from "./Home.module.scss";
+import { Carousel } from '../../components';
+import styles from './Home.module.scss';
 
 export default function Home() {
-  return (
-    <div className={styles.container}>
-      <div className={styles.carousel__container}>
-        <Carousel />
-      </div>
-    </div>
-  );
+    return (
+        <div className={styles.container}>
+            <div className={styles.carousel__container}>
+                <Carousel />
+            </div>
+        </div>
+    );
 }
