@@ -32,7 +32,7 @@ export const registerUser = async (dispatch, user) => {
 
         if (userData.ok) {
             dispatch({ type: AUTH_REGISTER_OK, payload: userData });
-            // localStorage.setItem('user', JSON.stringify(userData)); //Necesario?
+            localStorage.setItem('user', JSON.stringify(userData)); //Necesario?
             return userData;
         } else {
             dispatch({ type: AUTH_REGISTER_ERROR, payload: false }); //userData.error[0] viene del form? en su lugar añadimos false
