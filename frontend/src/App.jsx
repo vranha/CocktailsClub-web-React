@@ -21,9 +21,9 @@ import { AuthProvider } from './context';
 // import Bookings from './pages/Bookings/Bookings';
 
 function App() {
+
     return (
         <AuthProvider>
-
             <div className="app">
                 <Toaster />
                 <Router>

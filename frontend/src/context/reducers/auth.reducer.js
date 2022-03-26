@@ -37,8 +37,9 @@ const authReducer = (state = INITIAL_STATE, action) => {
         case actions.AUTH_LOGIN_OK: {
             return {
                 ...state,
-                user: payload.user,
+                user: payload,
                 loading: false,
+                error: '',
             }
         }
         case actions.AUTH_LOGIN_ERROR: {
@@ -47,6 +48,29 @@ const authReducer = (state = INITIAL_STATE, action) => {
                 loading: false,
                 error: payload,
                 user: false
+            }
+        }
+        case actions.CHECK_SESSION: {
+            return {
+                ...state,
+                loading: true,
+                error: false,
+            }
+        }
+        case actions.CHECK_SESSION_OK: {
+            return {
+                ...state,
+                user: payload,
+                loading: false,
+                error: false,
+            }
+        }
+        case actions.CHECK_SESSION_ERROR: {
+            return {
+                ...state,
+                error: '',
+                user: false,
+                loading: false
             }
         }
 

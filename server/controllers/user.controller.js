@@ -16,16 +16,16 @@ const generateToken = (id) => {
 // ======================== REGISTER ==================== //
 // ====================================================== //
 
-// const checkSession = async (req, res, next) => {
-//     if (req.user) {
-//         let userRegister = req.user;
-//         userRegister.password = null;
+const checkSession = async (req, res, next) => {
+    if (req.user) {
+        let userRegister = req.user;
+        userRegister.password = null;
 
-//         return res.status(200).json(userRegister);
-//     } else {
-//         return res.status(401).json({message: 'User not found'});
-//     }
-// };
+        return res.status(200).json(userRegister);
+    } else {
+        return res.status(401).json({message: 'User not found'});
+    }
+};
 
 
 const registerPost = async(req, res, next) => {
@@ -70,7 +70,8 @@ const loginPost = (req, res, next) => {
 
         req.logIn(user, (error) => {
             if (error) {
-                return res.status(403).json({ message: error.message });
+                return next(error);
+                // return res.status(403).json({ message: error.message });
             };
             let userLogged = user;
             userLogged.password = null;
@@ -80,7 +81,21 @@ const loginPost = (req, res, next) => {
     })(req, res, next);
 };
 
+const logoutPost = (req, res, next) => {
+    if (req.user) {
+        req.logout();
+
+        req.session.destroy(() => {
+            res.clearCookie("connect.sid");
+
+            return  res.status(200).json({ message: 'Logout succesfull' })
+        });
+    } else {
+        return res.status(401).json({ message: 'Unexpected error' });
+    }
+};
+
 
 
 // // module.exports = { registerUser, loginUser, registerPost };
-module.exports = { loginPost, registerPost};
+module.exports = { registerPost, loginPost, logoutPost, checkSession};

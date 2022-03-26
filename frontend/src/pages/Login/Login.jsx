@@ -17,7 +17,7 @@ const INITIAL_STATE = {
     password: ''
 }
 
-export default function Login({error}) {
+export default function Login() {
     const [form, setForm] = useState(INITIAL_STATE);
     const dispatch = useAuthDispatch();
     const navigate = useNavigate();
@@ -76,14 +76,15 @@ export default function Login({error}) {
         try {
             
             const response = await loginUser(dispatch, form);
-            // if (!response.user) return;
-            // navigate('/home');
+            // console.log("login responde", response); //console.log de prueba, quitar o comentar
+            if (!response) return;
+            navigate('/home');
         } catch (error) {
             console.log("Error:", error);
         }
         
     };
-    // console.log(state.error); //Para pruebas sobre los estados
+    console.log(state); //Para pruebas sobre los estados
 
     return (
         <div className={styles.container}>

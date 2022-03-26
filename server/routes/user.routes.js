@@ -2,7 +2,7 @@ const express = require('express');
 const User = require('../models/user');
 const router = express.Router();
 
-const { registerPost, loginPost } = require('../controllers/user.controller');
+const { registerPost, loginPost, checkSession, logoutPost } = require('../controllers/user.controller');
 // const { registerUser, loginUser, getMe } = require('../controllers/userController');
 // const { protect } = require('../middlewares/auth.middleware'); // Falta determinar creacion de carpeta o uso de una existente para el archivo
 
@@ -14,6 +14,8 @@ router.get('/', async (req, res, next) => {
 
 router.post('/register', registerPost); //requrie registerPost
 router.post('/login', loginPost);
+router.post('/logout', logoutPost);
+router.get('/check-session', checkSession);
 
 // router.get('/me', protect, getMe);
 
