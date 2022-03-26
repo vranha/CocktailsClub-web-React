@@ -16,7 +16,7 @@ export default function Header() {
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link as={Link} to="/">
+                            <Nav.Link as={Link} to="/home">
                                 Home
                             </Nav.Link>
                             <Nav.Link as={Link} to="/menu">

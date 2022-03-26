@@ -13,7 +13,7 @@ import {
     Contactanos,
 } from './pages';
 import { Header, Footer, PrivateRoute } from './components';
-import { BrowserRouter as Router, Navigate, Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider } from './context';
 
@@ -25,8 +25,7 @@ function App() {
     return (
         <AuthProvider>
             <div className="app">
-                <Toaster />
-                <Router>
+                <Toaster />               
                     <Header></Header>
                     <Routes>
                         <Route path="/" element={<Navigate to="/home" />} />
@@ -41,8 +40,7 @@ function App() {
                         <Route path="/bookings" element={<PrivateRoute component={<Bookings />} />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
-                    </Routes>
-                </Router>
+                    </Routes>                                
                 <Footer></Footer>
             </div>
         </AuthProvider>

@@ -15,13 +15,13 @@ export default function Carousel() {
   const [titleSlide, setTitleSlide] = useState(0);
   
   const handleTitle = () => {
-    if (titleSlide === 0) {
+    if (titleSlide === (1 || 5)) {
       navigate('/menu')
-    } else if (titleSlide === 1) {
-      navigate('/bookings')
     } else if (titleSlide === 2) {
-      navigate('/about')
+      navigate('/bookings')
     } else if (titleSlide === 3) {
+      navigate('/about')
+    } else if (titleSlide === 4) {
       navigate('/contact')
     }
   }
@@ -33,12 +33,14 @@ export default function Carousel() {
             pagination={{
                 clickable: true,
             }}
+            loop={true}
             autoplay={{
                 delay: 2500,
                 disableOnInteraction: false,
             }}
             onSlideChange={(swiper) => {
               setTitleSlide(swiper.activeIndex)
+              console.log(swiper.activeIndex)
             }}
             onClick={handleTitle}
         >
