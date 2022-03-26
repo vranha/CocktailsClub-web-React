@@ -1,14 +1,25 @@
 import { useState, useEffect } from "react";
+import styles from './Order.module.scss';
 
 export default function Order() {
   const [order, setOrder] = useState([]);
   useEffect(() => {
-    fetch("http://127.0.0.1:4000/order")
+   
+      function loopFunction(delay, callback){
+        var loop = function(){
+            callback();
+            setTimeout(loop, delay);
+        }; loop();
+    };
+    
+    loopFunction(10000, function(){
+       fetch("http://127.0.0.1:4000/order")
       .then((orders) => orders.json())
       .then((order) => {
         setOrder(order);
         console.log(order);
       });
+    });
   }, []);
 
   const completeOrder = (e, _id) => {
@@ -23,8 +34,8 @@ export default function Order() {
     window.location.reload();
   };
   return (
-    <>
-      <h2>Order</h2>
+    <div className={styles.container}>
+      <h2 className={styles.title}>Order</h2>
       {order.map(({ _id, table, products, totalPrice, date, time }) => (
         <div key={_id}>
           <p>{`Mesa ${table}`}</p>
@@ -47,6 +58,6 @@ export default function Order() {
           </button>
         </div>
       ))}
-    </>
+    </div>
   );
 }

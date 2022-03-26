@@ -54,6 +54,41 @@ export default function Menu() {
 
   }
 
+  const sendOrder = (e) => {
+    e.preventDefault();
+    console.log(totalPrice);
+    fetch("http://127.0.0.1:4000/order/new", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        table: 2,
+        products: productSelection,
+        totalPrice: totalPrice,
+      }),
+    });
+    toast(` Pedido Realizado `, {
+      duration: 2000,
+      icon: '🍽',
+      style: {
+        border: '4px solid blue',
+        padding: '56px',
+        color: 'var(--main)',
+        width: '100%',
+      },
+      iconTheme: {
+        primary: 'green',
+        secondary: '#FFFAEE',
+      },
+    });
+    setTimeout(() => {
+      window.location.reload()
+    }, 2000);
+  };
+
+
 
   const addProduct = (name, id, price) => {
   
@@ -171,7 +206,7 @@ export default function Menu() {
         </Dropdown>
       </div>
 
-      <MenuSidebar sideNav={sideNav} main={main} productSelection={productSelection} totalPrice={totalPrice} buttonPedido={buttonPedido}></MenuSidebar>
+      <MenuSidebar sendOrder={sendOrder} sideNav={sideNav} main={main} productSelection={productSelection} totalPrice={totalPrice} buttonPedido={buttonPedido}></MenuSidebar>
 
       <div className={styles.menu}>
         {products.map((product) => (
