@@ -1,6 +1,5 @@
-const currentDate = new Date();
-
 function getDate() {
+  const currentDate = new Date();
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const day = currentDate.getDate();
@@ -8,6 +7,7 @@ function getDate() {
 }
 
 function getTime() {
+  const currentDate = new Date();
   const seconds = currentDate.getSeconds();
   const minutes = currentDate.getMinutes();
   const hour = currentDate.getHours();
