@@ -12,6 +12,7 @@ const authRoute = require ("./routes/user.routes");
 const productRoute = require("./routes/product.routes");
 const orderRoute = require("./routes/order.routes");
 const nodemailer = require("nodemailer");
+const { patch } = require("./routes/user.routes");
 
 connect();
 
@@ -23,7 +24,7 @@ const server = express();
 
 
 server.use((req, res, next) => {
-  res.header('Acces-Control-Allow-Methods', 'GET,PUT,`PST,DELETE');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
@@ -32,10 +33,14 @@ server.use((req, res, next) => {
 server.use(bodyParser.json());
 server.use(bodyParser.urlencoded({ extended: true }));
 
+// server.use(express.json());
+// server.use(express.urlencoded({ extended: true }));
+
+// server.use(express.static(path.join(__dirname, 'public')));
 
 require('./authentication/passport');
 
-server.options("*", cors());
+// server.options("*", cors());
 server.use(cors({
   origin: 'http://localhost:3000',
   credentials: true,

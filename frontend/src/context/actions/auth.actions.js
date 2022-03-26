@@ -22,9 +22,9 @@ export const registerUser = async (dispatch, user) => {
             headers: {
                 Accept: "application/json",
                 "Content-Type": "application/json",
-                // "Access-Control-Allow-Origin": "*", // matizar?
+                "Access-Control-Allow-Origin": "*", // matizar?
             },
-            // credentials: "include", //Si añado esta parte y el access-Control-Allow-Orgin no funciona, ¿por que?
+            credentials: "include", //Si añado esta parte y el access-Control-Allow-Orgin no funciona, ¿por que?
             body: JSON.stringify(user),
         });
 
@@ -63,7 +63,7 @@ export const loginUser = async (dispatch, loginData) => {
                 "Content-Type": "application/json",
                 "Access-Control-Allow-Origin": "*", // matizar?
             },
-            // credentials: "include",
+            credentials: "include",
             body: JSON.stringify(loginData)
         });
         console.log(request)
@@ -93,10 +93,10 @@ export const checkUserSession = () => {
             method: "GET",
             headers: {
                 Accept: "application/json",
-                // "Content-Type": "application/json",
-                // "Access-Control-Allow-Origin": "*",
+                "Content-Type": "application/json",
+                "Access-Control-Allow-Origin": "*",
             },
-            // credentials: "include",
+            credentials: "include",
         });
 
         const data = await request.json();
