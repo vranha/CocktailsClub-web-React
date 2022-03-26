@@ -45,9 +45,12 @@ const registerPost = async(req, res, next) => {
         }
 
         req.logIn(user, (error) => {
+            console.log(user);
             if (error) {
                 return res.status(403).json({message: error.message});
             };
+            // console.log(user);
+
 
             let userRegister = user;
             userRegister.password = null;
@@ -70,9 +73,10 @@ const loginPost = (req, res, next) => {
 
         req.logIn(user, (error) => {
             if (error) {
-                return next(error);
-                // return res.status(403).json({ message: error.message });
+                // return next(error);
+                return res.status(403).json({ message: error.message });
             };
+            // console.log(user);
             let userLogged = user;
             userLogged.password = null;
 

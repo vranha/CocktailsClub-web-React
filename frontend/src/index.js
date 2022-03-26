@@ -6,12 +6,16 @@ import { store } from "./app/store";
 import { Provider } from "react-redux";
 import "./index.scss";
 import { BrowserRouter as Router } from "react-router-dom";
+import { AuthProvider } from "./context";
 ReactDOM.render(
+
     <React.StrictMode>
         <Router>
-            <Provider store={store}>
-                <App />
-            </Provider>
+            <AuthProvider>
+                <Provider store={store}>
+                    <App />
+                </Provider>
+            </AuthProvider>
         </Router>
     </React.StrictMode>,
     document.getElementById("root")
