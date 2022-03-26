@@ -37,7 +37,8 @@ function App() {
                         <Route path="/order" element={<Order />} />
                         <Route path="/orderList" element={<OrderList />} />
                         <Route path="/book" element={<Book />} />
-                        <Route path="/bookings" element={<PrivateRoute component={<Bookings />} />} />
+                        {/* <Route path="/order" element={<PrivateRoute component={<Order />} />} /> */}
+                        <Route path="/bookings" element={ <Bookings />} />
                         <Route path="/register" element={<Register />} />
                         <Route path="/login" element={<Login />} />
                     </Routes>                                
