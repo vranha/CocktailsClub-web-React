@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 import styles from './Order.module.scss';
 
 export default function Order() {
   const [order, setOrder] = useState([]);
   useEffect(() => {
+
+//  HACER UN LUZ VERDE EN EL CONTEXT QUE LANCE EL FETCH Y CREE UNA LUZ
    
       function loopFunction(delay, callback){
         var loop = function(){
@@ -20,6 +23,8 @@ export default function Order() {
         console.log(order);
       });
     });
+
+
   }, []);
 
   const completeOrder = (e, _id) => {
@@ -31,33 +36,40 @@ export default function Order() {
         "Content-Type": "application/json",
       },
     });
-    window.location.reload();
+   
   };
+
+
+
   return (
     <div className={styles.container}>
-      <h2 className={styles.title}>Order</h2>
-      {order.map(({ _id, table, products, totalPrice, date, time }) => (
-        <div key={_id}>
-          <p>{`Mesa ${table}`}</p>
-          {products.map((product) => (
-            <div>
-              <p>{`${product.quantity}  ${product.product} `}</p>
+      <h2 className={styles.title}>Pedidos</h2>
+      <div className={styles.box}>
+        {order.map(({ _id, table, products, totalPrice, date, time }) => (
+          <div className={styles.order} key={_id}>
+            <div className={styles.center}>
+              <p className={styles.table}>Mesa  <span className={styles.tableNum}>{table}</span></p>
+                         <div > {products.map((product) => (
+                <p onClick={(e) => {
+                  return e.target.style.color = "red"
+                }} className={styles.products} key={Math.random()}> <span className={styles.productNum}>{product.quantity}</span>  {product.product }</p>
+              ))}</div>
+              <p className={styles.time}>{`${time}`}</p>
             </div>
-          ))}
-          <p></p>
-          <p>{totalPrice}</p>
-          <p>{`Día ${date}`}</p>
-          <p>{`Hora ${time}`}</p>
-          <button
-            type="submit"
-            onClick={(e) => {
-              completeOrder(e, _id);
-            }}
-          >
-            Completar
-          </button>
-        </div>
-      ))}
+            <Button
+            className={styles.completed}
+            variant="dark"
+            style={{ backgroundColor: "green" }}
+              type="submit"
+              onClick={(e) => {
+                completeOrder(e, _id);
+              }}
+            >
+              Completado
+            </Button>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
