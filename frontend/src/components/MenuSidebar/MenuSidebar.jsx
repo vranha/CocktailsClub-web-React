@@ -22,6 +22,7 @@ export default function MenuSidebar({
   productSelection,
   totalPrice,
   buttonPedido,
+  sendOrder
 }) {
   /* Set the width of the side navigation to 0 */
   function closeNav() {
@@ -31,23 +32,7 @@ export default function MenuSidebar({
     buttonPedido.current.style.backgroundColor = "var(--medium)";
   }
 
-  const sendOrder = (e) => {
-    e.preventDefault();
-    console.log(totalPrice);
-    fetch("http://127.0.0.1:4000/order/new", {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        table: 2,
-        products: productSelection,
-        totalPrice: totalPrice,
-      }),
-    });
-  };
-
+  
   return (
     <>
       <div ref={sideNav} className={styles.sidenav}>
@@ -82,6 +67,7 @@ export default function MenuSidebar({
             style={{ backgroundColor: "var(--medium)" }}
             onClick={(e) => {
               sendOrder(e);
+              
             }}
           >
             Realizar Pedido

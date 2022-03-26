@@ -40,7 +40,6 @@ export default function Carousel() {
             }}
             onSlideChange={(swiper) => {
               setTitleSlide(swiper.activeIndex)
-              console.log(swiper.activeIndex)
             }}
             onClick={handleTitle}
         >
