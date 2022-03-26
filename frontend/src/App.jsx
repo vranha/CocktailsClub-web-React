@@ -15,15 +15,24 @@ import {
 import { Header, Footer, PrivateRoute } from './components';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
-import { AuthProvider } from './context';
+import { AuthProvider, checkUserSession, useAuthDispatch, useAuthState } from './context';
+import { useEffect } from 'react';
 
 
 // import Bookings from './pages/Bookings/Bookings';
 
 function App() {
 
+    const dispatch = useAuthDispatch();
+    const state = useAuthState();
+
+    useEffect(() => {
+        checkUserSession(dispatch);
+    }, []);
+
+    console.log("app state ->", state);
+
     return (
-        <AuthProvider>
             <div className="app">
                 <Toaster />               
                     <Header></Header>
@@ -44,7 +53,6 @@ function App() {
                     </Routes>                                
                 <Footer></Footer>
             </div>
-        </AuthProvider>
     );
 }
 

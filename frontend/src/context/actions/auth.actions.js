@@ -10,6 +10,10 @@ export const CHECK_SESSION = "CHECK_SESSION";
 export const CHECK_SESSION_OK = "CHECK_SESSION_OK";
 export const CHECK_SESSION_ERROR = "CHECK_SESSION_ERROR";
 
+export const LOGOUT_USER = "LOGOUT_USER";
+export const LOGOUT_USER_OK = "LOGOUT_USER_OK";
+export const LOGOUT_USER_ERROR = "LOGOUT_USER_ERROR";
+
 export const registerUser = async (dispatch, user) => {
     try {
         console.log('función regiserUser -> ', user);
@@ -52,9 +56,7 @@ export const loginUser = async (dispatch, loginData) => {
     try {
         console.log('Función loginUser ->', loginData); //console log para pruebas, comentar o quitar cuando no sea necesario
 
-        dispatch({ 
-            type: AUTH_LOGIN 
-        });
+        dispatch({ type: AUTH_LOGIN });
 
         const request = await fetch("http://localhost:4000/auth/login", {
             method: 'POST',
@@ -86,9 +88,10 @@ export const loginUser = async (dispatch, loginData) => {
     }
 };
 
-export const checkUserSession = () => {
-    return async (dispatch) => {
+export const checkUserSession = async (dispatch) => {
+
         dispatch({ type: CHECK_SESSION });
+        console.log('hola')
         const request = await fetch("http://localhost:4000/auth/check-session", {
             method: "GET",
             headers: {
@@ -107,5 +110,25 @@ export const checkUserSession = () => {
             dispatch({ type: CHECK_SESSION_ERROR, payload: data.message });
         }
 
-    };
 };
+
+export const logoutPost = async (dispatch) => {
+      dispatch({ type: LOGOUT_USER });
+      const request = await fetch("http://localhost:4000/auth/logout", {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        credentials: "include",
+      });
+
+      const data = await request.json()
+    
+      if (request.ok) {
+        dispatch({ type: LOGOUT_USER_OK, });
+      } else {
+        dispatch({ type: LOGOUT_USER_ERROR, payload: data.message });
+      }
+  };

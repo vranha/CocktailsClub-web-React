@@ -20,14 +20,6 @@ const containerVariants = {
 
 export default function Home() {
 
-    const dispatch = useAuthDispatch();
-    const state = useAuthState();
-
-    useEffect(() => {
-        dispatch(checkUserSession());
-    }, []);
-
-    console.log("Home state ->", state);
 
     return (
         <motion.div variants={containerVariants} initial="hidden" animate="show"  className={styles.container}>

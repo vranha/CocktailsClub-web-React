@@ -10,6 +10,7 @@ import toast from 'react-hot-toast';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import styles from './Login.module.scss';
+import { logoutPost } from '../../context/actions/auth.actions';
 
 
 const INITIAL_STATE = {
@@ -90,7 +91,7 @@ export default function Login() {
         <div className={styles.container}>
             <Form className="container d-flex flex-column align-items-center" onSubmit={submitForm}>
                 <h1>Vamos a tomar algo</h1>
-                <Form.Group className="mb-3 text-white" controlId="formBasicEmail">
+                <Form.Group className="mb-3 text-white" >
                     <Form.Label>
                         <h3>Correo</h3>
                     </Form.Label>
@@ -106,7 +107,7 @@ export default function Login() {
                     <Form.Text className="text-muted">Sin el no podrás entrar.</Form.Text>
                 </Form.Group>
 
-                <Form.Group className="mb-3 text-white" controlId="formBasicPassword">
+                <Form.Group className="mb-3 text-white" >
                     <Form.Label>
                         <h3>Password</h3>
                     </Form.Label>
@@ -123,6 +124,7 @@ export default function Login() {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
+                <button onClick={() => logoutPost(dispatch)} > logout </button>
             </Form>
             {/* {state.error && <p>{state.error}</p> } */}
                 <a className={styles.linkRegister} href="/register"> <p>¿No estás registrado?</p> </a>
