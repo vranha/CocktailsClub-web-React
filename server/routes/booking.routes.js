@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
+
 const Booking = require("../models/booking");
 
 router.post("/new", async (req, res, next) => {
   const { date, hour } = req.body;
   const bookingData = await Booking.findOne({ date: date, hour: hour });
-  console.log(bookingData);
   if (!bookingData) {
     let table = 1;
     const bookingCounter = await Booking.countDocuments();
@@ -25,6 +25,7 @@ router.post("/new", async (req, res, next) => {
     }
   } else {
     console.log("Current booking not available");
+    res.json("Not available");
   }
 });
 

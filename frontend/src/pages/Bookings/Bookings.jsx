@@ -59,7 +59,7 @@ export default function Bookings() {
     );
   };
 
-  const uploadBooking = (date, hour) => {
+  const uploadBooking = async (date, hour) => {
     fetch("http://127.0.0.1:4000/booking/new", {
       method: "POST",
       headers: {
@@ -71,7 +71,13 @@ export default function Bookings() {
         date: date,
         hour: hour.toString(),
       }),
-    });
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        if (res === "Not available") {
+          console.log("Redirect to booking failed component");
+        }
+      });
   };
   return (
     <motion.div
