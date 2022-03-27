@@ -43,7 +43,8 @@ export default function Bookings() {
       fetch(`http://127.0.0.1:4000/booking`)
       .then((res) => res.json())
         .then((res) => {
-         console.log(res[0].date); //resultado de la base de datos de las reservas
+      
+        console.log(res[0].date); //resultado de la base de datos de las reservas
         });
     }, [date]);
 
