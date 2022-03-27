@@ -60,8 +60,18 @@ export default function Bookings() {
   };
 
   const uploadBooking = (date, hour) => {
-    console.log(date);
-    console.log(hour);
+    fetch("http://127.0.0.1:4000/booking/new", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        table: 2,
+        date: date,
+        hour: hour.toString(),
+      }),
+    });
   };
   return (
     <motion.div
@@ -96,9 +106,6 @@ export default function Bookings() {
           </DatePicker>
         ) : step === "2" ? (
           <motion.div
-            onClick={() => {
-              uploadBooking(date, hour);
-            }}
             className={styles.containerHours}
             variants={containerVariants}
             initial="hidden"
@@ -107,70 +114,100 @@ export default function Bookings() {
             <Button
               className={styles.orderButton}
               variant="dark"
-              onClick={() => handleHourSelect("17:00")}
+              onClick={() => {
+                handleHourSelect("17:00");
+                uploadBooking(date, "17:00");
+              }}
             >
               17:00
             </Button>
             <Button
               className={styles.orderButton}
               variant="dark"
-              onClick={() => handleHourSelect("18:00")}
+              onClick={() => {
+                handleHourSelect("18:00");
+                uploadBooking(date, "18:00");
+              }}
             >
               18:00
             </Button>
             <Button
               className={styles.orderButton}
               variant="dark"
-              onClick={() => handleHourSelect("19:00")}
+              onClick={() => {
+                handleHourSelect("19:00");
+                uploadBooking(date, "19:00");
+              }}
             >
               19:00
             </Button>
             <Button
               className={styles.orderButton}
               variant="dark"
-              onClick={() => handleHourSelect("20:00")}
+              onClick={() => {
+                handleHourSelect("20:00");
+                uploadBooking(date, "20:00");
+              }}
             >
               20:00
             </Button>
             <Button
               className={styles.orderButton}
               variant="dark"
-              onClick={() => handleHourSelect("21:00")}
+              onClick={() => {
+                handleHourSelect("21:00");
+                uploadBooking(date, "21:00");
+              }}
             >
               21:00
             </Button>
             <Button
               className={styles.orderButton}
               variant="dark"
-              onClick={() => handleHourSelect("22:00")}
+              onClick={() => {
+                handleHourSelect("22:00");
+                uploadBooking(date, "22:00");
+              }}
             >
               22:00
             </Button>
             <Button
               className={styles.orderButton}
               variant="dark"
-              onClick={() => handleHourSelect("23:00")}
+              onClick={() => {
+                handleHourSelect("23:00");
+                uploadBooking(date, "23:00");
+              }}
             >
               23:00
             </Button>
             <Button
               className={styles.orderButton}
               variant="dark"
-              onClick={() => handleHourSelect("00:00")}
+              onClick={() => {
+                handleHourSelect("00:00");
+                uploadBooking(date, "00:00");
+              }}
             >
               00:00
             </Button>
             <Button
               className={styles.orderButton}
               variant="dark"
-              onClick={() => handleHourSelect("01:00")}
+              onClick={() => {
+                handleHourSelect("01:00");
+                uploadBooking(date, "01:00");
+              }}
             >
               01:00
             </Button>
             <Button
               className={styles.orderButton}
               variant="dark"
-              onClick={() => handleHourSelect("02:00")}
+              onClick={() => {
+                handleHourSelect("02:00");
+                uploadBooking(date, "02:00");
+              }}
             >
               02:00
             </Button>
