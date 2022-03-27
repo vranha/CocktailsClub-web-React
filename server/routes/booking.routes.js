@@ -3,6 +3,14 @@ const router = express.Router();
 
 const Booking = require("../models/booking");
 
+router.get("/:date", async (req, res, next) => {
+  const {date} = req.params
+  console.log(date)
+  const books = await Booking.find({ date: date });
+  res.json(books);
+  
+});
+
 router.post("/new", async (req, res, next) => {
   const { date, hour } = req.body;
   const bookingData = await Booking.findOne({ date: date, hour: hour });

@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-import { forwardRef, useState } from "react";
+import {  useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import DatePicker, {
   CalendarContainer,
   registerLocale,
-  setDefaultLocale,
 } from "react-datepicker";
 import es from "date-fns/locale/es";
 import "react-datepicker/dist/react-datepicker.css";
@@ -29,8 +28,32 @@ export default function Bookings() {
 
   registerLocale("es", es);
 
+
+  const handleButtons = () => {
+  
+    setTimeout(() => {
+      const buttons = document.querySelectorAll(".orderButton")
+      buttons.forEach(button => {
+        console.log(button.innerHTML)
+      });
+    }, 1000);
+}
+    useEffect(() => {
+      console.log(date)
+      fetch(`http://127.0.0.1:4000/booking/:${date}`)
+      .then((res) => res.json())
+        .then((res) => {
+         console.log(res);
+        });
+    }, [date]);
+
+
+
+
   const handleDateSelect = () => {
     setStep("2");
+    handleButtons()
+ 
   };
 
   const handleHourSelect = (hour) => {
@@ -117,7 +140,7 @@ export default function Bookings() {
             animate="show"
           >
             <Button
-              className={styles.orderButton}
+              className={`orderButton ${styles.orderButton}` }
               variant="dark"
               onClick={() => {
                 handleHourSelect("17:00");
@@ -127,7 +150,7 @@ export default function Bookings() {
               17:00
             </Button>
             <Button
-              className={styles.orderButton}
+              className={`orderButton ${styles.orderButton}` }
               variant="dark"
               onClick={() => {
                 handleHourSelect("18:00");
@@ -137,7 +160,7 @@ export default function Bookings() {
               18:00
             </Button>
             <Button
-              className={styles.orderButton}
+              className={`orderButton ${styles.orderButton}` }
               variant="dark"
               onClick={() => {
                 handleHourSelect("19:00");
@@ -147,7 +170,7 @@ export default function Bookings() {
               19:00
             </Button>
             <Button
-              className={styles.orderButton}
+              className={`orderButton ${styles.orderButton}` }
               variant="dark"
               onClick={() => {
                 handleHourSelect("20:00");
@@ -157,7 +180,7 @@ export default function Bookings() {
               20:00
             </Button>
             <Button
-              className={styles.orderButton}
+              className={`orderButton ${styles.orderButton}` }
               variant="dark"
               onClick={() => {
                 handleHourSelect("21:00");
@@ -167,7 +190,7 @@ export default function Bookings() {
               21:00
             </Button>
             <Button
-              className={styles.orderButton}
+              className={`orderButton ${styles.orderButton}` }
               variant="dark"
               onClick={() => {
                 handleHourSelect("22:00");
@@ -177,7 +200,7 @@ export default function Bookings() {
               22:00
             </Button>
             <Button
-              className={styles.orderButton}
+              className={`orderButton ${styles.orderButton}` }
               variant="dark"
               onClick={() => {
                 handleHourSelect("23:00");
@@ -187,7 +210,7 @@ export default function Bookings() {
               23:00
             </Button>
             <Button
-              className={styles.orderButton}
+              className={`orderButton ${styles.orderButton}` }
               variant="dark"
               onClick={() => {
                 handleHourSelect("00:00");
@@ -197,7 +220,7 @@ export default function Bookings() {
               00:00
             </Button>
             <Button
-              className={styles.orderButton}
+              className={`orderButton ${styles.orderButton}` }
               variant="dark"
               onClick={() => {
                 handleHourSelect("01:00");
@@ -207,7 +230,7 @@ export default function Bookings() {
               01:00
             </Button>
             <Button
-              className={styles.orderButton}
+              className={`orderButton ${styles.orderButton}` }
               variant="dark"
               onClick={() => {
                 handleHourSelect("02:00");
@@ -216,6 +239,7 @@ export default function Bookings() {
             >
               02:00
             </Button>
+            {}
           </motion.div>
         ) : (
           <div className={styles.done}>
