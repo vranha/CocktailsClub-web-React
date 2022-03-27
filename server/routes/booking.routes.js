@@ -3,10 +3,12 @@ const router = express.Router();
 
 const Booking = require("../models/booking");
 
-router.get("/:date", async (req, res, next) => {
-  const {date} = req.params
-  console.log(date)
-  const books = await Booking.find({ date: date });
+router.get("/", async (req, res, next) => {
+  // const {date} = req.params
+  // console.log(date)
+  // const books = await Booking.find({ date: date });
+  const books = await Booking.find();
+  console.log(books);
   res.json(books);
   
 });

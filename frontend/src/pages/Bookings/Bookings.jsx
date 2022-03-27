@@ -40,10 +40,10 @@ export default function Bookings() {
 }
     useEffect(() => {
       console.log(date)
-      fetch(`http://127.0.0.1:4000/booking/:${date}`)
+      fetch(`http://127.0.0.1:4000/booking`)
       .then((res) => res.json())
         .then((res) => {
-         console.log(res);
+         console.log(res[0].date); //resultado de la base de datos de las reservas
         });
     }, [date]);
 
