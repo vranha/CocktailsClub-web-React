@@ -14,12 +14,12 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/new", async (req, res, next) => {
-  const { date, hour } = req.body;
-  const bookingData = await Booking.findOne({ date: date, hour: hour });
+  const { date, hour, table } = req.body;
+  const bookingData = await Booking.findOne({ date: date, hour: hour, table: table });
   if (!bookingData) {
-    let table = 1;
-    const bookingCounter = await Booking.countDocuments();
-    bookingCounter ? (table = bookingCounter + 1) : table;
+    // let table = 1;
+    // const bookingCounter = await Booking.countDocuments();
+    // bookingCounter ? (table = bookingCounter + 1) : table;
 
     try {
       Booking.create({
