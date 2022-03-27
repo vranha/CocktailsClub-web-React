@@ -67,7 +67,6 @@ export default function Bookings() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        table: 2,
         date: date,
         hour: hour.toString(),
       }),
