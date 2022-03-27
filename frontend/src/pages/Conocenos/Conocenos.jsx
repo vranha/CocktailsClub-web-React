@@ -1,31 +1,32 @@
-
 import React from "react";
 import { useState } from "react";
 import { motion, AnimateSharedLayout, AnimatePresence } from "framer-motion";
-import styles from './Conocenos.module.scss'
+import styles from "./Conocenos.module.scss";
 
 const containerVariants = {
   hidden: {
-     
-      opacity:0,
+    opacity: 0,
   },
   show: {
-     
-      opacity:1,
+    opacity: 1,
   },
-  
-}
+};
 
 export default function Conocenos() {
   return (
-    <motion.div variants={containerVariants} initial="hidden" animate="show"  className={styles.container}>
-       <AnimateSharedLayout>
-      <motion.ul layout initial={{ borderRadius: 25 }}>
-        {items.map(item => (
-          <Item key={item} />
-        ))}
-      </motion.ul>
-    </AnimateSharedLayout>
+    <motion.div
+      variants={containerVariants}
+      initial="hidden"
+      animate="show"
+      className={styles.container}
+    >
+      <AnimateSharedLayout>
+        <motion.ul layout initial={{ borderRadius: 25 }}>
+          {items.map((item) => (
+            <Item key={item} />
+          ))}
+        </motion.ul>
+      </AnimateSharedLayout>
     </motion.div>
   );
 }
@@ -38,7 +39,7 @@ function Item() {
   return (
     <motion.li layout onClick={toggleOpen} initial={{ borderRadius: 10 }}>
       <motion.div className={styles.avatar} layout />
-      
+
       <AnimatePresence>{isOpen && <Content />}</AnimatePresence>
     </motion.li>
   );
@@ -59,4 +60,4 @@ function Content() {
   );
 }
 
-const items = [0, 1, 2];
+const items = [0, 1, 2, 3];
