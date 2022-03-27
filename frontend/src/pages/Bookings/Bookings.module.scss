@@ -5,6 +5,52 @@
       margin-top: 60px;
       margin-bottom: 40px;
       font-size: 40px;
+      letter-spacing: 4px;
     }
 
-  }
+    .containerHours{
+    
+        display: grid;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-columns: 1fr 1fr;    
+    
+        grid-gap: 20px;
+        padding: 30px;
+        // border: 1px solid white;
+        box-shadow: 0 5px 40px rgba(0, 0, 0, 0.411);
+        border-radius: 10px;
+    
+        width: 70%;
+        margin:0 auto;
+
+        Button{
+          cursor: pointer;
+          padding: 15px 15px;
+          background-color: var(--dark);
+        }
+    }
+
+    .done {
+      margin-top: 100px;
+      
+      h2{
+        color: var(--medium);
+        font-size: 35px;
+        letter-spacing: 2px;
+        margin: 20px;
+      }
+      
+      p {
+        font-size: 20px;
+        margin: 50px;
+        
+        strong{
+          letter-spacing: 2px;
+          text-decoration: underline;
+          text-decoration-color: var(--medium);
+          font-weight: 700;
+          padding:10px;
+        }
+      }
+    }
+}
