@@ -2,11 +2,12 @@ import { Button } from "react-bootstrap";
 import { motion } from "framer-motion";
 import styles from "./MenuSidebar.module.scss";
 import { useContext, useState } from "react";
+import Paypal from "../Paypal/Paypal";
 
 const INITIAL_FORM = {
-  id: '',
-  value: '',
-}
+  id: "",
+  value: "",
+};
 
 const divVariants = {
   hidden: {
@@ -30,13 +31,9 @@ export default function MenuSidebar({
   buttonPedido,
   sendOrder,
   setNumTable,
-  numTable
+  numTable,
 }) {
-
-
-
-
-    
+  const [checkout, setcheckout] = useState(false);
   /* Set the width of the side navigation to 0 */
   function closeNav() {
     sideNav.current.style.width = "0px";
@@ -45,8 +42,6 @@ export default function MenuSidebar({
     buttonPedido.current.style.backgroundColor = "var(--medium)";
   }
 
-
-  
   return (
     <>
       <div ref={sideNav} className={styles.sidenav}>
@@ -75,24 +70,41 @@ export default function MenuSidebar({
           <hr className={styles.line}></hr>
           <p>Precio total</p>
           <h4 className={styles.totalPrice}>{totalPrice.toFixed(2)}€</h4>
-          <form action="" onSubmit={(e) => {
-                setTimeout(() => {
-                
-                }, 2000);
-                sendOrder(e);
-                
-              }}>
-            <label htmlFor="table" > Nº Mesa </label>
-            <input type="number" name="table" id="table" min="1" max="10" 
-             onChange={(e) => setNumTable(e.target.value)} required/>
-            <Button
-              type="submit"
-              className={styles.orderButton}
-              variant="dark"
-              style={{ backgroundColor: "var(--medium)" }}
-            >
-              Realizar Pedido
-            </Button>
+          <form
+            action=""
+            onSubmit={(e) => {
+              setTimeout(() => {}, 2000);
+              sendOrder(e);
+            }}
+          >
+            <label htmlFor="table"> Nº Mesa </label>
+            <input
+              type="number"
+              name="table"
+              id="table"
+              min="1"
+              max="10"
+              onChange={(e) => setNumTable(e.target.value)}
+              required
+            />
+            <div>
+              {checkout ? (
+                <Paypal totalPrice={totalPrice} />
+              ) : (
+                <Button
+                  type="submit"
+                  className={styles.orderButton}
+                  variant="dark"
+                  style={{ backgroundColor: "var(--medium)" }}
+                  onClick={() => {
+                    setcheckout(true);
+                    sideNav.current.style.width = "100vw";
+                  }}
+                >
+                  Realizar Pedido
+                </Button>
+              )}
+            </div>
           </form>
         </div>
       </div>

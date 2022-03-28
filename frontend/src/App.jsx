@@ -23,7 +23,6 @@ import {
   useAuthState,
 } from "./context";
 import { useEffect } from "react";
-import Payment from "./components/Payment/Payment";
 
 // import Bookings from './pages/Bookings/Bookings';
 
@@ -65,7 +64,6 @@ function App() {
           element={!user ? <Register /> : <Navigate replace to="/" />}
         />
         <Route path="/login" element={<Login />} />
-        <Route path="/payment" element={<Payment />} />
       </Routes>
       <Footer></Footer>
     </div>
