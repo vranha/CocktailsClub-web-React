@@ -4,6 +4,7 @@ import logoCoctel from '../../assets/logoCoctel.png';
 import styles from './Header.module.scss';
 import { logoutPost } from '../../context/actions/auth.actions';
 import { useAuthDispatch, useAuthState } from '../../context';
+import { useState } from 'react';
 
 
 export default function Header() {
@@ -12,30 +13,31 @@ export default function Header() {
     const { user, error, loading } = state;
 
     const navigate = useNavigate();
+    const [expanded, setExpanded] = useState(false);
 
     return (
         <>
-            <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar expanded={expanded} collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container>
-                    <Navbar.Brand className={styles.titleNav} onClick={() => navigate('home')}>
+                    <Navbar.Brand  className={styles.titleNav}  onClick={() => {navigate('home') ; setExpanded(false)} }>
                         <img className={styles.logoNav} src={logoCoctel} alt="imagen" /> Cocktails Club
                     </Navbar.Brand>
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+                    <Navbar.Toggle onClick={() => setExpanded(expanded ? false : "expanded")} aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto">
-                            <Nav.Link as={Link} to="/home">
+                            <Nav.Link as={Link} to="/home" onClick={() => setExpanded(false)}>
                                 Home
                             </Nav.Link>
-                            <Nav.Link as={Link} to="/menu">
+                            <Nav.Link as={Link} to="/menu" onClick={() => setExpanded(false)}>
                                 Carta
                             </Nav.Link>
-                            <Nav.Link as={Link} to="/bookings">
+                            <Nav.Link as={Link} to="/bookings" onClick={() => setExpanded(false)}>
                                 Reservas
                             </Nav.Link>
                             <NavDropdown menuVariant="dark" title="Sobre nosotros" id="collasible-nav-dropdown">
-                                <NavDropdown.Item onClick={() => navigate('about')}>Conócenos</NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => navigate('locate')}>Encuéntranos</NavDropdown.Item>
-                                <NavDropdown.Item onClick={() => navigate('contact')}>Contáctanos</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => {navigate('about') ; setExpanded(false)} }>Conócenos</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => {navigate('locate') ; setExpanded(false)}}>Encuéntranos</NavDropdown.Item>
+                                <NavDropdown.Item onClick={() => {navigate('contact') ; setExpanded(false)}}>Contáctanos</NavDropdown.Item>
                                 {/* <NavDropdown.Divider /> */}
                             </NavDropdown>
                         </Nav>
@@ -47,7 +49,7 @@ export default function Header() {
                                     Logout
                                 </Nav.Link>
                             ) : (
-                            <Nav.Link as={Link} to="/login" >
+                            <Nav.Link as={Link} to="/login" onClick={() => setExpanded(false)} >
                                 Login
                             </Nav.Link> )
                             }

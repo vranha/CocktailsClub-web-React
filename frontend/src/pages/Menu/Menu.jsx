@@ -39,6 +39,7 @@ export default function Menu() {
   const [productSelection, setProductSelection] = useState([]);
   const [/* productObject */, setProductObject] = useState(INITIAL_STATE);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [numTable, setNumTable] = useState("");
 
   const sideNav = useRef();
   const main = useRef();
@@ -72,7 +73,7 @@ export default function Menu() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        table: 2,
+        table: numTable,
         products: productSelection,
         totalPrice: totalPrice,
       }),
@@ -93,7 +94,7 @@ export default function Menu() {
     });
     setTimeout(() => {
       window.location.reload()
-    }, 2200);
+    }, 2000);
   };
 
 
@@ -216,7 +217,7 @@ export default function Menu() {
         </Dropdown>
       </div>
 
-      <MenuSidebar sendOrder={sendOrder} sideNav={sideNav} main={main} productSelection={productSelection} totalPrice={totalPrice} buttonPedido={buttonPedido}></MenuSidebar>
+      <MenuSidebar setNumTable={setNumTable} numTable={numTable} sendOrder={sendOrder} sideNav={sideNav} main={main} productSelection={productSelection} totalPrice={totalPrice} buttonPedido={buttonPedido}></MenuSidebar>
 
       <div className={styles.menu}>
         {products.map((product) => (

@@ -1,9 +1,7 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
-// import { getOrder, useAuthDispatch, useAuthState } from "../../context";
 import styles from './Order.module.scss';
 import { motion } from "framer-motion"
-import { UseStateContext } from "../../context/useStateContext/UseStateContext";
 
 const containerVariants = {
   hidden: {
@@ -18,33 +16,29 @@ const containerVariants = {
 }
 
 export default function Order() {
-  console.log("holaaa");
-  // const dispatch = useAuthDispatch();
-  // const state = useAuthState();
-
   const [order, setOrder] = useState([]);
-
-  const context = useContext(UseStateContext)
-  const { newOrder } = context
-
   useEffect(() => {
-    console.log("holaaa");
 
-    // getOrder(dispatch); 
 //  HACER UN LUZ VERDE EN EL CONTEXT QUE LANCE EL FETCH Y CREE UNA LUZ
+   
+      function loopFunction(delay, callback){
+        var loop = function(){
+            callback();
+            setTimeout(loop, delay);
+        }; loop();
+    };
     
+    loopFunction(10000, function(){
        fetch("http://127.0.0.1:4000/order")
       .then((orders) => orders.json())
       .then((order) => {
         setOrder(order);
         console.log(order);
       });
-   
+    });
 
 
-
-}, [newOrder]);
-
+  }, []);
 
   const completeOrder = (e, _id) => {
     console.log(_id);
@@ -58,7 +52,7 @@ export default function Order() {
    
   };
 
-  // console.log("Order state ->", state);
+
 
   return (
     <motion.div
