@@ -73,11 +73,11 @@ export default function Register() {
                         </div> */}
                         <div className="col-md-12 w-75 mx-auto m-3">
                             <label htmlFor="email" className="form-label">Email</label>
-                            <input type="email" className="form-control" id="email" placeholder='ex: MisterCoctel95@coldmail.com' onChange={inputChange} />
+                            <input type="email" className="form-control" id="email" placeholder='ex: MisterCoctel95@coldmail.com' onChange={inputChange} required />
                         </div>
                         <div className="col-md-12 w-75 mx-auto m-3">
                             <label htmlFor="password" className="form-label">Contraseña</label>
-                            <input type="password" className="form-control" id="password" placeholder='********' onChange={inputChange} />
+                            <input type="password" className="form-control" id="password" placeholder='********' onChange={inputChange} required />
                         </div>
                         {/* <div className="col-md-12">
                             <label htmlFor="inputCity" className="form-label">Móvil</label>

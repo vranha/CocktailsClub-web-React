@@ -54,7 +54,7 @@ export const registerUser = async (dispatch, user) => {
 
 export const loginUser = async (dispatch, loginData) => {
     try {
-        console.log('Función loginUser ->', loginData); //console log para pruebas, comentar o quitar cuando no sea necesario
+        // console.log('Función loginUser ->', loginData); //console log para pruebas, comentar o quitar cuando no sea necesario
 
         dispatch({ type: AUTH_LOGIN });
 
@@ -68,7 +68,7 @@ export const loginUser = async (dispatch, loginData) => {
             credentials: "include",
             body: JSON.stringify(loginData)
         });
-        console.log(request)
+        // console.log(request)
 
         const data = await request.json();
         console.log('data from server', data);
