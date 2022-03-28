@@ -1,6 +1,19 @@
 import { useState, useEffect } from "react";
 import { Alert, Button } from "react-bootstrap";
 import styles from './Reservas.module.scss';
+import { motion } from "framer-motion"
+
+const containerVariants = {
+  hidden: {
+     
+      opacity:0,
+      
+  },
+  show: {
+     
+      opacity:1,
+  },
+}
 
 export default function Reservas() {
   const [bookings, setBookings] = useState([]);
@@ -51,7 +64,8 @@ export default function Reservas() {
 
 
   return (
-    <div className={styles.container}>
+    <motion.div
+      variants={containerVariants} initial="hidden" animate="show" className={styles.container}>
       <h2 className={styles.title}>Pedidos</h2>
       <div className={styles.box}>
         {bookings.map(({ hour, table, date, phone, _id }) => (
@@ -59,7 +73,14 @@ export default function Reservas() {
             <div className={styles.center}>
               <p className={styles.table}>{table.charAt(0) === 'i' ? "Dentro" : "Terraza"} <p className={styles.tableName}>{table}</p></p>
               <p className={styles.time}>{`${hour}`}</p>
-              <p className={styles.date}>{date}</p>   
+              <div>
+                <p className={styles.date}>{date}</p>
+                <div>
+                  <p className={styles.tel}>Número de contacto</p>
+                  <a className={styles.phone} href={`tel:${+phone}`}> {phone} </a>
+                </div>
+              </div>  
+              
             </div>
 
           {alert === _id ? <Alert show={show}  variant="dark" >
@@ -94,6 +115,6 @@ export default function Reservas() {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }

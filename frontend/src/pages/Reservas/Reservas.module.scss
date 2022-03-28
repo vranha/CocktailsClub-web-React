@@ -54,13 +54,25 @@
         // color: var(--main);
         background-color: var(--dark);
         letter-spacing: 2px;
+        position: relative;
+        left: 25px;
     }
 
-   
-    
+    .phone {
+        margin: 0px -14px;
+        text-decoration: none;
+        color: var(--subtitle);
+    }
+
+    .tel {
+        margin: 0px -14px;
+        text-decoration: none;
+        color: var(--subtitle);
+        
+    }
+
     .completed{
         padding: 15px 20px;
-        width: 100%;
     }
 
   }
