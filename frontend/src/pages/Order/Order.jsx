@@ -1,11 +1,18 @@
 import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
+import { getOrder, useAuthDispatch, useAuthState } from "../../context";
 import styles from './Order.module.scss';
 
 export default function Order() {
+  console.log("holaaa");
+  const dispatch = useAuthDispatch();
+  const state = useAuthState();
+
   const [order, setOrder] = useState([]);
   useEffect(() => {
+    console.log("holaaa");
 
+    getOrder(dispatch); 
 //  HACER UN LUZ VERDE EN EL CONTEXT QUE LANCE EL FETCH Y CREE UNA LUZ
    
       function loopFunction(delay, callback){
@@ -24,7 +31,6 @@ export default function Order() {
       });
     });
 
-
   }, []);
 
   const completeOrder = (e, _id) => {
@@ -39,7 +45,7 @@ export default function Order() {
    
   };
 
-
+  console.log("Order state ->", state);
 
   return (
     <div className={styles.container}>
