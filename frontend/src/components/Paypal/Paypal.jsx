@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
+import { logoutPost } from "../../context/actions/auth.actions";
 
-const Paypal = () => {
+const Paypal = ({ totalPrice }) => {
   const paypal = useRef();
 
   useEffect(() => {
@@ -14,7 +15,7 @@ const Paypal = () => {
                 description: "Bar order",
                 amount: {
                   currency_code: "EUR",
-                  value: 650.0,
+                  value: totalPrice,
                 },
               },
             ],

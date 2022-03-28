@@ -94,7 +94,7 @@ export default function Menu() {
     });
     setTimeout(() => {
       window.location.reload()
-    }, 2200);
+    }, 2000);
   };
 
 
