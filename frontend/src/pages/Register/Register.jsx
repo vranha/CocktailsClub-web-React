@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerUser, useAuthDispatch, useAuthState } from '../../context';
 import styles from './Register.module.scss'
 import { motion } from "framer-motion"
@@ -89,6 +89,7 @@ export default function Register() {
                     </Form>
                 </div>
                 {state.error && <p style={{color: 'red'}}> { state.error } </p> }
+                <Link className={styles.linkLogin} to="/login"> <p>¿Ya tienes cuenta?</p> </Link>
             </div>
         </motion.div>
     );
