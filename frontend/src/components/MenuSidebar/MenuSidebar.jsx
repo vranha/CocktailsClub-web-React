@@ -1,7 +1,7 @@
 import { Button } from "react-bootstrap";
 import { motion } from "framer-motion";
 import styles from "./MenuSidebar.module.scss";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import Paypal from "../Paypal/Paypal";
 
 const INITIAL_FORM = {
@@ -33,6 +33,8 @@ export default function MenuSidebar({
   setNumTable,
   numTable,
 }) {
+  const listProducts = useRef();
+
   const [checkout, setcheckout] = useState(false);
   /* Set the width of the side navigation to 0 */
   function closeNav() {
@@ -48,7 +50,7 @@ export default function MenuSidebar({
         <div className={styles.closebtn} onClick={closeNav}>
           &times;
         </div>
-        <div>
+        <div ref={listProducts}>
           {productSelection.map((pedido) => (
             <motion.div
               variants={divVariants}
@@ -73,8 +75,11 @@ export default function MenuSidebar({
           <form
             action=""
             onSubmit={(e) => {
-              setTimeout(() => {}, 2000);
+
               sendOrder(e);
+              setcheckout(true);
+              sideNav.current.style.width = "100vw";
+              // listProducts.current.style.display = "none"
             }}
           >
             <label htmlFor="table"> Nº Mesa </label>
@@ -96,10 +101,6 @@ export default function MenuSidebar({
                   className={styles.orderButton}
                   variant="dark"
                   style={{ backgroundColor: "var(--medium)" }}
-                  onClick={() => {
-                    setcheckout(true);
-                    sideNav.current.style.width = "100vw";
-                  }}
                 >
                   Realizar Pedido
                 </Button>
