@@ -33,17 +33,28 @@ const INITIAL_STATE = {
 
 export default function Login() {
     const [form, setForm] = useState(INITIAL_STATE);
+    const [loginError, setLoginError] = useState();
     const dispatch = useAuthDispatch();
     const navigate = useNavigate();
     const state = useAuthState();
     
-    // const { email, password } = formData;
-
-    // const navigate = useNavigate();
-    // const dispatch = useDispatch();
-
-    // const { user, isError, isSuccess, message } = useSelector((state) => state.auth);
-    // const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
+    // useEffect(() => {
+    //     if (state.user === false) {
+    //         toast(false, {
+    //             icon: '❌',
+    //             style: {
+    //             border: '4px solid var(--dark)',
+    //             padding: '16px',
+    //             color: 'var(--main)',
+    //             },
+    //             iconTheme: {
+    //             primary: 'red',
+    //             secondary: '#FFFAEE',
+    //             } 
+    
+    //         });
+    //     }
+    // }, [state]);
 
     // useEffect(() => {
     //     if (state.error) {
@@ -66,12 +77,7 @@ export default function Login() {
     //     // dispatch(reset());
     // }, []);
 
-    // const onChange = (e) => {
-    //     setFormData((prevState) => ({
-    //         ...prevState,
-    //         [e.target.name]: e.target.value,
-    //     }));
-    // };
+
 
     const inputChange = (ev) => {
         const {id, value} = ev.target;
@@ -80,12 +86,14 @@ export default function Login() {
             ...form,
             [id]: value,
         });
-    };
 
+    };
 
 
     const submitForm = async (ev) => {
         ev.preventDefault();
+        console.log(state.user);
+
 
         try {
             
@@ -93,12 +101,13 @@ export default function Login() {
             // console.log("login responde", response); //console.log de prueba, quitar o comentar
             if (!response) return;
             navigate('/home');
+
         } catch (error) {
             console.log("Error:", error);
-        }
-        
+        }        
     };
-    console.log(state); //Para pruebas sobre los estados
+    console.log("state login ->",state.user); //Para pruebas sobre los estados
+
 
     return (
         <motion.div className={styles.container} variants={containerVariants} initial="hidden" animate="show">
@@ -118,6 +127,7 @@ export default function Login() {
                             value={form.email}
                             placeholder="Tu correo electrónico"
                             onChange={inputChange}
+                            required
                         />
                         {/* <Form.Text className="text-muted">Sin el no podrás entrar.</Form.Text> */}
                     </Form.Group>
@@ -133,14 +143,18 @@ export default function Login() {
                             value={form.password}
                             placeholder="Tu contraseña"
                             onChange={inputChange}
+                            required
                         />
                     </Form.Group>
+
                     <Button  className="m-3 " variant="dark" style={{backgroundColor: 'var(--medium)'}} type="submit">
                         Entrar
                     </Button>
+
                 </Form>
             </div>
-            {/* {state.error && <p>{state.error}</p> } */}
+                {state.error && <p className={styles.userError}> { state.error } </p> }
+
                 <Link className={styles.linkRegister} to="/register"> <p>¿No estás registrado?</p> </Link>
         </div>
         </motion.div>
