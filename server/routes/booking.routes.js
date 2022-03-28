@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
   // console.log(date)
   // const books = await Booking.find({ date: date });
   const books = await Booking.find();
-  console.log(books);
+  // console.log(books);
   res.json(books);
   
 });
