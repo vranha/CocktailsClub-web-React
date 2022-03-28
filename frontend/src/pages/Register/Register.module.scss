@@ -2,7 +2,19 @@
   display: flex;
   justify-content: center;
   margin: 2%;
-  // min-height: 100vh ;
+  min-height: 100vh;
+  }
+
+  .title{
+    margin:20px;
+  }
+
+  .subtitle{
+    margin:20px;
+  }
+
+  .register{
+  margin-top:100px;
   }
 
 .formContainer{
@@ -13,6 +25,13 @@
   color: white;
   padding: 2%;
 }
+
+.linkLogin{
+  text-decoration-color: var(--dark);
+  margin:30px;
+  font-size:20px;
+  letter-spacing: 1px;
+ }
 
 .formlabe{
   color: red;

@@ -1,15 +1,29 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { loginUser, useAuthDispatch, useAuthState } from '../../context';
 // import { login, reset } from '../../features/authSlice';
 // import { toast } from 'react-toastify';
 import toast from 'react-hot-toast';
+import { motion } from "framer-motion"
 
 // BOOTSTRAP IMPORTS
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import styles from './Login.module.scss';
+
+
+const containerVariants = {
+    hidden: {
+       
+        opacity:0,
+        
+    },
+    show: {
+       
+        opacity:1,
+    },
+  }
 
 
 const INITIAL_STATE = {
@@ -87,45 +101,48 @@ export default function Login() {
     console.log(state); //Para pruebas sobre los estados
 
     return (
-        <div className={styles.container}>
-            <Form className="container d-flex flex-column align-items-center" onSubmit={submitForm}>
-                <h1>Vamos a tomar algo</h1>
-                <Form.Group className="mb-3 text-white" >
-                    <Form.Label>
-                        <h3>Correo</h3>
-                    </Form.Label>
-                    <Form.Control
-                        type="email"
-                        className="form-control"
-                        id="email"
-                        name="email"
-                        value={form.email}
-                        placeholder="Introduce tu correo electrónico"
-                        onChange={inputChange}
-                    />
-                    <Form.Text className="text-muted">Sin el no podrás entrar.</Form.Text>
-                </Form.Group>
-
-                <Form.Group className="mb-3 text-white" >
-                    <Form.Label>
-                        <h3>Password</h3>
-                    </Form.Label>
-                    <Form.Control
-                        type="password"
-                        className="form-control"
-                        id="password"
-                        name="password"
-                        value={form.password}
-                        placeholder="Introduce tu Password"
-                        onChange={inputChange}
-                    />
-                </Form.Group>
-                <Button variant="primary" type="submit">
-                    Submit
-                </Button>
-            </Form>
+        <motion.div className={styles.container} variants={containerVariants} initial="hidden" animate="show">
+        <div className={styles.login}>
+            <div className={styles.formContainer}>
+                <Form className="container d-flex flex-column align-items-center" onSubmit={submitForm}>
+                    <h1 className={styles.title}>Vamos a tomar algo</h1>
+                    <Form.Group className="m-3 text-white w-75 mx-auto" >
+                        <Form.Label>
+                            <h3>Correo</h3>
+                        </Form.Label>
+                        <Form.Control
+                            type="email"
+                            className="form-control "
+                            id="email"
+                            name="email"
+                            value={form.email}
+                            placeholder="Tu correo electrónico"
+                            onChange={inputChange}
+                        />
+                        {/* <Form.Text className="text-muted">Sin el no podrás entrar.</Form.Text> */}
+                    </Form.Group>
+                    <Form.Group className="m-3 text-white w-75 mx-auto" >
+                        <Form.Label>
+                            <h3>Contraseña</h3>
+                        </Form.Label>
+                        <Form.Control
+                            type="password"
+                            className="form-control "
+                            id="password"
+                            name="password"
+                            value={form.password}
+                            placeholder="Tu contraseña"
+                            onChange={inputChange}
+                        />
+                    </Form.Group>
+                    <Button  className="m-3 " variant="dark" style={{backgroundColor: 'var(--medium)'}} type="submit">
+                        Entrar
+                    </Button>
+                </Form>
+            </div>
             {/* {state.error && <p>{state.error}</p> } */}
-                <a className={styles.linkRegister} href="/register"> <p>¿No estás registrado?</p> </a>
+                <Link className={styles.linkRegister} to="/register"> <p>¿No estás registrado?</p> </Link>
         </div>
+        </motion.div>
     );
 }

@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/new", async (req, res, next) => {
-  const { date, hour, table } = req.body;
+  const { date, hour, table, phone } = req.body;
   const bookingData = await Booking.findOne({ date: date, hour: hour, table: table });
   if (!bookingData) {
     // let table = 1;
@@ -26,6 +26,7 @@ router.post("/new", async (req, res, next) => {
         table,
         date,
         hour,
+        phone
       });
       res.status(200);
       res.json("New booking send to db");
@@ -36,6 +37,17 @@ router.post("/new", async (req, res, next) => {
   } else {
     console.log("Current booking not available");
     res.json("Not available");
+  }
+});
+
+router.delete("/delete/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    await Booking.findByIdAndDelete(id);
+    return res.status(200).json(`Booking ${id} deleted`);
+  } catch (error) {
+    return res.status(400).json(`Error deleting booking => ${error}`);
   }
 });
 

@@ -9,5 +9,6 @@ import Book from './Book/Book';
 import Bookings from './Bookings/Bookings';
 import Encuentranos from './Encuentranos/Encuentranos';
 import Contactanos from './Contactanos/Contactanos';
+import Reservas from './Reservas/Reservas';
 
-export { Home, Menu, Conocenos, Login, OrderList, Order, Register, Book, Bookings, Encuentranos, Contactanos };
+export { Home, Menu, Conocenos, Login, OrderList, Order, Register, Book, Bookings, Encuentranos, Contactanos, Reservas };

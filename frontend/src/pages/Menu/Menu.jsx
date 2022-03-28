@@ -7,6 +7,8 @@ import toast from 'react-hot-toast';
 import { motion } from "framer-motion"
 import styles from "./Menu.module.scss";
 import MenuSidebar from "../../components/MenuSidebar/MenuSidebar";
+import { useAuthState } from '../../context';
+import { useNavigate } from "react-router-dom";
 
 const containerVariants = {
   hidden: {
@@ -27,6 +29,12 @@ export default function Menu() {
     price: '',
     totalPrice: ''
   }
+
+  const navigate = useNavigate();
+
+  const state = useAuthState()
+  const { user } = state;
+
   const [products, setProducts] = useState([]);
   const [productSelection, setProductSelection] = useState([]);
   const [/* productObject */, setProductObject] = useState(INITIAL_STATE);
@@ -174,7 +182,9 @@ export default function Menu() {
       variants={containerVariants} initial="hidden" animate="show"
       ref={main} id="main" className={styles.container}>
       <div className={styles.menuHeader}>
-      <Button ref={buttonPedido} className={styles.orderButton} onClick={openNav} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Mi Pedido</Button>
+      {user ? 
+      <Button ref={buttonPedido} className={styles.orderButton} onClick={openNav} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Mi Pedido</Button> 
+      : <Button className={styles.orderButton} onClick={() => navigate('/register')} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Pedir desde aquí</Button>}
         <Dropdown  as={ButtonGroup}>
           <Button variant="light" >Filtrar</Button>
 

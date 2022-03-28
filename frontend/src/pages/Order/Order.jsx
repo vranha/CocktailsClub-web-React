@@ -2,6 +2,19 @@ import { useState, useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { getOrder, useAuthDispatch, useAuthState } from "../../context";
 import styles from './Order.module.scss';
+import { motion } from "framer-motion"
+
+const containerVariants = {
+  hidden: {
+     
+      opacity:0,
+      
+  },
+  show: {
+     
+      opacity:1,
+  },
+}
 
 export default function Order() {
   console.log("holaaa");
@@ -48,7 +61,8 @@ export default function Order() {
   console.log("Order state ->", state);
 
   return (
-    <div className={styles.container}>
+    <motion.div
+      variants={containerVariants} initial="hidden" animate="show" className={styles.container}>
       <h2 className={styles.title}>Pedidos</h2>
       <div className={styles.box}>
         {order.map(({ _id, table, products, totalPrice, date, time }) => (
@@ -76,6 +90,6 @@ export default function Order() {
           </div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 }

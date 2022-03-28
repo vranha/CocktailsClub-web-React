@@ -3,12 +3,18 @@
   }
 
 .title {
-    margin-top: 60px;
+    
     margin-bottom: 30px;
     font-size: 40px;
     letter-spacing: 4px;
   }
-
+.box {
+    background-color: rgb(33, 37, 41);
+    width: 60%;
+    margin: 60px auto 10px;
+    padding: 30px;
+    border-radius: 5px;
+}
 
 .directions{
        
@@ -29,6 +35,12 @@
             font-weight: 500;
             font-size: 20px;
             letter-spacing: 2px;
+            color:var(--medium);
+            
+            strong{
+                color:white;
+                font-weight:500;
+            }
         }
 }
 
@@ -36,7 +48,7 @@
 
 .mapContainer{
     position: absolute;
-    margin-top:40px;
+    margin-top:10px;
     left: 50%;
     transform: translate(-50%, 0%);
     
