@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
-import { logoutPost } from "../../context/actions/auth.actions";
 
-const Paypal = ({ totalPrice }) => {
+
+const Paypal = ({ totalPrice, sendOrder }) => {
   const paypal = useRef();
 
   useEffect(() => {
@@ -24,13 +24,14 @@ const Paypal = ({ totalPrice }) => {
         onApprove: async (data, actions) => {
           const order = await actions.order.capture();
           console.log(order);
+          sendOrder()
         },
         onError: (err) => {
           console.log(err);
         },
       })
       .render(paypal.current);
-  }, []);
+  }, [totalPrice]);
   return (
     <div>
       <div ref={paypal}></div>

@@ -74,7 +74,16 @@
         box-shadow: 0 0px 10px rgba(0, 0, 0, 0.39);
     }
 }
+.containerMesa {
+    display: flex;
+    justify-content: space-between;
 
+    input{
+        text-align: center;
+        border-radius: 5px;
+        border: 1px solid black;
+    }
+}
 
 /* On smaller screens, where height is less than 450px, change the style of the sidenav (less padding and a smaller font size) */
 @media screen and (max-height: 450px) {
@@ -85,3 +94,5 @@
         font-size: 18px;
     }
 }
+
+

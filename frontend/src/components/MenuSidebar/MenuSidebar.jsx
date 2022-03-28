@@ -61,9 +61,8 @@ export default function MenuSidebar({
             >
               <span> {pedido.quantity} </span>
               <p className={styles.product}> {pedido.product} </p>
-              <p className={styles.price}>
-                {" "}
-                {(pedido.price * pedido.quantity).toFixed(2)}€{" "}
+              <p className={styles.price}>  
+                {(pedido.price * pedido.quantity).toFixed(2)}€
               </p>
             </motion.div>
           ))}
@@ -75,26 +74,35 @@ export default function MenuSidebar({
           <form
             action=""
             onSubmit={(e) => {
-
-              sendOrder(e);
-              setcheckout(true);
+              if (productSelection.length > 0) {
+                e.preventDefault();
+                sendOrder()
+              
+              // setcheckout(true);
               sideNav.current.style.width = "100vw";
               // listProducts.current.style.display = "none"
+              } else {
+                 e.preventDefault();
+              }
+             
             }}
           >
-            <label htmlFor="table"> Nº Mesa </label>
-            <input
-              type="number"
-              name="table"
-              id="table"
-              min="1"
-              max="10"
-              onChange={(e) => setNumTable(e.target.value)}
-              required
-            />
+            <div  className={styles.containerMesa}>
+              <label htmlFor="table"> Nº Mesa </label>
+              <input
+                type="number"
+                name="table"
+                id="table"
+                min="1"
+                max="10"
+                className={styles.input}
+                onChange={(e) => setNumTable(e.target.value)}
+                required
+              />
+            </div>
             <div>
               {checkout ? (
-                <Paypal totalPrice={totalPrice} />
+                <Paypal sendOrder={sendOrder} totalPrice={totalPrice} />
               ) : (
                 <Button
                   type="submit"

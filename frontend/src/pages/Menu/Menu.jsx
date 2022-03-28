@@ -9,6 +9,7 @@ import styles from "./Menu.module.scss";
 import MenuSidebar from "../../components/MenuSidebar/MenuSidebar";
 import { useAuthState } from '../../context';
 import { useNavigate } from "react-router-dom";
+import { Modal } from "react-bootstrap";
 
 const containerVariants = {
   hidden: {
@@ -40,6 +41,12 @@ export default function Menu() {
   const [/* productObject */, setProductObject] = useState(INITIAL_STATE);
   const [totalPrice, setTotalPrice] = useState(0);
   const [numTable, setNumTable] = useState("");
+  const [localization, setLocalization] = useState(false);
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const sideNav = useRef();
   const main = useRef();
@@ -63,8 +70,8 @@ export default function Menu() {
 
   }
 
-  const sendOrder = (e) => {
-    e.preventDefault();
+  const sendOrder = () => {
+    
     console.log(totalPrice);
     fetch("http://127.0.0.1:4000/order/new", {
       method: "POST",
@@ -177,15 +184,35 @@ export default function Menu() {
           filterProduct.style.display = "none";
         });
       }
-  };
+
+    }
+    
+    useEffect(() => {
+       navigator.geolocation.getCurrentPosition(function(position) {
+      console.log("Latitude is :", position.coords.latitude);
+      console.log("Longitude is :", position.coords.longitude);
+        if (position.coords.latitude > 41.4309000 && position.coords.latitude < 41.4317000 
+          && position.coords.longitude > 2.1562646 && position.coords.longitude < 2.1568646) {
+          setLocalization(true)
+          console.log(localization)
+    }
+    });
+    }, [localization]);
+
+    
+   
+
+  
+
   return (
     <motion.div
       variants={containerVariants} initial="hidden" animate="show"
       ref={main} id="main" className={styles.container}>
       <div className={styles.menuHeader}>
-      {user ? 
+      {(user && localization) ? 
       <Button ref={buttonPedido} className={styles.orderButton} onClick={openNav} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Mi Pedido</Button> 
-      : <Button className={styles.orderButton} onClick={() => navigate('/register')} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Pedir desde aquí</Button>}
+      : user  ? <Button className={styles.orderButton}  onClick={handleShow} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Pedir desde aquí</Button>
+      : <Button className={styles.orderButton} onClick={() => navigate('/register')} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Pedir desde aquí</Button> }
         <Dropdown  as={ButtonGroup}>
           <Button variant="light" >Filtrar</Button>
 
@@ -229,6 +256,18 @@ export default function Menu() {
           />
           ))}
       </div>
+
+      <Modal  show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title >Te necesitamos cerca...</Modal.Title>
+        </Modal.Header>
+        <Modal.Body className="mx-auto">Activa tu ubicación o acercate mas 😋 </Modal.Body>
+        <Modal.Footer>
+          <Button variant="dark" onClick={handleClose} style={{ backgroundColor: "var(--medium)" }}>
+            ¡De acuerdo!
+          </Button>
+        </Modal.Footer>
+      </Modal>
 
     </motion.div>
   );
