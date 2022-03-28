@@ -25,9 +25,11 @@ export default function Bookings() {
     const [table, setTable] = useState("");
     const [hour, setHour] = useState("");
     const [step, setStep] = useState("1");
+    const [phone, setPhone] = useState("");
 
     useEffect(() => {
         console.log(date);
+
         fetch(`http://127.0.0.1:4000/booking`)
             .then((res) => res.json())
             .then((res) => {
@@ -90,7 +92,7 @@ export default function Bookings() {
         );
     };
 
-    const uploadBooking = async (date, table, hour) => {
+    const uploadBooking = async (date, table, hour, phone) => {
         fetch("http://127.0.0.1:4000/booking/new", {
             method: "POST",
             headers: {
@@ -100,7 +102,8 @@ export default function Bookings() {
             body: JSON.stringify({
                 date: date,
                 hour: hour.toString(),
-                table: table
+                table: table,
+                phone: phone
             }),
         })
             .then((res) => res.json())
@@ -116,29 +119,37 @@ export default function Bookings() {
 
           <div className={styles.mapa}>
                 {step === "1" ? (
-                    <div className={styles.calendario}>
-                      <DatePicker
-                          selected={startDate}
-                          onSelect={handleDateSelect}
-                      
-                          locale="es"
-                          onChange={(date) => setStartDate(date)}
-                          calendarContainer={MyContainer}
-                          minDate={new Date()}
-                          inline
-                          showDisabledMonthNavigation
-                      >
-                          <div
-                              style={{
-                                  color: "var(--medium)",
-                                  padding: "6px",
-                                  fontSize: "14px",
-                              }}
-                          >
-                              ¡Elije el dia que mejor te vaya!
-                          </div>
-                      </DatePicker>
-                    </div>
+<div>
+  
+  <div className="form-group container p-2 text-white ">
+    Tu número de teléfono
+  <input type="text" value={phone} onChange={(e) => setPhone(e.target.value)} name="phone" placeholder="Teléfono de contacto" className="form-control w-50 mx-auto text-center"/>
+  </div>
+  
+                      <div className={styles.calendario}>
+                        <DatePicker
+                            selected={startDate}
+                            onSelect={handleDateSelect}
+  
+                            locale="es"
+                            onChange={(date) => setStartDate(date)}
+                            calendarContainer={MyContainer}
+                            minDate={new Date()}
+                            inline
+                            showDisabledMonthNavigation
+                        >
+                            <div
+                                style={{
+                                    color: "var(--medium)",
+                                    padding: "6px",
+                                    fontSize: "14px",
+                                }}
+                            >
+                                ¡Elije el dia que mejor te vaya!
+                            </div>
+                        </DatePicker>
+                      </div>
+</div>
                 ) : step === "2" ? (
                   <motion.div
                   className={styles.containerHours}
@@ -251,6 +262,7 @@ export default function Bookings() {
               </motion.div>
                 ) : step === "3" ? (
                   <motion.div
+                  key="step3"
                   className={styles.containerTables}
                   variants={containerVariants}
                   initial="hidden"
@@ -261,7 +273,7 @@ export default function Bookings() {
                       variant="dark"
                       onClick={() => {
                           handleTableSelect("inside1");
-                          uploadBooking(date, "inside1", hour);
+                          uploadBooking(date, "inside1", hour, phone);
                       }}
                       key="inside1"
                       id="inside1"
@@ -273,7 +285,7 @@ export default function Bookings() {
                       variant="dark"
                       onClick={() => {
                           handleTableSelect("inside2");
-                          uploadBooking(date, "inside2", hour);
+                          uploadBooking(date, "inside2", hour, phone);
                       }}
                       key="inside2"
                       id="inside2"
@@ -285,7 +297,7 @@ export default function Bookings() {
                       variant="dark"
                       onClick={() => {
                           handleTableSelect("inside3");
-                          uploadBooking(date, "inside3", hour);
+                          uploadBooking(date, "inside3", hour, phone);
                       }}
                       key="inside3"
                       id="inside3"
@@ -297,7 +309,7 @@ export default function Bookings() {
                       variant="dark"
                       onClick={() => {
                           handleTableSelect("inside4");
-                          uploadBooking(date,"inside4", hour);
+                          uploadBooking(date,"inside4", hour, phone);
                       }}
                       key="inside4"
                       id="inside4"
@@ -309,7 +321,7 @@ export default function Bookings() {
                       variant="dark"
                       onClick={() => {
                           handleTableSelect("inside5");
-                          uploadBooking(date, "inside5", hour);
+                          uploadBooking(date, "inside5", hour, phone);
                       }}
                       key="inside5"
                       id="inside5"
@@ -321,7 +333,7 @@ export default function Bookings() {
                       variant="dark"
                       onClick={() => {
                           handleTableSelect("inside6");
-                          uploadBooking(date, "inside6", hour);
+                          uploadBooking(date, "inside6", hour, phone);
                       }}
                       key="inside6"
                       id="inside6"
@@ -333,7 +345,7 @@ export default function Bookings() {
                       variant="dark"
                       onClick={() => {
                           handleTableSelect("outside1");
-                          uploadBooking(date, "outside1", hour);
+                          uploadBooking(date, "outside1", hour, phone);
                       }}
                       key="outside1"
                       id="outside1"
@@ -345,7 +357,7 @@ export default function Bookings() {
                       variant="dark"
                       onClick={() => {
                           handleTableSelect("outside2");
-                          uploadBooking(date, "outside2", hour);
+                          uploadBooking(date, "outside2", hour, phone);
                       }}
                       key="outside2"
                       id="outside2"
@@ -357,7 +369,7 @@ export default function Bookings() {
                       variant="dark"
                       onClick={() => {
                           handleTableSelect("outside3");
-                          uploadBooking(date, "outside3", hour);
+                          uploadBooking(date, "outside3", hour, phone);
                       }}
                       key="outside3"
                       id="outside3"
@@ -369,7 +381,7 @@ export default function Bookings() {
                       variant="dark"
                       onClick={() => {
                           handleTableSelect("outside4");
-                          uploadBooking(date, "outside4", hour);
+                          uploadBooking(date, "outside4", hour, phone);
                       }}
                       key="outside4"
                       id="outside4"
@@ -377,15 +389,16 @@ export default function Bookings() {
                       Terraza
                   </Button>
                   {}
-              </motion.div>
+              </motion.div >
+              
                 ) : (
-                  <div className={styles.done}>
+                  <motion.div key="step4" variants={containerVariants} initial="hidden" animate="show" className={styles.done}>
                   <h2>Ya estás listo para disfrutar</h2>
                   <p>
                       Nos vemos el <strong>{date}</strong> a las <strong>{hour}</strong> horas
                   </p>
                   <p>Te estaremos esperando</p>
-              </div>
+              </motion.div>
                 )}
             </div>
         </motion.div>

@@ -14,7 +14,7 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/new", async (req, res, next) => {
-  const { date, hour, table } = req.body;
+  const { date, hour, table, phone } = req.body;
   const bookingData = await Booking.findOne({ date: date, hour: hour, table: table });
   if (!bookingData) {
     // let table = 1;
@@ -26,6 +26,7 @@ router.post("/new", async (req, res, next) => {
         table,
         date,
         hour,
+        phone
       });
       res.status(200);
       res.json("New booking send to db");
