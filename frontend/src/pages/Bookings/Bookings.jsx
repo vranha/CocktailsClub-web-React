@@ -196,6 +196,7 @@ export default function Bookings() {
                             onClick={() => {
                                 handleHourSelect("18:00");
                             }}
+                            key="18:00"
                         >
                             18:00
                         </Button>
@@ -205,6 +206,7 @@ export default function Bookings() {
                             onClick={() => {
                                 handleHourSelect("19:00");
                             }}
+                            key="19:00"
                         >
                             19:00
                         </Button>
@@ -214,6 +216,7 @@ export default function Bookings() {
                             onClick={() => {
                                 handleHourSelect("20:00");
                             }}
+                            key="20:00"
                         >
                             20:00
                         </Button>
@@ -223,6 +226,7 @@ export default function Bookings() {
                             onClick={() => {
                                 handleHourSelect("21:00");
                             }}
+                            key="21:00"
                         >
                             21:00
                         </Button>
@@ -232,6 +236,7 @@ export default function Bookings() {
                             onClick={() => {
                                 handleHourSelect("22:00");
                             }}
+                            key="22:00"
                         >
                             22:00
                         </Button>
@@ -241,6 +246,7 @@ export default function Bookings() {
                             onClick={() => {
                                 handleHourSelect("23:00");
                             }}
+                            key="23:00"
                         >
                             23:00
                         </Button>
@@ -250,6 +256,7 @@ export default function Bookings() {
                             onClick={() => {
                                 handleHourSelect("00:00");
                             }}
+                            key="00:00"
                         >
                             00:00
                         </Button>
@@ -259,6 +266,7 @@ export default function Bookings() {
                             onClick={() => {
                                 handleHourSelect("01:00");
                             }}
+                            key="01:00"
                         >
                             01:00
                         </Button>
@@ -268,6 +276,7 @@ export default function Bookings() {
                             onClick={() => {
                                 handleHourSelect("02:00");
                             }}
+                            key="02:00"
                         >
                             02:00
                         </Button>
@@ -285,7 +294,7 @@ export default function Bookings() {
                             className={styles.arrow}
                             color="white"
                             size={46}
-                            onClick={() => setStep("2")}
+                            onClick={() => window.location.reload()}
                         />
 
                         <Button
