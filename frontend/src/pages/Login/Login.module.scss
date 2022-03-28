@@ -1,7 +1,31 @@
 .container {
-    min-height: 100vh;
-  }
+  display: flex;
+  justify-content: center;
+  margin: 2%;
+  min-height: 100vh;
+}
+
+.title{
+  margin:20px;
+}
+
 
 .linkRegister{
- margin: 5%; 
+ text-decoration-color: var(--dark);
+ margin:30px;
+ font-size:20px;
+ letter-spacing: 1px;
+}
+
+.formContainer{
+  width: 70vh;
+  height: auto;
+  border-radius: 5px;
+  background-color: rgb(33, 37, 41);
+  color: white;
+  padding: 2%;
+}
+
+.login{
+  margin-top:100px;
 }

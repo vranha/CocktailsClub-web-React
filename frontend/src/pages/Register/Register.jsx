@@ -2,6 +2,20 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { registerUser, useAuthDispatch, useAuthState } from '../../context';
 import styles from './Register.module.scss'
+import { motion } from "framer-motion"
+import { Button, Form } from 'react-bootstrap';
+
+const containerVariants = {
+    hidden: {
+       
+        opacity:0,
+        
+    },
+    show: {
+       
+        opacity:1,
+    },
+  }
 
 const INITIAL_STATE = {
     username: '',
@@ -43,36 +57,39 @@ export default function Register() {
     }
 
     return (
-        <div className={styles.container}>
-            <div className={styles.formContainer}>
-                <h1>Regístrate</h1>
-                <form className="row g-3" onSubmit={submitForm}>
-                    <div className="col-md-12">
-                        <label htmlFor="username" className="form-label">First name</label>
-                        <input type="text" className="form-control" id="username" onChange={inputChange} placeholder='Nombre...' required/>
-                    </div>
-                    {/* <div className="col-md-12">
-                        <label htmlFor="validationDefault02" className="form-label">Last name</label>
-                        <input type="text" className="form-control" id="validationDefault02" placeholder='Apellido...' required/>
-                    </div> */}
-                    <div className="col-md-12">
-                        <label htmlFor="email" className="form-label">Email</label>
-                        <input type="email" className="form-control" id="email" onChange={inputChange} />
-                    </div>
-                    <div className="col-md-12">
-                        <label htmlFor="password" className="form-label">Password</label>
-                        <input type="password" className="form-control" id="password" onChange={inputChange} />
-                    </div>  
-                    {/* <div className="col-md-12">
-                        <label htmlFor="inputCity" className="form-label">Móvil</label>
-                        <input type="text" className="form-control" id="inputMobile"/>
-                    </div> */}
-                    <div className="col-12">
-                        <button type="submit" className="btn btn-primary">Regístrate</button>
-                    </div>
-                </form>
+        <motion.div className={styles.container} variants={containerVariants} initial="hidden" animate="show">
+            <div className={styles.register}>
+                <div className={styles.formContainer}>
+                    <h1 className={styles.title}>Regístrate</h1>
+                    <h4 className={styles.subtitle}>Para poder hacer tu pedido desde la web</h4>
+                    <Form className=" row g-3" onSubmit={submitForm}>
+                        <div className="col-md-12 w-75 mx-auto m-3">
+                            <label htmlFor="username" className="form-label">Nombre</label>
+                            <input type="text" className="form-control" id="username" onChange={inputChange} placeholder='ex: MisterCoctel95' required/>
+                        </div>
+                        {/* <div className="col-md-12">
+                            <label htmlFor="validationDefault02" className="form-label">Last name</label>
+                            <input type="text" className="form-control" id="validationDefault02" placeholder='Apellido...' required/>
+                        </div> */}
+                        <div className="col-md-12 w-75 mx-auto m-3">
+                            <label htmlFor="email" className="form-label">Email</label>
+                            <input type="email" className="form-control" id="email" placeholder='ex: MisterCoctel95@coldmail.com' onChange={inputChange} />
+                        </div>
+                        <div className="col-md-12 w-75 mx-auto m-3">
+                            <label htmlFor="password" className="form-label">Contraseña</label>
+                            <input type="password" className="form-control" id="password" placeholder='********' onChange={inputChange} />
+                        </div>
+                        {/* <div className="col-md-12">
+                            <label htmlFor="inputCity" className="form-label">Móvil</label>
+                            <input type="text" className="form-control" id="inputMobile"/>
+                        </div> */}
+                        <div className="col-12 ">
+                            <Button type="submit" className="btn btn-primary m-3" variant="dark" style={{backgroundColor: 'var(--medium)'}}>Regístrate</Button>
+                        </div>
+                    </Form>
+                </div>
+                {state.error && <p style={{color: 'red'}}> { state.error } </p> }
             </div>
-            {state.error && <p style={{color: 'red'}}> { state.error } </p> }
-        </div>
+        </motion.div>
     );
 }
