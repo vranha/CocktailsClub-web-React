@@ -1,10 +1,10 @@
 import { useEffect, useRef } from "react";
-import { Paypal } from "../index";
+
 const Paypal = () => {
   const paypal = useRef();
 
   useEffect(() => {
-    windows.paypal
+    window.paypal
       .Buttons({
         createOrder: (data, actions, err) => {
           return actions.order.create({
