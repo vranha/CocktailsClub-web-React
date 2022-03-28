@@ -91,7 +91,7 @@ export const loginUser = async (dispatch, loginData) => {
 export const checkUserSession = async (dispatch) => {
 
         dispatch({ type: CHECK_SESSION });
-        console.log('hola')
+        // console.log('hola')
         const request = await fetch("http://localhost:4000/auth/check-session", {
             method: "GET",
             headers: {
