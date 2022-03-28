@@ -10,7 +10,6 @@ import toast from 'react-hot-toast';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import styles from './Login.module.scss';
-import { logoutPost } from '../../context/actions/auth.actions';
 
 
 const INITIAL_STATE = {
@@ -33,7 +32,7 @@ export default function Login() {
     // const { user, isLoading, isError, isSuccess, message } = useSelector((state) => state.auth);
 
     // useEffect(() => {
-    //     if (isError) {
+    //     if (state.error) {
     //         toast(`error`, {
     //             icon: '❌',
     //             style: {
@@ -47,11 +46,11 @@ export default function Login() {
     //             },
     //           });
     //     }
-    //     if (isSuccess || user) {
+    //     if (state.user) {
     //         navigate('/');
     //     }
-    //     dispatch(reset());
-    // }, [user, isError, isSuccess, message, navigate, dispatch]);
+    //     // dispatch(reset());
+    // }, []);
 
     // const onChange = (e) => {
     //     setFormData((prevState) => ({
@@ -124,7 +123,6 @@ export default function Login() {
                 <Button variant="primary" type="submit">
                     Submit
                 </Button>
-                <button onClick={() => logoutPost(dispatch)} > logout </button>
             </Form>
             {/* {state.error && <p>{state.error}</p> } */}
                 <a className={styles.linkRegister} href="/register"> <p>¿No estás registrado?</p> </a>
