@@ -2,7 +2,6 @@ import { Button } from "react-bootstrap";
 import { motion } from "framer-motion";
 import styles from "./MenuSidebar.module.scss";
 import { useContext, useState } from "react";
-import { UseStateContext } from "../../context/useStateContext/UseStateContext";
 
 const INITIAL_FORM = {
   id: '',
@@ -29,13 +28,14 @@ export default function MenuSidebar({
   productSelection,
   totalPrice,
   buttonPedido,
-  sendOrder
+  sendOrder,
+  setNumTable,
+  numTable
 }) {
 
-  const [form, setForm] = useState(INITIAL_FORM);
 
-  const context = useContext(UseStateContext)
-    const { setNewOrder } = context
+
+
     
   /* Set the width of the side navigation to 0 */
   function closeNav() {
@@ -45,15 +45,7 @@ export default function MenuSidebar({
     buttonPedido.current.style.backgroundColor = "var(--medium)";
   }
 
-  const inputChange = (ev) => {
-    const {id, value} = ev.target;
 
-    setForm({
-      ...form,
-      [id]: value,
-    })
-  }
-  
   
   return (
     <>
@@ -85,26 +77,19 @@ export default function MenuSidebar({
           <h4 className={styles.totalPrice}>{totalPrice.toFixed(2)}€</h4>
           <form action="" onSubmit={(e) => {
                 setTimeout(() => {
-                setNewOrder(totalPrice.toFixed(2))
+                
                 }, 2000);
                 sendOrder(e);
                 
               }}>
             <label htmlFor="table" > Nº Mesa </label>
             <input type="number" name="table" id="table" min="1" max="10" 
-            value={form.table} onChange={inputChange} required/>
+             onChange={(e) => setNumTable(e.target.value)} required/>
             <Button
               type="submit"
               className={styles.orderButton}
               variant="dark"
               style={{ backgroundColor: "var(--medium)" }}
-              // onClick={(e) => {
-              //   setTimeout(() => {
-              //   setNewOrder(totalPrice.toFixed(2))
-              //   }, 2000);
-              //   sendOrder(e);
-                
-              // }}
             >
               Realizar Pedido
             </Button>
