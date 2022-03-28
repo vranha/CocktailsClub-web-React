@@ -93,7 +93,7 @@ export default function Menu() {
     });
     setTimeout(() => {
       window.location.reload()
-    }, 2000);
+    }, 2200);
   };
 
 

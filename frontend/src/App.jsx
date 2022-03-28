@@ -18,6 +18,7 @@ import { Navigate, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { AuthProvider, checkUserSession, useAuthDispatch, useAuthState } from './context';
 import { useEffect } from 'react';
+import UseStateProvider from './context/useStateContext/UseStateContext';
 
 
 // import Bookings from './pages/Bookings/Bookings';
@@ -36,7 +37,8 @@ function App() {
 
     return (
             <div className="app">
-                <Toaster />               
+                <UseStateProvider>           
+                <Toaster />   
                     <Header></Header>
                     <Routes>
                     <Route path="*" element={<Navigate replace to="/" />} />
@@ -54,6 +56,7 @@ function App() {
                         <Route path="/login" element={<Login />} />
                     </Routes>                                
                 <Footer></Footer>
+                </UseStateProvider> 
             </div>
     );
 }

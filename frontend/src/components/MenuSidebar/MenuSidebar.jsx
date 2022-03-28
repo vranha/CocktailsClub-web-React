@@ -1,6 +1,8 @@
 import { Button } from "react-bootstrap";
 import { motion } from "framer-motion";
 import styles from "./MenuSidebar.module.scss";
+import { useContext } from "react";
+import { UseStateContext } from "../../context/useStateContext/UseStateContext";
 
 const divVariants = {
   hidden: {
@@ -24,6 +26,10 @@ export default function MenuSidebar({
   buttonPedido,
   sendOrder
 }) {
+
+  const context = useContext(UseStateContext)
+    const { setNewOrder } = context
+    
   /* Set the width of the side navigation to 0 */
   function closeNav() {
     sideNav.current.style.width = "0px";
@@ -32,6 +38,7 @@ export default function MenuSidebar({
     buttonPedido.current.style.backgroundColor = "var(--medium)";
   }
 
+  
   
   return (
     <>
@@ -66,6 +73,9 @@ export default function MenuSidebar({
             variant="dark"
             style={{ backgroundColor: "var(--medium)" }}
             onClick={(e) => {
+              setTimeout(() => {
+              setNewOrder(totalPrice.toFixed(2))
+              }, 2000);
               sendOrder(e);
               
             }}
