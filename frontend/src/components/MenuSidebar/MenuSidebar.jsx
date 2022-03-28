@@ -98,6 +98,7 @@ export default function MenuSidebar({
                   style={{ backgroundColor: "var(--medium)" }}
                   onClick={() => {
                     setcheckout(true);
+                    sideNav.current.style.width = "100vw";
                   }}
                 >
                   Realizar Pedido
