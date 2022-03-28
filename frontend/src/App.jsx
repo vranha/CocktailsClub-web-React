@@ -11,6 +11,7 @@ import {
     OrderList,
     Encuentranos,
     Contactanos,
+    Reservas
 } from './pages';
 import { Header, Footer, PrivateRoute } from './components';
 import { Navigate, Route, Routes } from 'react-router-dom';
@@ -25,6 +26,7 @@ function App() {
 
     const dispatch = useAuthDispatch();
     const state = useAuthState();
+    const { user } = state;
 
     useEffect(() => {
         checkUserSession(dispatch);
@@ -37,18 +39,18 @@ function App() {
                 <Toaster />               
                     <Header></Header>
                     <Routes>
+                    <Route path="*" element={<Navigate replace to="/" />} />
                         <Route path="/" element={<Navigate to="/home" />} />
                         <Route path="/home" element={<Home />} />
-                        <Route path="/menu" element={<Menu />} />
+                        <Route path="/menu" element={user?.role === "ADMIN_ROLE" ? <Order/> : <Menu />} />
                         <Route path="/about" element={<Conocenos />} />
                         <Route path="/locate" element={<Encuentranos />} />
                         <Route path="/contact" element={<Contactanos />} />
-                        <Route path="/order" element={<Order />} />
                         <Route path="/orderList" element={<OrderList />} />
                         <Route path="/book" element={<Book />} />
                         {/* <Route path="/order" element={<PrivateRoute component={<Order />} />} /> */}
-                        <Route path="/bookings" element={ <Bookings />} />
-                        <Route path="/register" element={<Register />} />
+                        <Route path="/bookings" element={user?.role === "ADMIN_ROLE" ? <Reservas/> : <Bookings />} />
+                        <Route path="/register" element={!user ? <Register /> : <Navigate replace to="/" />} />
                         <Route path="/login" element={<Login />} />
                     </Routes>                                
                 <Footer></Footer>

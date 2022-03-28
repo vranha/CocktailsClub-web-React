@@ -4,9 +4,12 @@ import Button from "react-bootstrap/Button";
 import { Form } from "react-bootstrap";
 import { useState } from "react";
 import ReactTooltip from 'react-tooltip';
-
+import {  useAuthState } from '../../context';
 
 export default function ProductCard({ onClickProduct, product, buttonPedido }) {
+
+  const state = useAuthState()
+  const { user } = state;
 
   const { id, name, description, image, price } = product;
 
@@ -61,7 +64,7 @@ export default function ProductCard({ onClickProduct, product, buttonPedido }) {
           selectedStyle(e, id, price);
         }}
       >
-        <input
+        {user ? <input
           min="1"
           className={`quantityInput-${name} quantityInput-${id} ${styles.quantityInput}`}
           type="number"
@@ -69,8 +72,8 @@ export default function ProductCard({ onClickProduct, product, buttonPedido }) {
           placeholder="1"
           id=""
           style={{textAlign: 'center'}}
-        />
-        <Button
+        /> : ''}
+        {user ? <Button
           type="submit"
           className={`button-${id} ${styles.buttonPrice}`}
           variant="outline-dark"
@@ -79,9 +82,9 @@ export default function ProductCard({ onClickProduct, product, buttonPedido }) {
           data-for="tooltip"
         >
           {`${price}€`}
-        </Button>
+        </Button> : ""}
 
-        <img className={styles.buttonIcon} src={waiterIcon} alt="" />
+        {user ? <img className={styles.buttonIcon} src={waiterIcon} alt="" /> : ''}
       </Form>
 
       <ReactTooltip id="tooltip"></ReactTooltip>

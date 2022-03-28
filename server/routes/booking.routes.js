@@ -40,4 +40,15 @@ router.post("/new", async (req, res, next) => {
   }
 });
 
+router.delete("/delete/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    await Booking.findByIdAndDelete(id);
+    return res.status(200).json(`Booking ${id} deleted`);
+  } catch (error) {
+    return res.status(400).json(`Error deleting booking => ${error}`);
+  }
+});
+
 module.exports = router;

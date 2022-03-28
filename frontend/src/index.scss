@@ -46,3 +46,9 @@ body {
       display: block;
       width: 100%;
   }
+
+  .react-datepicker__day--selected {
+      background-color:var(--medium);
+      color: black;
+    }
+ 
