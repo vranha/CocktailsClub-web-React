@@ -11,6 +11,7 @@ import {
   Contactanos,
   Reservas,
   UserCocktel,
+  MisReservas,
 } from "./pages";
 import { Header, Footer, PrivateRoute } from "./components";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -57,6 +58,9 @@ function App() {
         <Route
           path="/bookings"
           element={user?.role === "ADMIN_ROLE" ? <Reservas /> : <Bookings />}
+        />
+        <Route
+          path="/myBookings" element={user ? <MisReservas /> : <Navigate replace to="/" />}
         />
         <Route
           path="/register"

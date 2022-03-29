@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Order = require("../models/order");
+const UserCocktel = require("../models/userCocktel");
 const { getDate, getTime } = require("../utils/functions/getDateTime");
 
 router.get("/", async (req, res, next) => {
@@ -30,24 +31,13 @@ router.post("/new", async (req, res, next) => {
   }
 });
 
-router.delete("/delete/:id", async (req, res, next) => {
-  try {
-    const { id } = req.params;
-    console.log(id);
-    await Order.findByIdAndDelete(id);
-    return res.status(200).json(`Order ${id} deleted`);
-  } catch (error) {
-    return res.status(400).json(`Error deleting order => ${error}`);
-  }
-});
-
 router.post("/usercocktel", async (req, res, next) => {
   const { licor, mezcla, extra } = req.body;
   const date = getDate();
   const time = getTime();
 
   try {
-    Order.create({
+    UserCocktel.create({
       licor,
       mezcla,
       extra,
@@ -61,5 +51,18 @@ router.post("/usercocktel", async (req, res, next) => {
     res.status(400);
   }
 });
+
+router.delete("/delete/:id", async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    console.log(id);
+    await Order.findByIdAndDelete(id);
+    return res.status(200).json(`Order ${id} deleted`);
+  } catch (error) {
+    return res.status(400).json(`Error deleting order => ${error}`);
+  }
+});
+
+
 
 module.exports = router;

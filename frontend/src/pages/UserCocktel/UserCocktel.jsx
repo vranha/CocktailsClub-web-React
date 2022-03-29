@@ -4,7 +4,7 @@ import { postUserCocktel, useAuthDispatch, useAuthState } from '../../context';
 import styles from './UserCocktel.module.scss'
 import { motion } from "framer-motion"
 import { Button, Form } from 'react-bootstrap';
-import Dropdown from "react-bootstrap/Dropdown";
+
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 
@@ -81,7 +81,7 @@ export default function UserCocktel() {
                                 <option value="Coca-cola">Coca cola</option>
                                 <option value="Fanta">Fanta</option>
                                 <option value="Red-Bull">Red Bull</option>
-                                <option value="Zumon-de-tomate">Zuma de tomate</option>
+                                <option value="Zumo-de-tomate">Zumo de tomate</option>
                             </Form.Select>
                         </div>
                         <div className="col-md-10 w-75 mx-auto m-3">
