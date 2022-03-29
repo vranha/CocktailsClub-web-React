@@ -6,7 +6,7 @@ const INITIAL_STATE = {
     error: false,
 };
 
-const orderReducer = ( state = INITIAL_STATE, action ) => {
+const userCocktelReducer = ( state = INITIAL_STATE, action ) => {
     const { type, payload } = action;
     switch ( type ) {
         case actions.ORDER_GET: {
@@ -37,5 +37,5 @@ const orderReducer = ( state = INITIAL_STATE, action ) => {
 
 export {
     INITIAL_STATE,
-    orderReducer,
+    userCocktelReducer,
 };

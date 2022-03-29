@@ -8,5 +8,6 @@ import Bookings from './Bookings/Bookings';
 import Encuentranos from './Encuentranos/Encuentranos';
 import Contactanos from './Contactanos/Contactanos';
 import Reservas from './Reservas/Reservas';
+import UserCocktel from './UserCocktel/UserCocktel';
 
-export { Home, Menu, Conocenos, Login, Order, Register,  Bookings, Encuentranos, Contactanos, Reservas };
+export { Home, Menu, Conocenos, Login, Order, Register,  Bookings, Encuentranos, Contactanos, Reservas, UserCocktel };
