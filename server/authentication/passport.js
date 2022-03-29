@@ -61,7 +61,8 @@ passport.use(
                 const newUser = new User({
                     email: email.toLowerCase(),
                     username: req.body.username,
-                    password: hash                    
+                    password: hash,
+                    movil: req.body.movil,                    
                 });
 
 

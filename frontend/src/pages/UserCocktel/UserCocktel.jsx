@@ -35,18 +35,18 @@ export default function UserCocktel() {
     const state = useAuthState();
 
     const inputChange = (ev) => {
-        const { id, value } = ev.target;
+        const { name, value } = ev.target;
 
         setUserCocktel({
             ...userCocktel,
-            [id]: value,
+            [name]: value,
         });
     };
 
     const submitForm = async (ev) => {
         ev.preventDefault();
 
-        console.log(ev.target);
+        console.log(ev);
 
         try {
             // console.log(user);
@@ -69,10 +69,10 @@ export default function UserCocktel() {
                         <div className="col-md-10 w-75 mx-auto m-3">
                             <Form.Select aria-label="Default select example" name='licor' id='licor'>
                                 <option id='licor' name='licor'>Selecciona Licor</option>
-                                <option id='licor' name='licor' value="Whiskey">Whiskey</option>
-                                <option id='licor' name='licor' value="Tequila">Tequila</option>
-                                <option id='licor' name='licor' value="Ron">Ron</option>
-                                <option id='licor' name='licor' value="Vodka">Vodka</option>
+                                <option id='whiskey' name='whiskey' value={userCocktel.licor} onChange={inputChange}>Whiskey</option>
+                                <option id='Tequila' name='Tequila'  value={userCocktel.licor}>Tequila</option>
+                                <option id='Ron' name='Ron'  value={userCocktel.licor}>Ron</option>
+                                <option id='Vodka' name='Vodka'  value={userCocktel.licor}>Vodka</option>
                             </Form.Select>
                         </div>
                         <div className="col-md-10 w-75 mx-auto m-3">

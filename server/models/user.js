@@ -20,6 +20,10 @@ const user = mongoose.Schema(
             type: String,
             default: "USER_ROLE",
             require: true
+        },
+        movil: {
+            type: String,
+            unique: true
         }
     },
     { timestamps: true }
