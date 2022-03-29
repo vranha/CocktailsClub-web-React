@@ -22,8 +22,7 @@ const INITIAL_STATE = {
     // apellido: '',
     email: '',
     password: '',
-    // role: 'USER_ROLE', //modificado en el método passport
-    // movil: ''    
+    movil: ''    
 }
 
 export default function Register() {
@@ -79,10 +78,10 @@ export default function Register() {
                             <label htmlFor="password" className="form-label">Contraseña</label>
                             <input type="password" className="form-control" id="password" placeholder='********' onChange={inputChange} required />
                         </div>
-                        {/* <div className="col-md-12">
-                            <label htmlFor="inputCity" className="form-label">Móvil</label>
-                            <input type="text" className="form-control" id="inputMobile"/>
-                        </div> */}
+                        <div className="col-md-12 w-75 mx-auto m-3">
+                            <label htmlFor="movil" className="form-label">Móvil</label>
+                            <input type="text" id="movil" onChange={inputChange}  className="form-control" />
+                        </div>
                         <div className="col-12 ">
                             <Button type="submit" className="btn btn-primary m-3" variant="dark" style={{backgroundColor: 'var(--medium)'}}>Regístrate</Button>
                         </div>
