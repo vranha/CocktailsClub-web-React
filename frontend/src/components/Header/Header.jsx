@@ -35,7 +35,7 @@ export default function Header() {
                                 Reservas
                             </Nav.Link>
                             <NavDropdown menuVariant="dark" title="Sobre nosotros" id="collasible-nav-dropdown">
-                                <NavDropdown.Item onClick={() => {navigate('about') ; setExpanded(false)} }>Conócenos</NavDropdown.Item>
+                                {/* <NavDropdown.Item onClick={() => {navigate('about') ; setExpanded(false)} }>Conócenos</NavDropdown.Item> */}
                                 <NavDropdown.Item onClick={() => {navigate('locate') ; setExpanded(false)}}>Encuéntranos</NavDropdown.Item>
                                 <NavDropdown.Item onClick={() => {navigate('contact') ; setExpanded(false)}}>Contáctanos</NavDropdown.Item>
                                 {/* <NavDropdown.Divider /> */}
@@ -47,7 +47,7 @@ export default function Header() {
                             </Nav.Link> : ''}
                            {/* <button onClick={() => logoutPost(dispatch)} > logout </button> */}
                             { user ? (
-                                <Nav.Link as={Link} to="/login" onClick={() => logoutPost(dispatch)}>
+                                <Nav.Link as={Link} to="/home" onClick={() => logoutPost(dispatch)}>
                                     Logout
                                 </Nav.Link>
                             ) : (

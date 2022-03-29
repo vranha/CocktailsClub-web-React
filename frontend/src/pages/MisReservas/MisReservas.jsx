@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Alert, Button } from "react-bootstrap";
 import styles from './MisReservas.module.scss';
 import { motion } from "framer-motion"
+import { useAuthState } from "../../context";
 
 const containerVariants = {
   hidden: {
@@ -20,14 +21,18 @@ export default function MisReservas() {
   const [show, setShow] = useState(false);
   const [alert, setAlert] = useState('');
 
+  const state = useAuthState()
+  const { user } = state;
+ 
+
   useEffect(() => {
 
        fetch("http://127.0.0.1:4000/booking")
       .then((bookings) => bookings.json())
       .then((bookings) => {
-        setBookings(bookings);
         console.log(bookings);
-        bookings.filter(booking => booking.name);
+        const myBookings = bookings.filter(booking => booking.username === user.username);
+        setBookings(myBookings);
       });
   
   }, []);

@@ -49,7 +49,7 @@ export default function Reservas() {
         "Content-Type": "application/json",
       },
     });
-   
+   window.location.reload();
   };
 
   const setIdAlert = (_id) => {

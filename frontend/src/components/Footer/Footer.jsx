@@ -124,13 +124,13 @@ export default function App() {
           </MDBCol>
 
           <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
-            <h5 className={styles.textTittle}>sobre nosotros</h5>
+            {/* <h5 className={styles.textTittle}>Nuestra Carta</h5> */}
 
             <div className={styles.mb0}>
               <ul className='list-unstyled mb-0'>
                 <li>
                   <Link to='/about' className={styles.noDecoration}>
-                      <p className={styles.text}> <MDBIcon fas icon="info" className="m-2" style={{color: 'var(--medium)'}} /> Conocenos Mejor </p>
+                      <p className={styles.text}> <MDBIcon fas icon="info" className="m-2" style={{color: 'var(--medium)'}} /> Nuestra carta</p>
                   </Link>
                 </li>
               </ul>
