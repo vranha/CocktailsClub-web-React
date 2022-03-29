@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const order = new mongoose.Schema({
     table: { type: Number, required: true },
     products: { type: Array, required: true },
-    totalPrice: { type: Number, required: true},
+    totalPrice: { type: Number, required: true },
     date: { type: String },
     time: { type: String },
 });
