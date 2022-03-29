@@ -58,6 +58,15 @@
         }
     }
 
+    .username{
+        position: relative;
+        left: 25px;
+        
+        @include tablet {
+            left: 0;
+        }
+    }
+
     .time{
         font-size: 40px;
         // border: 1px solid white;

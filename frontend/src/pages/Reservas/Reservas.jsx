@@ -31,7 +31,7 @@ export default function Reservas() {
         }; loop();
     };
     
-    loopFunction(10000, function(){
+    loopFunction(100000, function(){
        fetch("http://127.0.0.1:4000/booking")
       .then((bookings) => bookings.json())
       .then((bookings) => {
@@ -66,13 +66,16 @@ export default function Reservas() {
   return (
     <motion.div
       variants={containerVariants} initial="hidden" animate="show" className={styles.container}>
-      <h2 className={styles.title}>Pedidos</h2>
+      <h2 className={styles.title}>Reservas</h2>
       <div className={styles.box}>
-        {bookings.map(({ hour, table, date, phone, _id }) => (
+        {bookings.map(({ hour, table, date, phone, _id, username }) => (
           <div className={styles.order} key={hour + table + date}>
             <div className={styles.center}>
               <p className={styles.table}>{table.charAt(0) === 'i' ? "Dentro" : "Terraza"} <p className={styles.tableName}>{table}</p></p>
-              <p className={styles.time}>{`${hour}`}</p>
+              <div>
+                <h4 className={styles.username}>{username}</h4>
+                <p className={styles.time}>{`${hour}`}</p>
+              </div>
               <div>
                 <p className={styles.date}>{date}</p>
                 <div>
