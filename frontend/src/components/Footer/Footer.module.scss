@@ -23,8 +23,10 @@ iframe{
 
 .text{
     color: rgba(255, 255, 255, 0.55);
+    text-decoration: none;
     &:hover{
         color: rgba(255, 255, 255, 0.856);
+        cursor: pointer;
     }
 }
 

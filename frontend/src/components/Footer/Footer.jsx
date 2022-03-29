@@ -25,7 +25,7 @@ export default function App() {
             href='https://facebook.com'
             role='button'
             target="_blank"
-            rel='noreferrer's
+            rel='noreferrer'
           >
             <MDBIcon fab icon='facebook-f' />
           </a>
@@ -95,15 +95,15 @@ export default function App() {
               <ul className='list-unstyled mb-0'>
               
                 <li>
-                    
-                  <p className={styles.text}>
+  
+                  <a className={styles.text} href="mailto:cockteles@cocktails.com?Subject=Queridos%20cocteleros...">
                   <MDBIcon fas icon="envelope-square" className='m-2' style={{color: 'var(--medium)'}} /> cockteles@cocktails.com
-                  </p>
+                  </a>
                 </li>
                 <li>
-                  <p className={styles.text}>
+                  <a className={styles.text} href={`tel:${978455757}`}>
                   <MDBIcon fas icon="mobile-alt" className='m-2' style={{color: 'var(--medium)'}} /> 978-455-757
-                  </p>
+                  </a>
                 </li>
 
               </ul>
@@ -158,11 +158,9 @@ export default function App() {
 
       </div>
 
-      <div className={styles.text} style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}>
-        © 2022 Copyright:
-        <a className={styles.text} href='https://mdbootstrap.com/'>
-            COCKTAILS CLUB
-        </a>
+      <div style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', color : 'rgba(255, 255, 255, 0.55)' }}>
+        © 2022 Copyright
+      
       </div>
     </MDBFooter>
   );

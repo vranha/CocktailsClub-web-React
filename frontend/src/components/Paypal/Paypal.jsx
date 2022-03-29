@@ -15,7 +15,7 @@ const Paypal = ({ totalPrice, sendOrder }) => {
                 description: "Bar order",
                 amount: {
                   currency_code: "EUR",
-                  value: totalPrice,
+                  value: totalPrice.toFixed(2),
                 },
               },
             ],
@@ -31,7 +31,7 @@ const Paypal = ({ totalPrice, sendOrder }) => {
         },
       })
       .render(paypal.current);
-  }, [totalPrice]);
+  }, []);
   return (
     <div>
       <div ref={paypal}></div>

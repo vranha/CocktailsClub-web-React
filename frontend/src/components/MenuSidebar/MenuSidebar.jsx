@@ -1,4 +1,4 @@
-import { Button } from "react-bootstrap";
+import { Button, Modal } from "react-bootstrap";
 import { motion } from "framer-motion";
 import styles from "./MenuSidebar.module.scss";
 import { useContext, useRef, useState } from "react";
@@ -36,6 +36,10 @@ export default function MenuSidebar({
   const listProducts = useRef();
 
   const [checkout, setcheckout] = useState(false);
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
   /* Set the width of the side navigation to 0 */
   function closeNav() {
     sideNav.current.style.width = "0px";
@@ -76,9 +80,9 @@ export default function MenuSidebar({
             onSubmit={(e) => {
               if (productSelection.length > 0) {
                 e.preventDefault();
-                sendOrder()
-              
-              // setcheckout(true);
+                // sendOrder()
+                handleShow()
+              setcheckout(true);
               sideNav.current.style.width = "100vw";
               // listProducts.current.style.display = "none"
               } else {
@@ -101,9 +105,9 @@ export default function MenuSidebar({
               />
             </div>
             <div>
-              {checkout ? (
-                <Paypal sendOrder={sendOrder} totalPrice={totalPrice} />
-              ) : (
+              
+                
+              
                 <Button
                   type="submit"
                   className={styles.orderButton}
@@ -112,11 +116,16 @@ export default function MenuSidebar({
                 >
                   Realizar Pedido
                 </Button>
-              )}
+              
             </div>
           </form>
         </div>
       </div>
+      <Modal  show={show} onHide={handleClose} size="md"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered>
+     <Paypal sendOrder={sendOrder} totalPrice={totalPrice} />
+      </Modal>
     </>
   );
 }

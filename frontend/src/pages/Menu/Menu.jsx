@@ -72,6 +72,7 @@ export default function Menu() {
 
   const sendOrder = () => {
     
+    console.log(numTable, "sdkjadjsakldjaskldjaskldjkaslj")
     console.log(totalPrice);
     fetch("http://127.0.0.1:4000/order/new", {
       method: "POST",
@@ -84,7 +85,9 @@ export default function Menu() {
         products: productSelection,
         totalPrice: totalPrice,
       }),
+      
     });
+    
     toast(` Pedido Realizado `, {
       duration: 2000,
       icon: '🍽',
