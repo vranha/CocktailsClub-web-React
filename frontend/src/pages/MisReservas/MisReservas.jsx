@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Alert, Button } from "react-bootstrap";
-import styles from './Reservas.module.scss';
+import styles from './MisReservas.module.scss';
 import { motion } from "framer-motion"
 
 const containerVariants = {
@@ -15,29 +15,21 @@ const containerVariants = {
   },
 }
 
-export default function Reservas() {
+export default function MisReservas() {
   const [bookings, setBookings] = useState([]);
   const [show, setShow] = useState(false);
   const [alert, setAlert] = useState('');
 
   useEffect(() => {
 
-      function loopFunction(delay, callback){
-        var loop = function(){
-            callback();
-            setTimeout(loop, delay);
-        }; loop();
-    };
-    
-    loopFunction(100000, function(){
        fetch("http://127.0.0.1:4000/booking")
       .then((bookings) => bookings.json())
       .then((bookings) => {
         setBookings(bookings);
         console.log(bookings);
+        bookings.filter(booking => booking.name);
       });
-    });
-
+  
   }, []);
 
   const completeOrder = (e, _id) => {

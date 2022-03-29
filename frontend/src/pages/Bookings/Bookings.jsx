@@ -7,6 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { ArrowLeftSquareFill } from "react-bootstrap-icons";
 
 import styles from "./Bookings.module.scss";
+import { useAuthState } from "../../context";
 
 const containerVariants = {
     hidden: {
@@ -27,6 +28,11 @@ export default function Bookings() {
     const [hour, setHour] = useState("");
     const [step, setStep] = useState("1");
     const [phone, setPhone] = useState("");
+    const [name, setName] = useState("");
+
+    const state = useAuthState()
+    const { user } = state;
+    
 
     useEffect(() => {
         console.log(date);
@@ -54,7 +60,7 @@ export default function Bookings() {
     }, [date, table, hour]);
 
     const handleDateSelect = () => {
-        if (phone.length >= 9) {
+        if (phone.length >= 9 && (name.length >= 2 || user)) {
             setStep("2");
             console.log("step 2");
         } else {
@@ -94,7 +100,7 @@ export default function Bookings() {
         );
     };
 
-    const uploadBooking = async (date, table, hour, phone) => {
+    const uploadBooking = async (date, table, hour, phone, name) => {
         fetch("http://127.0.0.1:4000/booking/new", {
             method: "POST",
             headers: {
@@ -106,6 +112,7 @@ export default function Bookings() {
                 hour: hour.toString(),
                 table: table,
                 phone: phone,
+                username: user.username ?? name
             }),
         })
             .then((res) => res.json())
@@ -133,13 +140,21 @@ export default function Bookings() {
                 {step === "1" ? (
                     <div>
                         <div className="form-group container p-2 text-white ">
-                            Tu número de teléfono
+                            {!user ?  <input
+                                type="text"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                                name="name"
+                                placeholder="Nombre"
+                                className="form-control w-50 mx-auto my-3 text-center"
+                            /> : ""}
+                            
                             <input
                                 type="text"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 name="phone"
-                                placeholder="Teléfono de contacto"
+                                placeholder="Teléfono"
                                 className="form-control w-50 mx-auto text-center"
                             />
                         </div>
@@ -302,7 +317,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside1");
-                                uploadBooking(date, "inside1", hour, phone);
+                                uploadBooking(date, "inside1", hour, phone, name);
                             }}
                             key="inside1"
                             id="inside1"
@@ -314,7 +329,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside2");
-                                uploadBooking(date, "inside2", hour, phone);
+                                uploadBooking(date, "inside2", hour, phone, name);
                             }}
                             key="inside2"
                             id="inside2"
@@ -326,7 +341,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside3");
-                                uploadBooking(date, "inside3", hour, phone);
+                                uploadBooking(date, "inside3", hour, phone, name);
                             }}
                             key="inside3"
                             id="inside3"
@@ -338,7 +353,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside4");
-                                uploadBooking(date, "inside4", hour, phone);
+                                uploadBooking(date, "inside4", hour, phone, name);
                             }}
                             key="inside4"
                             id="inside4"
@@ -350,7 +365,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside5");
-                                uploadBooking(date, "inside5", hour, phone);
+                                uploadBooking(date, "inside5", hour, phone, name);
                             }}
                             key="inside5"
                             id="inside5"
@@ -362,7 +377,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside6");
-                                uploadBooking(date, "inside6", hour, phone);
+                                uploadBooking(date, "inside6", hour, phone, name);
                             }}
                             key="inside6"
                             id="inside6"
@@ -374,7 +389,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("outside1");
-                                uploadBooking(date, "outside1", hour, phone);
+                                uploadBooking(date, "outside1", hour, phone, name);
                             }}
                             key="outside1"
                             id="outside1"
@@ -386,7 +401,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("outside2");
-                                uploadBooking(date, "outside2", hour, phone);
+                                uploadBooking(date, "outside2", hour, phone, name);
                             }}
                             key="outside2"
                             id="outside2"
@@ -398,7 +413,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("outside3");
-                                uploadBooking(date, "outside3", hour, phone);
+                                uploadBooking(date, "outside3", hour, phone, name);
                             }}
                             key="outside3"
                             id="outside3"
@@ -410,7 +425,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("outside4");
-                                uploadBooking(date, "outside4", hour, phone);
+                                uploadBooking(date, "outside4", hour, phone, name);
                             }}
                             key="outside4"
                             id="outside4"
@@ -427,7 +442,8 @@ export default function Bookings() {
                         animate="show"
                         className={styles.done}
                     >
-                        <h2>Ya estás listo para disfrutar</h2>
+                        <h2>Ya tienes sitio</h2>
+                        <h2>{user.username ?? name}</h2>
                         <p>
                             Nos vemos el <strong>{date}</strong> a las <strong>{hour}</strong> horas
                         </p>
@@ -437,7 +453,7 @@ export default function Bookings() {
                     <motion.div className={styles.validation} variants={containerVariants}
                     initial="hidden"
                     animate="show">
-                        <h2>Necesitamos tu teléfono</h2>
+                        <h2>Necesitamos tu nombre y teléfono</h2>
                         <h3>por si ocurre algun imprevisto</h3>
                         
                         <Button

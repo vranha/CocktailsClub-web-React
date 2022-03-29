@@ -42,7 +42,9 @@ export default function Header() {
                             </NavDropdown>
                         </Nav>
                         <Nav>
-                        
+                        {user ? <Nav.Link as={Link} to="/myBookings" onClick={() => setExpanded(false)}>
+                                Mis Reservas
+                            </Nav.Link> : ''}
                            {/* <button onClick={() => logoutPost(dispatch)} > logout </button> */}
                             { user ? (
                                 <Nav.Link as={Link} to="/login" onClick={() => logoutPost(dispatch)}>
