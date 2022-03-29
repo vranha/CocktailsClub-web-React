@@ -41,4 +41,25 @@ router.delete("/delete/:id", async (req, res, next) => {
   }
 });
 
+router.post("/usercocktel", async (req, res, next) => {
+  const { licor, mezcla, extra } = req.body;
+  const date = getDate();
+  const time = getTime();
+
+  try {
+    Order.create({
+      licor,
+      mezcla,
+      extra,
+      date,
+      time,
+    });
+    res.status(200);
+    res.json("New order send to db");
+  } catch (error) {
+    res.json(`Error creating new order => ${error}`);
+    res.status(400);
+  }
+});
+
 module.exports = router;

@@ -1,5 +1,5 @@
 import { registerUser, loginUser, checkUserSession } from "./actions/auth.actions";
-import { getOrder } from "./actions/orderActions";
+import { postUserCocktel } from "./actions/userCocktelActions";
 import { useAuthState, useAuthDispatch, AuthProvider } from "./context";
 
 export {
@@ -9,5 +9,5 @@ export {
     registerUser,
     loginUser,
     checkUserSession,
-    getOrder,
+    postUserCocktel,
 };

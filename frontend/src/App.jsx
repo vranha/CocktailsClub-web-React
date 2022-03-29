@@ -10,6 +10,7 @@ import {
   Encuentranos,
   Contactanos,
   Reservas,
+  UserCocktel,
 } from "./pages";
 import { Header, Footer, PrivateRoute } from "./components";
 import { Navigate, Route, Routes } from "react-router-dom";
@@ -61,6 +62,7 @@ function App() {
           path="/register"
           element={!user ? <Register /> : <Navigate replace to="/" />}
         />
+        <Route path="/usercocktel" element={<UserCocktel/>} />
         <Route path="/login" element={<Login />} />
       </Routes>
       <Footer></Footer>

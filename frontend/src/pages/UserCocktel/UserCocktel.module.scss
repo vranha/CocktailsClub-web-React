@@ -1,0 +1,54 @@
+@import "../../../styles/responsive.scss";
+
+
+.container {
+  display: flex;
+  justify-content: center;
+  margin: 2%;
+  min-height: 100vh;
+  }
+
+  .title{
+    margin:20px;
+  }
+
+  .subtitle{
+    margin:20px;
+
+    @include tablet {     
+      font-size: 18px;
+    }
+  }
+
+  .register{
+  margin-top:100px;
+  
+  @include tablet {     
+    margin-top: 30px;
+  }
+  }
+
+.formContainer{
+  width: 70vh;
+  height: auto;
+  border-radius: 5px;
+  background-color: rgb(33, 37, 41);
+  color: white;
+  padding: 2%;
+  
+  @include tablet {
+    width: 45vh;
+                
+  }
+}
+
+.linkLogin{
+  text-decoration-color: var(--dark);
+  margin:30px;
+  font-size:20px;
+  letter-spacing: 1px;
+ }
+
+.formlabe{
+  color: red;
+}
