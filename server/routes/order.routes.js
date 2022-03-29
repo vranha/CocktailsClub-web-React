@@ -10,7 +10,7 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/new", async (req, res, next) => {
-  const { table, products } = req.body;
+  const { table, products, totalPrice } = req.body;
   const date = getDate();
   const time = getTime();
 
@@ -18,6 +18,7 @@ router.post("/new", async (req, res, next) => {
     Order.create({
       table,
       products,
+      totalPrice,
       date,
       time,
     });
