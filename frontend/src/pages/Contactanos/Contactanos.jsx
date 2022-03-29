@@ -38,7 +38,7 @@ export default function Contactanos() {
     return (
         <motion.div  variants={containerVariants} initial="hidden" animate="show" className={styles.container}>
             <h2 className={styles.title}>Contáctanos</h2>
-            <h4>Envíanos un e-mail</h4>
+            <h4 className={styles.subtitle}>Envíanos un e-mail</h4>
             {!sent ? (
                 <div className="container p-4 ">
                 <div className="row">

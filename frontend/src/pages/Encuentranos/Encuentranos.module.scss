@@ -1,22 +1,40 @@
+@import "../../../styles/responsive.scss";
+
 .container {
     min-height: 100vh;
-  }
+}
 
 .title {
     
     margin-bottom: 30px;
     font-size: 40px;
     letter-spacing: 4px;
-  }
+
+    @include mobile {
+        font-size: 25px;
+        margin-bottom: 0px;
+        
+    }
+}
 .box {
     background-color: rgb(33, 37, 41);
     width: 60%;
     margin: 60px auto 10px;
     padding: 30px;
     border-radius: 5px;
+    
+    @include mobile {
+        width: 80%;
+        margin: 20px auto 10px; 
+        padding: 30px 0 0;        
+    }
 }
 
 .directions{
+
+    @include mobile {
+    transform:scale(0.8)
+    }
        
     .logos_metro, .logos_fgc {
         display: flex;
@@ -36,10 +54,16 @@
             font-size: 20px;
             letter-spacing: 2px;
             color:var(--medium);
+
+            
             
             strong{
                 color:white;
                 font-weight:500;
+
+                @include mobile {
+                    display: block;
+                }
             }
         }
 }
@@ -58,5 +82,11 @@
         border-radius: 10px;
         border: 1px solid #ccc;
         box-shadow: 0 5px 20px rgba(0, 0, 0, 0.315);
+
+        @include mobile {
+            height: 200px;
+            width: 340px;
+        }
+
     }
 }

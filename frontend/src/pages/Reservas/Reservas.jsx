@@ -110,7 +110,7 @@ export default function Reservas() {
         </div>
       </Alert> : ''}  
 
-      {!show && <Button variant="dark" onClick={() => setIdAlert(_id) }>Anular Reserva</Button>}
+      {!show && <Button className={styles.anular} variant="dark" onClick={() => setIdAlert(_id) }>Anular Reserva</Button>}
             
           </div>
         ))}

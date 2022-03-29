@@ -1,3 +1,5 @@
+@import "../../../styles/responsive.scss";
+
 .container {
     min-height: 100vh;
     
@@ -11,12 +13,19 @@
       transform: scale(1.3);
       position: relative;
       top:50px;
-
+      max-width: 75vw;
+      margin-left:12vw;
     }
     .arrow{
       position: absolute;
       top: 125px;
       cursor: pointer;
+      
+      @include mobile {
+        left: 20px;
+        top: 75px;
+        transform: scale(.7)
+      }
     }
 
     .containerTables{
@@ -106,9 +115,9 @@
       font-size: 40px;
       letter-spacing: 4px;
       position: relative;
-  top: 200px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 70vw;
+      top: 200px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      max-width: 70vw;
     }
 }

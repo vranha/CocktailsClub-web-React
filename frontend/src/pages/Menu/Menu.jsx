@@ -23,7 +23,7 @@ const containerVariants = {
   },
 }
 
-export default function Menu() {
+export default function Menu({ expanded }) {
   const INITIAL_STATE = {
     product: '',
     quantity: '',
@@ -52,6 +52,20 @@ export default function Menu() {
   const main = useRef();
   const buttonPedido = useRef();
   
+  // useEffect(() => {
+
+  //   expanded ? buttonPedido.current.style.top = "286px" : buttonPedido.current.style.top = "86px";;
+
+
+  //   // if (expanded) {
+  //   //   buttonPedido.current.style.transition = ".35s  ";
+  //   //   buttonPedido.current.style.top = "286px";
+  //   // } else if (expanded) {
+  //   //   buttonPedido.current.style.transition = ".35s  ";
+  //   //   buttonPedido.current.style.top = "86px";
+  //   // }
+
+  // }, [expanded]);
 
   useEffect(() => {
     fetch("http://127.0.0.1:4000/product")
@@ -63,9 +77,9 @@ export default function Menu() {
 
     /* Set the width of the side navigation to 250px */
     const openNav = () => {
-    sideNav.current.style.width = "300px";
+    sideNav.current.style.width = "360px";
     main.current.style.transition = ".5s";
-    main.current.style.marginLeft = "250px";
+    main.current.style.marginLeft = "230px";
     buttonPedido.current.style.backgroundColor = "var(--dark)";
 
   }
@@ -213,10 +227,10 @@ export default function Menu() {
       ref={main} id="main" className={styles.container}>
       <div className={styles.menuHeader}>
       {(user && localization) ? 
-      <Button ref={buttonPedido} className={styles.orderButton} onClick={openNav} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Mi Pedido</Button> 
-      : user  ? <Button className={styles.orderButton}  onClick={handleShow} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Pedir desde aquí</Button>
-      : <Button className={styles.orderButton} onClick={() => navigate('/register')} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Pedir desde aquí</Button> }
-        <Dropdown  as={ButtonGroup}>
+      <Button ref={buttonPedido} as={ButtonGroup} className={styles.orderButton} onClick={openNav} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Mi Pedido</Button> 
+      : user  ? <Button as={ButtonGroup} className={styles.orderButton}  onClick={handleShow} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Pedir aquí</Button>
+      : <Button as={ButtonGroup} className={styles.orderButton} onClick={() => navigate('/register')} variant="dark" style={{backgroundColor: 'var(--medium)'}} >Pedir aquí</Button> }
+        <Dropdown className={styles.filterButton} as={ButtonGroup}>
           <Button variant="light" >Filtrar</Button>
 
           <Dropdown.Toggle split variant="light" id="dropdown-split-basic" />

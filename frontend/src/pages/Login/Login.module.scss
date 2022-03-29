@@ -1,12 +1,22 @@
+@import "../../../styles/responsive.scss";
+
+
 .container {
   display: flex;
   justify-content: center;
   margin: 2%;
   min-height: 100vh;
+
+  @include tablet {
+                
+  }
 }
 
 .title{
   margin:20px;
+  @include tablet {
+      font-size:20px;      
+  }
 }
 
 
@@ -24,10 +34,19 @@
   background-color: rgb(33, 37, 41);
   color: white;
   padding: 2%;
+
+  @include tablet {
+    width: 45vh;        
+  }
 }
 
 .login{
   margin-top:100px;
+  
+  @include tablet {
+    margin-top:60px;
+         
+  }
 }
 
 .userError{

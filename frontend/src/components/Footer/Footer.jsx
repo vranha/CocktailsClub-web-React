@@ -140,12 +140,12 @@ export default function App() {
 
           <MDBCol lg='3' md='6' className='mb-4 mb-md-0'>
 
-              <h5 className={styles.textTittle}>Registrate</h5>
+            
               <div className={styles.mb0}>
 
                 <p className={styles.registerFree}>
-                  <span className='me-3'>Regístrate gratis</span>
-                  <Button onClick={() => navigate('/register')} variant="dark" style={{backgroundColor: 'var(--medium)'}} > Sign up!   </Button>
+  
+                  <Button onClick={() => navigate('/register')} variant="dark" style={{backgroundColor: 'var(--medium)'}} > Regístrate   </Button>
                 </p>
               </div>
 

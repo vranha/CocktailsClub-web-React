@@ -3,12 +3,10 @@ import {
   Home,
   Menu,
   Order,
-  Book,
   Bookings,
   Conocenos,
   Login,
   Register,
-  OrderList,
   Encuentranos,
   Contactanos,
   Reservas,
@@ -54,8 +52,6 @@ function App() {
         <Route path="/about" element={<Conocenos />} />
         <Route path="/locate" element={<Encuentranos />} />
         <Route path="/contact" element={<Contactanos />} />
-        <Route path="/orderList" element={<OrderList />} />
-        <Route path="/book" element={<Book />} />
         {/* <Route path="/order" element={<PrivateRoute component={<Order />} />} /> */}
         <Route
           path="/bookings"
