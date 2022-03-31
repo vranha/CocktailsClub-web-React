@@ -131,15 +131,15 @@ server.post("/booking_mail", cors(), async (req, res) => {
     service: "Gmail",
     port: 465,
     auth: {
-      user: "urioleh@gmail.com",
-      pass: "wkvttjqwcvlhqnrv",
+      user: process.env.MY_USER,
+      pass: process.env.MY_PASS,
     },
     tls: {
       rejectUnauthorized: false,
     },
   });
   await transport.sendMail({
-    from: `urioleh@gmail.com`,
+    from: process.env.MY_USER,
     to: `${emailMail}`,
     subject: "CocktailsClub Email confirmation",
     html: `<div style="
