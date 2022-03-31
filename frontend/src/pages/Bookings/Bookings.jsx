@@ -1,4 +1,5 @@
 import { motion } from "framer-motion";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Button } from "react-bootstrap";
 import DatePicker, { CalendarContainer, registerLocale } from "react-datepicker";
@@ -8,6 +9,7 @@ import { ArrowLeftSquareFill } from "react-bootstrap-icons";
 
 import styles from "./Bookings.module.scss";
 import { useAuthState } from "../../context";
+import { Link } from "react-router-dom";
 
 const containerVariants = {
     hidden: {
@@ -24,11 +26,13 @@ export default function Bookings() {
     const date = startDate.toLocaleDateString("es");
     registerLocale("es", es);
 
+    const [sent, setSent] = useState(false);
     const [table, setTable] = useState("");
     const [hour, setHour] = useState("");
     const [step, setStep] = useState("1");
     const [phone, setPhone] = useState("");
     const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
 
     const state = useAuthState()
     const { user } = state;
@@ -60,7 +64,7 @@ export default function Bookings() {
     }, [date, table, hour]);
 
     const handleDateSelect = () => {
-        if (phone.length >= 9 && (name.length >= 2 || user)) {
+        if ((phone.length >= 9 && name.length >= 2) || user) {
             setStep("2");
             console.log("step 2");
         } else {
@@ -100,7 +104,20 @@ export default function Bookings() {
         );
     };
 
-    const uploadBooking = async (date, table, hour, phone, name) => {
+    const handleSend = async () => {
+        setSent(true);
+        const emailMail = user.email ?? email
+        const userMail = user.username ?? name
+        try {
+            await axios.post("http://localhost:4000/booking_mail", {
+                date, userMail, emailMail, hour
+            });
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const uploadBooking = async (date, table, hour, phone, name, email) => {
         fetch("http://127.0.0.1:4000/booking/new", {
             method: "POST",
             headers: {
@@ -111,8 +128,9 @@ export default function Bookings() {
                 date: date,
                 hour: hour.toString(),
                 table: table,
-                phone: phone,
-                username: user.username ?? name
+                phone: user.phone ?? phone,
+                username: user.username ?? name,
+                email: user.email ?? email
             }),
         })
             .then((res) => res.json())
@@ -121,6 +139,7 @@ export default function Bookings() {
                     console.log("Redirect to booking failed component");
                 }
             });
+            handleSend()
     };
     return (
         <motion.div variants={containerVariants} initial="hidden" animate="show" className={styles.container}>
@@ -146,17 +165,26 @@ export default function Bookings() {
                                 onChange={(e) => setName(e.target.value)}
                                 name="name"
                                 placeholder="Nombre"
-                                className="form-control w-50 mx-auto my-3 text-center"
+                                className="form-control w-50 mx-auto text-center"
                             /> : ""}
                             
-                            <input
+                            {!user ? <input
                                 type="text"
                                 value={phone}
                                 onChange={(e) => setPhone(e.target.value)}
                                 name="phone"
                                 placeholder="Teléfono"
+                                className="form-control w-50 mx-auto my-3 text-center"
+                            /> : ""}
+
+                            {!user ? <input
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                name="email"
+                                placeholder="Email"
                                 className="form-control w-50 mx-auto text-center"
-                            />
+                            /> : ""}
                         </div>
 
                         <div className={styles.calendario}>
@@ -317,7 +345,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside1");
-                                uploadBooking(date, "inside1", hour, phone, name);
+                                uploadBooking(date, "inside1", hour, phone, name, email);
                             }}
                             key="inside1"
                             id="inside1"
@@ -329,7 +357,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside2");
-                                uploadBooking(date, "inside2", hour, phone, name);
+                                uploadBooking(date, "inside2", hour, phone, name, email);
                             }}
                             key="inside2"
                             id="inside2"
@@ -341,7 +369,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside3");
-                                uploadBooking(date, "inside3", hour, phone, name);
+                                uploadBooking(date, "inside3", hour, phone, name, email);
                             }}
                             key="inside3"
                             id="inside3"
@@ -353,7 +381,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside4");
-                                uploadBooking(date, "inside4", hour, phone, name);
+                                uploadBooking(date, "inside4", hour, phone, name, email);
                             }}
                             key="inside4"
                             id="inside4"
@@ -365,7 +393,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside5");
-                                uploadBooking(date, "inside5", hour, phone, name);
+                                uploadBooking(date, "inside5", hour, phone, name, email);
                             }}
                             key="inside5"
                             id="inside5"
@@ -377,7 +405,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("inside6");
-                                uploadBooking(date, "inside6", hour, phone, name);
+                                uploadBooking(date, "inside6", hour, phone, name, email);
                             }}
                             key="inside6"
                             id="inside6"
@@ -389,7 +417,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("outside1");
-                                uploadBooking(date, "outside1", hour, phone, name);
+                                uploadBooking(date, "outside1", hour, phone, name, email);
                             }}
                             key="outside1"
                             id="outside1"
@@ -401,7 +429,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("outside2");
-                                uploadBooking(date, "outside2", hour, phone, name);
+                                uploadBooking(date, "outside2", hour, phone, name, email);
                             }}
                             key="outside2"
                             id="outside2"
@@ -413,7 +441,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("outside3");
-                                uploadBooking(date, "outside3", hour, phone, name);
+                                uploadBooking(date, "outside3", hour, phone, name, email);
                             }}
                             key="outside3"
                             id="outside3"
@@ -425,7 +453,7 @@ export default function Bookings() {
                             variant="dark"
                             onClick={() => {
                                 handleTableSelect("outside4");
-                                uploadBooking(date, "outside4", hour, phone, name);
+                                uploadBooking(date, "outside4", hour, phone, name, email);
                             }}
                             key="outside4"
                             id="outside4"
@@ -453,9 +481,9 @@ export default function Bookings() {
                     <motion.div className={styles.validation} variants={containerVariants}
                     initial="hidden"
                     animate="show">
-                        <h2>Necesitamos tu nombre y teléfono</h2>
+                        <h2>Necesitamos todos tus datos</h2>
                         <h3>por si ocurre algun imprevisto</h3>
-                        
+                        <Link to="/register"> o mejor regístrate</Link>
                         <Button
                             variant="light"
                             onClick={() => {

@@ -123,3 +123,43 @@ server.post("/send_mail", cors(), async (req, res) => {
   });
   console.log("Mensaje enviado");
 });
+
+
+server.post("/booking_mail", cors(), async (req, res) => {
+  let { date, userMail, emailMail, hour } = req.body;
+  const transport = nodemailer.createTransport({
+    service: "Gmail",
+    port: 465,
+    auth: {
+      user: "urioleh@gmail.com",
+      pass: "wkvttjqwcvlhqnrv",
+    },
+    tls: {
+      rejectUnauthorized: false,
+    },
+  });
+  await transport.sendMail({
+    from: `urioleh@gmail.com`,
+    to: `${emailMail}`,
+    subject: "CocktailsClub Email confirmation",
+    html: `<div style="
+    border: 1px solid #6f2232;
+    background-color: #1a1a1d;
+    color: white;
+    padding: 20px;
+    font-family: sans-serif;
+    line-height: 2;
+    font-size: 20px;
+    ">
+    <h3>💌Querido/a <strong>${userMail}</strong></h3>
+
+    <h4>Confirmamos su reserva para el dia <strong style=" color: #6f2232; ">${date}</strong> a las <strong style=" color: #6f2232; ">${hour}</strong> horas </h4>
+    <p>Si desea anular su reserva hágalo en la seccion "Mis reservas" de nuestra web</p>
+
+    <p>Hasta entonces!</p>
+    <h4>Cocktails Club</h4>
+    </div>
+    `,
+  });
+  console.log("Confirmación de bookings enviada");
+});

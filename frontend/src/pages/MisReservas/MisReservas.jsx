@@ -31,7 +31,7 @@ export default function MisReservas() {
       .then((bookings) => bookings.json())
       .then((bookings) => {
         console.log(bookings);
-        const myBookings = bookings.filter(booking => booking.username === user.username);
+        const myBookings = bookings.filter(booking => booking.username === user.username && booking.phone === user.phone );
         setBookings(myBookings);
       });
   

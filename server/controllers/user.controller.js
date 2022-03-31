@@ -31,9 +31,9 @@ const checkSession = async (req, res, next) => {
 const registerPost = async(req, res, next) => {
     console.log('Llega petición');
     console.log(req.body);
-    const { email, password, username } = req.body;
+    const { email, password, username, phone } = req.body;
 
-    if (!password || !email || !username) {
+    if (!password || !email || !username || !phone) {
 
         return res.status(400).json({ message: 'Completa todos los campos' });
         

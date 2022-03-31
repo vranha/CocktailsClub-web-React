@@ -21,7 +21,7 @@ const user = mongoose.Schema(
             default: "USER_ROLE",
             require: true
         },
-        movil: {
+        phone: {
             type: String,
             unique: true
         }

@@ -34,7 +34,8 @@
 }
 
 .filterButton{
-  right: 42%;
+  right: 40%;
+  min-width: 110px;
   
   @include mobile {
  

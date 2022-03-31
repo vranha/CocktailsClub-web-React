@@ -22,7 +22,7 @@ const INITIAL_STATE = {
     // apellido: '',
     email: '',
     password: '',
-    movil: ''    
+    phone: ''    
 }
 
 export default function Register() {
@@ -75,12 +75,12 @@ export default function Register() {
                             <input type="email" className="form-control" id="email" placeholder='ex: MisterCoctel95@coldmail.com' onChange={inputChange} required />
                         </div>
                         <div className="col-md-12 w-75 mx-auto m-3">
-                            <label htmlFor="password" className="form-label">Contraseña</label>
-                            <input type="password" className="form-control" id="password" placeholder='********' onChange={inputChange} required />
+                            <label htmlFor="phone" className="form-label">Teléfono</label>
+                            <input type="text" id="phone" onChange={inputChange}  className="form-control" />
                         </div>
                         <div className="col-md-12 w-75 mx-auto m-3">
-                            <label htmlFor="movil" className="form-label">Móvil</label>
-                            <input type="text" id="movil" onChange={inputChange}  className="form-control" />
+                            <label htmlFor="password" className="form-label">Contraseña</label>
+                            <input type="password" className="form-control" id="password" placeholder='********' onChange={inputChange} required />
                         </div>
                         <div className="col-12 ">
                             <Button type="submit" className="btn btn-primary m-3" variant="dark" style={{backgroundColor: 'var(--medium)'}}>Regístrate</Button>
